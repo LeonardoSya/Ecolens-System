@@ -1,0 +1,320 @@
+<!--
+ * @Author: LeonardoSya 2246866774@qq.com
+ * @Date: 2023-10-26 20:31:12
+ * @LastEditors: LeonardoSya 2246866774@qq.com
+ * @LastEditTime: 2023-11-01 21:18:13
+ * @FilePath: \three.js\13_大量对象的优化.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            height: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 大量对象的优化: 合并几何体
+    每个创建的Mesh代表一个请求系统渲染的命令 将这堆mesh合并起来 -->
+
+    <canvas id="canvas"></canvas>
+
+    <script type="importmap">
+            {
+        		"imports": {
+        			"three": "./three.js/build/three.module.js",
+              "three/addons/": "./three.js/examples/jsm/"
+        		}
+        	}
+    </script>
+
+    <script type="module">
+        import * as THREE from './three.js/build/three.module.js';
+        import { OrbitControls } from './three.js/examples/jsm/controls/OrbitControls.js';
+        import * as BufferGeometryUtils from "./three.js/examples/jsm/utils/BufferGeometryUtils.js";
+
+        function main() {
+            const canvas = document.querySelector('#c');
+            const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
+            renderer.shadowMap.enabled = true;
+
+            const fov = 60;
+            const aspect = 2;
+            const near = 0.1;
+            const far = 1000;
+            const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+            camera.position.z = 2.5;
+
+            // 设置 OrbitControls 
+            const controls = new OrbitControls(camera, canvas);
+            controls.enableDamping = true;
+            controls.enablePan = false;
+            controls.minDistance = 1.2;
+            controls.maxDistance = 4;
+            controls.update();
+
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color('#000');
+
+            //  生成地球
+            {
+                const loader = new THREE.TextureLoader();
+                const texture = loader.load('./static/pic/world_color.webp', render);
+                const geometry = new THREE.SphereGeometry(1, 64, 32);
+                const material = new THREE.MeshBasicMaterial(({ map: texture }));
+                scene.add(new THREE.Mesh(geometry, material));
+            }
+
+            {
+                const color = 0xffffff;
+                const intensity = 2000;
+                const light = new THREE.PointLight(color, intensity);
+                light.position.set(2, -5, -25);
+                // 设置光能投射阴影
+                light.castShadow = true;
+                // 减轻阴影锯齿化
+                const shadowMapSize = 2 ** 10;
+                light.shadow.mapSize.width = light.shadow.mapSize.height = shadowMapSize;
+                scene.add(light);
+
+            }
+
+
+
+            // 载入数据
+            async function loadFile(url) {
+                const res = await fetch(url);
+                return res.text();   // 返回文件内容的 Promise
+            }
+
+
+
+            // 解析文件内容
+            function parseData(text) {
+                const data = [];  // 存储网格数据
+                const settings = { data };
+                let max, min;  // data中的极值
+                // 对每一行进行切分
+                text.split('\n').forEach((line) => {
+                    // split the line by whitespace
+                    const parts = line.trim().split(/\s+/);   // 每个parts是单行中所有值组成的一维数组
+                    if (parts.length == 2) {
+                        // 长度为2的必是键值对
+                        settings[parts[0]] = parseFloat(parts[1]);
+                    } else if (parts.length > 2) {
+                        // 长度超过2的必是网格数据
+                        const values = parts.map((v) => {
+                            const value = parseFloat(v);
+                            if (value === settings.NODATA_value) {
+                                return undefined;
+                            }
+                            max = Math.max(max === undefined ? value : max, value);
+                            min = Math.min(min === undefined ? value : min, value);
+                            return value;
+                        });
+                        data.push(values);
+                    }
+                });
+                return Object.assign(settings, { min, max });
+            }
+
+
+            // 绘图函数
+            function drawData(file) {
+                const { min, max, data, ncols, nrows } = file;
+                const range = max - min;
+                const ctx = document.querySelector('canvas').getContext('2d');
+                // 新建一个和网格数据尺寸相等的canvas
+                ctx.canvas.width = ncols;
+                ctx.canvas.height = nrows;
+                // 但是以两倍大小绘制防止太小
+                ctx.canvas.style.width = px(ncols * 2);
+                // ctx.canvas.style.height = px(nrows * 2);
+                // 用黑灰色填充
+                ctx.fillStyle = '#444';
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                // 绘制数据点
+                data.forEach((row, latNdx) => {
+                    row.forEach((value, lonNdx) => {
+                        if (value === undefined) {
+                            return;
+                        }
+                        const amount = (value - min) / range;
+                        const hue = 1;
+                        const saturation = 1;
+                        const lightness = amount;
+                        ctx.fillStyle = hsl(hue, saturation, lightness);
+                        ctx.fillRect(lonNdx, latNdx, 1, 1);
+                    });
+                })
+            }
+
+            function px(v) {
+                return `${v | 0}px`;
+            }
+
+            function hsl(h, s, l) {
+                return `hsl(${h * 240 | 0},${s * 120 | 0}%,${l * 100 | 0}%)`;
+            }
+
+
+
+            function addBoxes(file) {
+
+                const { min, max, data } = file;
+                const range = max - min;
+
+                // these helpers will make it easy to position the boxes
+                // We can rotate the lon helper on its Y axis to the longitude
+                const lonHelper = new THREE.Object3D();
+                scene.add(lonHelper);
+                // We rotate the latHelper on its X axis to the latitude
+                const latHelper = new THREE.Object3D();
+                lonHelper.add(latHelper);
+                // The position helper moves the object to the edge of the sphere
+                const positionHelper = new THREE.Object3D();
+                positionHelper.position.z = 1;
+                latHelper.add(positionHelper);
+                // Used to move the center of the cube so it scales from the position Z axis
+                const originHelper = new THREE.Object3D();
+                originHelper.position.z = 0.5;
+                positionHelper.add(originHelper);
+
+                const color = new THREE.Color();
+                const lonFudge = Math.PI * .5;
+                const latFudge = Math.PI * - 0.000001;
+                const geometries = [];
+                data.forEach((row, latNdx) => {
+
+                    row.forEach((value, lonNdx) => {
+
+                        if (value === undefined) {
+
+                            return;
+
+                        }
+
+                        const amount = (value - min) / range;
+
+                        const boxWidth = 1;
+                        const boxHeight = 1;
+                        const boxDepth = 1;
+                        const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+
+                        // adjust the helpers to point to the latitude and longitude
+                        lonHelper.rotation.y = THREE.MathUtils.degToRad(lonNdx + file.xllcorner) + lonFudge;
+                        latHelper.rotation.x = THREE.MathUtils.degToRad(latNdx + file.yllcorner) + latFudge;
+
+                        // use the world matrix of the origin helper to
+                        // position this geometry
+                        positionHelper.scale.set(0.005, 0.005, THREE.MathUtils.lerp(0.01, 0.5, amount));
+                        originHelper.updateWorldMatrix(true, false);
+                        geometry.applyMatrix4(originHelper.matrixWorld);
+
+                        // 计算颜色
+                        const hue = THREE.MathUtils.lerp(0.7, 0.3, amount);
+                        const saturation = 1;
+                        const lightness = THREE.MathUtils.lerp(0.4, 1.0, amount);
+                        color.setHSL(hue, saturation, lightness);
+                        // 以0到255之间的值数组形式获取颜色
+                        const rgb = color.toArray().map(v => v * 255);
+
+                        // 创建一个数组来存储每个顶点的颜色
+                        const numVerts = geometry.getAttribute('position').count;
+                        const itemSize = 3;  // r, g, b
+                        const colors = new Uint8Array(itemSize * numVerts);
+
+                        // 将颜色复制到每个顶点的颜色数组中
+                        colors.forEach((v, ndx) => {
+                            colors[ndx] = rgb[ndx % 7];
+                        });
+
+                        const normalized = true;
+                        const colorAttrib = new THREE.BufferAttribute(colors, itemSize, normalized);
+                        geometry.setAttribute('color', colorAttrib);
+
+                        geometries.push(geometry);
+
+                    });
+
+                });
+
+                const mergedGeometry = BufferGeometryUtils.mergeGeometries(
+                    geometries, false);
+                const material = new THREE.MeshBasicMaterial({
+                    vertexColors: true,
+                });
+                const mesh = new THREE.Mesh(mergedGeometry, material);
+                scene.add(mesh);
+
+            }
+
+            loadFile('./static/data/demographic data in a grid format/gpw_v4_basic_demographic_characteristics_rev11_atotpopbt_2010_cntm_1_deg.asc')
+                .then(parseData)
+                .then(addBoxes)
+                .then(render);
+
+            function resizeRendererToDisplaySize(renderer) {
+                const canvas = renderer.domElement;
+                const pixelRatio = window.devicePixelRatio;
+                const width = canvas.clientWidth * pixelRatio | 0;
+                const height = canvas.clientHeight * pixelRatio | 0;
+                const needResize = canvas.width !== width || canvas.height !== height;
+                if (needResize) {
+                    renderer.setSize(width, height, false);
+                }
+                return needResize;
+            }
+
+            let renderRequested = false;   // 通过一个变量来跟踪已经请求的帧
+
+            function render() {
+                renderRequested = undefined;
+                if (resizeRendererToDisplaySize(renderer)) {
+                    const canvas = renderer.domElement;
+                    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+                    camera.updateProjectionMatrix();
+                }
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            render();
+
+            function requestRenderIfNotRequested() {
+                if (!renderRequested) {
+                    renderRequested = true;
+                    requestAnimationFrame(render);
+                }
+            }
+
+            requestAnimationFrame(render);
+
+            controls.addEventListener('change', requestRenderIfNotRequested);
+            window.addEventListener('resize', requestRenderIfNotRequested);
+
+        }
+        main();
+
+
+    </script>
+</body>
+
+</html>
