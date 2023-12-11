@@ -29,7 +29,7 @@ const HomePage_Header = () => {
                 style={{ textAlign: "center", fontSize: "0.8vw" }}>
                 <Link to="/services/homepage" style={{ margin: "auto 1vw", fontFamily: "Poppins",color: 'inherit' }}>Services</Link>
                 <Link to="#" style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Documents</Link>
-                <Link to="https://github.com/LeonardoSya/React-studynote" style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Star us on GitHub <GithubOutlined style={{fontSize:'1rem', marginLeft:'0.3rem'}} /></Link>
+                <Link to="https://github.com/LeonardoSya/Ecolens-System" style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Star us on GitHub <GithubOutlined style={{fontSize:'1rem', marginLeft:'0.3rem'}} /></Link>
             </Col>
             <Col span={1}></Col>
         </Row>
