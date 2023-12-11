@@ -124,23 +124,25 @@ const MyHeader = ({ primary, togglePrimaryColor }) => (
             <Col span={12}>
                 <Flex justify="flex-start" align="flex-start" gap="small">
                     <ColorPicker value={primary} onChangeComplete={togglePrimaryColor} style={{ margin: '1vh', border: 'none', background: "inherit", }} />
-                    <Title style={{ fontSize: "1.5vw", fontFamily: "Silkscreen", marginTop: '1vh', color: '#fff' }}>Ecolens System</Title>
+                    <Title style={{ fontSize: "1.5vw", fontFamily: "Silkscreen", marginTop: '1vh', color: '#fff' }}>
+                        <Link to="https://buzzard-equipped-heavily.ngrok-free.app/" style={{ color: 'inherit' }}>Ecolens System</Link>
+                    </Title>
                 </Flex>
             </Col>
             <Col span={6} offset={6}>
                 <Flex justify="flex-end" align='center' style={{ margin: '1vh 1vw', overflow: 'hidden', }}>
 
                     <Tooltip placement='bottom' title={<span>Contact us!</span>}>
-                        <Button size="large" style={{ boxShadow: 'none', border: 'none', background: 'inherit', marginTop: '0vh' }} icon={<WechatFilled />} />
+                        <Button href='https://github.com/LeonardoSya' size="large" style={{ boxShadow: 'none', border: 'none', background: 'inherit', marginTop: '0vh' }} icon={<WechatFilled />} />
                     </Tooltip>
                     <Tooltip placement='bottom' title={<span>GitHub</span>}>
-                        <Button href='https://github.com/LeonardoSya/React-studynote' target='_blank' size="large" style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<GithubOutlined />} />
+                        <Button href='https://github.com/LeonardoSya/Ecolens-System' target='_blank' size="large" style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<GithubOutlined />} />
                     </Tooltip>
                     <Tooltip placement='bottom' title={<span>Docs</span>}>
                         <Button href='#' target='_blank' size='large' style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<FileFilled />} />
                     </Tooltip>
                     <Tooltip placement='bottomRight' title={<span>Developer Log</span>}>
-                        <Button href='https://github.com/LeonardoSya/React-studynote' target='_blank' size='large' style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<CodeFilled />} />
+                        <Button href='https://github.com/LeonardoSya/React-studynote/pulse/monthly' target='_blank' size='large' style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<CodeFilled />} />
                     </Tooltip>
                 </Flex>
             </Col>

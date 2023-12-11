@@ -1,5 +1,9 @@
 .map-container-page1,
-.map-container-page2 {
+.map-container-page2,
+.map-container-page3,
+.map-container-page4,
+.map-container-page5,
+.map-container-page6 {
     /* width: 100.3%; */
     height: 100vh;
     overflow: hidden;
