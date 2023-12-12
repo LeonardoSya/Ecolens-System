@@ -3,13 +3,7 @@ import { Card, Col, Layout, Row, Flex, Typography, Image, Divider } from 'antd';
 import { InstagramFilled } from '@ant-design/icons';
 import { Content } from 'antd/es/layout/layout';
 
-import homepageIcon from '../assets/homepage_icon.svg';
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../assets/vite.svg';
-import antdLogo from '../assets/antd.svg';
-import babelLogo from '../assets/babel.svg';
-import tsLogo from '../assets/ts.svg';
-import GEELogo from '../assets/gee.svg';
+import * as icons from '../../assets/svg/icons';
 
 import '../style/HomePage.css'
 
@@ -71,7 +65,7 @@ const HomePage_Content = () => {
                     </Card>
 
                     <img
-                        src={homepageIcon}
+                        src={icons.homepage_icon}
                         className='homepage-icon'
                         placeholder='blur'
                     // width="450vw"
@@ -95,17 +89,17 @@ const HomePage_Content = () => {
                     <Col span={3}></Col>
                     <Col span={1}>
                         <Link to="https://react.docschina.org/" target='_blank'>
-                            <img src={reactLogo} className="logo" alt="React logo" />
+                            <img src={icons.react} className="logo" alt="React logo" />
                         </Link>
                     </Col>
                     <Col span={1}>
                         <Link to="https://vitejs.dev/" target='_blank'>
-                            <img src={viteLogo} className="logo" alt="Vite logo" />
+                            <img src={icons.vite} className="logo" alt="Vite logo" />
                         </Link>
                     </Col>
                     <Col span={1}>
                         <Link to="https://ant.design/index-cn/" target='_blank'>
-                            <img src={antdLogo} className="logo" alt="Antd logo" />
+                            <img src={icons.antd} className="logo" alt="Antd logo" />
                         </Link>
                     </Col>
                     <Col span={1}>
@@ -115,17 +109,17 @@ const HomePage_Content = () => {
                     </Col>
                     <Col span={1}>
                         <Link to="https://earthengine.google.com/" target='_blank'>
-                            <img src={GEELogo} className="logo" alt="GEE logo" style={{ width: '2.3vw', marginTop: '0.2vw' }} />
+                            <img src={icons.gee} className="logo" alt="GEE logo" style={{ width: '2.3vw', marginTop: '0.2vw' }} />
                         </Link>
                     </Col>
                     <Col span={1}>
                         <Link to="https://www.typescriptlang.org/docs/" target='_blank'>
-                            <img src={tsLogo} className="logo" alt="TypeScript logo" />
+                            <img src={icons.ts} className="logo" alt="TypeScript logo" />
                         </Link>
                     </Col>
                     <Col span={1}>
                         <Link to="https://babeljs.io/repl/" target='_blank'>
-                            <img src={babelLogo} className="logo" alt="BABEL logo" style={{width:'2.3vw', marginLeft:'-0.3vw'}} />
+                            <img src={icons.babel} className="logo" alt="BABEL logo" style={{ width: '2.3vw', marginLeft: '-0.3vw' }} />
                         </Link>
                     </Col>
                     <Col span={3}></Col>

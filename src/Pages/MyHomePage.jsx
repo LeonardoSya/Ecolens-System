@@ -1,9 +1,9 @@
 import { Layout } from 'antd';
 import React from 'react';
 
-import HomePage_Header from './HomePage_Header';
-import HomePage_Content from './HomePage_Content';
-import HomePage_Footer from './HomePage_Footer';
+import HomePage_Header from '../Components/layouts/HomePage_Header';
+import HomePage_Content from '../Components/layouts/HomePage_Content';
+import HomePage_Footer from '../Components/layouts/HomePage_Footer';
 
 
 const MyHomePage = () => {
@@ -11,8 +11,8 @@ const MyHomePage = () => {
         <>
             <Layout
                 style={{
-                    width:'75.6vw',
-                    height:'105vh'
+                    width: '75.6vw',
+                    height: '105vh'
                 }}>
                 <HomePage_Header />
                 <HomePage_Content />
