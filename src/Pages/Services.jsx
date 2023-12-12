@@ -3,21 +3,17 @@ import { Route, Link, Routes, NavLink, Navigate, useNavigate } from 'react-route
 import { FloatButton, Col, Row, ColorPicker, Divider, ConfigProvider, App, Space, Select, Flex, Button, Layout, Menu, theme, Typography, Dropdown, Tooltip, Switch } from 'antd';
 import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, FundOutlined, ZoomInOutlined, ZoomOutOutlined, SyncOutlined, MenuFoldOutlined, MenuUnfoldOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 
-import HomePage from './Routers/HomePage';
-import Page1 from './Routers/Page1';
-import Page2 from './Routers/Page2';
-import Page3 from './Routers/Page3';
-import Page4 from './Routers/Page4';
-import Page5 from './Routers/Page5';
+import { Homepage, Page1, Page2, Page3, Page4, Page5 } from '../Components/Routers/services-routers';
+import { useSafeState } from '../Components/hooks/hooks';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
 
 
 const Services = () => {
-    const [mapZoom, setMapZoom] = useState(3);
-    const [collapsed, setCollapsed] = React.useState(true);
-    const [primary, setPrimary] = React.useState('#262626')
+    const [mapZoom, setMapZoom] = useSafeState(3);
+    const [collapsed, setCollapsed] = useSafeState(false);
+    const [primary, setPrimary] = useSafeState('#262626')
     // const { token: { colorBgContainer }, } = theme.useToken();
 
     const toggleCollapsed = () => {
@@ -252,7 +248,7 @@ const MyMap = ({ zoom, onZoomChange }) => (
             {/* Route用于将应用的位置映射到不同的React组件 */}
             {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
             <Routes>
-                <Route path='/homepage' element={<HomePage />} />
+                <Route path='/homepage' element={<Homepage />} />
                 <Route path='/page1' element={<Page1 zoom={zoom} onZoomChange={onZoomChange} />} />
                 <Route path='/page2' element={<Page2 />} />
                 <Route path='/page3' element={<Page3 />} />

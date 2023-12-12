@@ -36,7 +36,7 @@ const HomePage = () => {
     );
 };
 
-const CardImage = ({ src,textEN,textCN }) => (
+const CardImage = ({ src, textEN, textCN }) => (
     <Card
         style={{ background: '#f5f5f5', borderRadius: 0 }}
     >
@@ -58,7 +58,7 @@ const CardImage = ({ src,textEN,textCN }) => (
                 <Divider>Ecolens</Divider>
                 {textCN}
             </Typography>
- 
+
         </Flex>
 
     </Card>

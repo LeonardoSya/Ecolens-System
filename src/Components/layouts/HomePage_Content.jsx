@@ -3,15 +3,9 @@ import { Card, Col, Layout, Row, Flex, Typography, Image, Divider } from 'antd';
 import { InstagramFilled } from '@ant-design/icons';
 import { Content } from 'antd/es/layout/layout';
 
-import homepageIcon from '../assets/homepage_icon.svg';
-import reactLogo from '../assets/react.svg'
-import viteLogo from '../assets/vite.svg';
-import antdLogo from '../assets/antd.svg';
-import babelLogo from '../assets/babel.svg';
-import tsLogo from '../assets/ts.svg';
-import GEELogo from '../assets/gee.svg';
+import { homepageIcon, reactLogo, viteLogo, antdLogo, babelLogo, tsLogo, GEELogo, } from '../../assets/svg/icons';
 
-import '../style/HomePage.css'
+import '../../style/HomePage.css'
 
 
 const { Title, Text } = Typography;
@@ -125,7 +119,7 @@ const HomePage_Content = () => {
                     </Col>
                     <Col span={1}>
                         <Link to="https://babeljs.io/repl/" target='_blank'>
-                            <img src={babelLogo} className="logo" alt="BABEL logo" style={{width:'2.3vw', marginLeft:'-0.3vw'}} />
+                            <img src={babelLogo} className="logo" alt="BABEL logo" style={{ width: '2.3vw', marginLeft: '-0.3vw' }} />
                         </Link>
                     </Col>
                     <Col span={3}></Col>

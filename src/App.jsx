@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter, Route, Link, Router, Routes, NavLink, Navigate, useNavigate } from 'react-router-dom';
 
 // import Galaxy from './Components/Galaxy';
-import MyHomePage from './Components/MyHomePage';
-import Services from './Components/Services';
+import MyHomePage from './Pages/MyHomePage';
+import Services from './Pages/Services';
 import './style/App.css'
 import './style/index.css'
 

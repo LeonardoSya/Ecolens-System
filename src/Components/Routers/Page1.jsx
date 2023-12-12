@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ZoomInOutlined, ZoomOutOutlined, SyncOutlined } from '@ant-design/icons';
 import { FloatButton, Layout } from 'antd';
+import {useSafeState} from '../hooks/hooks';
 
 import Map from 'ol/Map'
 import View from 'ol/View'
@@ -8,13 +9,12 @@ import TileLayer from 'ol/layer/Tile'
 import VectorLayer from 'ol/layer/Vector'
 import VectorSource from 'ol/source/Vector'
 import XYZ from 'ol/source/XYZ'
+
 import '../../style/map.css';
 
-const { Content } = Layout;
-
 const Page1 = ({ zoom, onZoomChange }) => {
-    const [map, setMap] = useState();
-    const [featuresLayer, setFeaturesLayer] = useState();
+    const [map, setMap] = useSafeState();
+    const [featuresLayer, setFeaturesLayer] = useSafeState();
     // const [selectedCoord, setSelectedCoord] = useState();
     const mapElement = useRef();
     // 使用useRef存储初始化地图的引用，确保组件在重新渲染时能够访问到正确的地图实例
