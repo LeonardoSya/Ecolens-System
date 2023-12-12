@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Typography } from 'antd';
 // import Galaxy from '../Galaxy';
 import axios from 'axios';
+import { useSafeState } from '../hooks/hooks';
+
 
 const { Content } = Layout;
 const { Title } = Typography;
 
 const Page3 = () => {
-    const [data, setData] = useState(null);
+    const [data, setData] = useSafeState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,7 +31,7 @@ const Page3 = () => {
             style={{
                 padding: 24,
                 minHeight: '80vh',
-                backgroundImage:'../../assets/银河.png'
+                backgroundImage: '../../assets/银河.png'
             }}>
             <Title level={2}>This page is Page 3 :)</Title>
         </Content>

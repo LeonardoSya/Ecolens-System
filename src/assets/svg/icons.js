@@ -1,19 +1,19 @@
 
-import { ReactComponent as homepage_icon} from './homepage_icon.svg';
-import { ReactComponent as react} from './react.svg'
-import { ReactComponent as vite} from './vite.svg';
-import { ReactComponent as antd} from './antd.svg';
-import { ReactComponent as babel} from './babel.svg';
-import { ReactComponent as ts} from './ts.svg';
-import { ReactComponent as gee} from './gee.svg';
+import homepageIcon from './homepage_icon.svg';
+import reactLogo from './react.svg'
+import viteLogo from './vite.svg';
+import antdLogo from './antd.svg';
+import babelLogo from './babel.svg';
+import tsLogo from './ts.svg';
+import GEELogo from './gee.svg';
 
 
 export {
-    homepage_icon, 
-    react, 
-    vite, 
-    antd, 
-    babel,
-    ts,
-    gee,
+    homepageIcon,
+    reactLogo,
+    viteLogo,
+    antdLogo,
+    babelLogo,
+    tsLogo,
+    GEELogo,
 }
