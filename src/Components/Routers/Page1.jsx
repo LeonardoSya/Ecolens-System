@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ZoomInOutlined, ZoomOutOutlined, SyncOutlined } from '@ant-design/icons';
 import { FloatButton, Layout } from 'antd';
-import {useSafeState} from '../hooks/hooks';
+import { useSafeState } from '../hooks/hooks';
 
 import Map from 'ol/Map'
 import View from 'ol/View'
@@ -12,7 +12,7 @@ import XYZ from 'ol/source/XYZ'
 
 import '../../style/map.css';
 
-const Page1 = ({ zoom, onZoomChange }) => {
+const Page1 = () => {
     const [map, setMap] = useSafeState();
     const [featuresLayer, setFeaturesLayer] = useSafeState();
     // const [selectedCoord, setSelectedCoord] = useState();
@@ -45,7 +45,7 @@ const Page1 = ({ zoom, onZoomChange }) => {
             view: new View({
                 projection: 'EPSG:4326', // WGS84
                 center: [-70, 38],
-                zoom: zoom,
+                zoom: 3,
             }),
             controls: [],
         });
@@ -62,14 +62,13 @@ const Page1 = ({ zoom, onZoomChange }) => {
         const handleResolutionChange = () => {
             const newZoom = view.getZoom();
             console.log('zoom changed:', newZoom);
-            onZoomChange(newZoom);
         }
         view.on('change:resolution', handleResolutionChange);
 
         return () => {
             view.un('change:resolution', handleResolutionChange);
         };
-    }, [zoom, onZoomChange]);
+    }, []);
 
     const handleZoomIn = () => {
         const view = map.getView();
@@ -106,8 +105,8 @@ const Page1 = ({ zoom, onZoomChange }) => {
                 shape='circle'
                 style={{ right: 24 }}
             >
-                <FloatButton onClick={handleZoomIn} icon={< ZoomInOutlined />} />
-                <FloatButton onClick={handleZoomOut} icon={< ZoomOutOutlined />} />
+                <FloatButton icon={< ZoomInOutlined />} />
+                <FloatButton icon={< ZoomOutOutlined />} />
                 <FloatButton />
                 <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
                 <FloatButton.BackTop visibilityHeight={70} />
