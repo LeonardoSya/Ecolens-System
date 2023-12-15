@@ -16,8 +16,11 @@ const Page2 = () => {
     useEffect(() => {
         if (!mapStore) {
             // GeoServer WMS 地图服务的 url
-            const geoServerUrl = 'https://electric-duly-peacock.ngrok-free.app/geoserver/yashixiang/wms';
-            const layers = 'yashixiang:2023-6-01';
+            const geoServerUrl = 'https://electric-duly-peacock.ngrok-free.app/geoserver/yangshan/wms';
+            // const layers = 'yashixiang:2023-06-01';
+            // const layers = 'NDVI_sentinel:2019-06-01';
+            const layers = 'yangshan:19711';
+
 
             // 创建WMS图层
             const wmsLayer = new TileLayer({
@@ -39,7 +42,7 @@ const Page2 = () => {
                 target: mapContainerRef.current,
                 view: new View({
                     center: [0, 0],
-                    zoom: 5,
+                    zoom: 3,
                 }),
             });
 

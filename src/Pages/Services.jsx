@@ -11,7 +11,6 @@ const { Title } = Typography;
 
 
 const Services = () => {
-    const [mapZoom, setMapZoom] = useSafeState(3);
     const [collapsed, setCollapsed] = useSafeState(false);
     const [primary, setPrimary] = useSafeState('#262626')
     // const { token: { colorBgContainer }, } = theme.useToken();
@@ -30,15 +29,6 @@ const Services = () => {
         }
     }
 
-    const handleZoomIn = () => {
-        setMapZoom(mapZoom + 1);
-    }
-
-    const handleZoomOut = () => {
-        setMapZoom(mapZoom - 1);
-    }
-
-
 
     return (
         <ConfigProvider
@@ -51,9 +41,9 @@ const Services = () => {
                 }
             }}
         >
-            <MyFloatButton zoom={mapZoom} ouZoomIn={handleZoomIn} onZoomOut={handleZoomOut} />
+            <MyFloatButton />
 
-            <Layout style={{ minHeight: '100vh', width: '100.3%' }}>
+            <Layout style={{ minHeight: '100vh', width: '103.2%' }}>
                 {/* Sider */}
                 <MySider collapsed={collapsed} />
 
@@ -65,7 +55,7 @@ const Services = () => {
                     <MySearchModule collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
 
                     {/* Router */}
-                    <MyMap style={{ width: '100vw' }} zoom={mapZoom} onZoomChange={setMapZoom} />
+                    <MyMap style={{ width: '100vw' }} />
                     {/* Footer */}
                     <Footer style={{ textAlign: 'center', background: 'rgba(0,0,0,.8)', color: '#bfbfbf' }}>
                         Ecolens System ©2023 Created by Zhangyiyang
@@ -226,14 +216,14 @@ const MySearchModule = ({ collapsed, toggleCollapsed }) => {
     );
 };
 
-const MyFloatButton = ({ onZoomIn, onZoomOut }) => {  // ?? 通过 Button setZoom 失败了，再研究一下
+const MyFloatButton = () => {  // ?? 通过 Button setZoom 失败了，再研究一下
     return (
         <FloatButton.Group
             shape='circle'
             style={{ right: 24 }}
         >
-            <FloatButton onClick={onZoomIn} icon={< ZoomInOutlined />} />
-            <FloatButton onClick={onZoomOut} icon={< ZoomOutOutlined />} />
+            <FloatButton icon={< ZoomInOutlined />} />
+            <FloatButton icon={< ZoomOutOutlined />} />
             <FloatButton />
             <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
             <FloatButton.BackTop visibilityHeight={70} />
@@ -241,7 +231,7 @@ const MyFloatButton = ({ onZoomIn, onZoomOut }) => {  // ?? 通过 Button setZoo
     );
 }
 
-const MyMap = ({ zoom, onZoomChange }) => (
+const MyMap = () => (
     <>
         <Content>
 
@@ -249,7 +239,7 @@ const MyMap = ({ zoom, onZoomChange }) => (
             {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
             <Routes>
                 <Route path='/homepage' element={<Homepage />} />
-                <Route path='/page1' element={<Page1 zoom={zoom} onZoomChange={onZoomChange} />} />
+                <Route path='/page1' element={<Page1 />} />
                 <Route path='/page2' element={<Page2 />} />
                 <Route path='/page3' element={<Page3 />} />
                 <Route path='/page4' element={<Page4 />} />

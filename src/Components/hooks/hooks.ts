@@ -5,6 +5,11 @@ import useSafeState from './useSafeState';
 import useUnmount from './useUnmount';
 import useUnmountRef from './useUnmountedRef';
 import useUpdate from './useUpdate';
+import useEventListener from './useEventListener';
+import useReactive from './useReactive';
+import useSelections from './useSelections';
+import useNetWork from './useNetWork';
+
 
 export {
     useLatest,
@@ -14,4 +19,8 @@ export {
     useUnmountRef,
     useUpdate,
     useSafeState,
+    useEventListener,
+    useReactive,
+    useNetWork,
+    useSelections,
 }
