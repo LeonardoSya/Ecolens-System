@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Route, Link, Routes, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { FloatButton, Col, Row, ColorPicker, Divider, ConfigProvider, App, Space, Select, Flex, Button, Layout, Menu, theme, Typography, Dropdown, Tooltip, Switch } from 'antd';
-import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, FundOutlined, ZoomInOutlined, ZoomOutOutlined, SyncOutlined, MenuFoldOutlined, MenuUnfoldOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
+import { AreaChartOutlined, BarChartOutlined, EditFilled, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, FundOutlined, ZoomInOutlined, ZoomOutOutlined, SyncOutlined, MenuFoldOutlined, MenuUnfoldOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 
-import { Homepage, Page1, Page2, Page3, Page4, Page5 } from '../Components/Routers/services-routers';
+import { Homepage, Overview, Page1, Page2, Page3, Page4, Page5 } from '../Components/Routers/services-routers';
 import { useSafeState } from '../Components/hooks/hooks';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -80,7 +80,7 @@ const items = [
     getItem('Page 3', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/page3"),
     getItem('Page 4', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/page4"),
     getItem('Page 5', '6', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
-    getItem('Page 6', '7', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/page6"),
+    getItem('Overview', '7', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/overview"),
 
 ];
 
@@ -222,8 +222,7 @@ const MyFloatButton = () => {  // ?? 通过 Button setZoom 失败了，再研究
             shape='circle'
             style={{ right: 24 }}
         >
-            <FloatButton icon={< ZoomInOutlined />} />
-            <FloatButton icon={< ZoomOutOutlined />} />
+            <FloatButton icon={<EditFilled />} />
             <FloatButton />
             <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
             <FloatButton.BackTop visibilityHeight={70} />
@@ -232,22 +231,21 @@ const MyFloatButton = () => {  // ?? 通过 Button setZoom 失败了，再研究
 }
 
 const MyMap = () => (
-    <>
-        <Content>
+    <Content>
 
-            {/* Route用于将应用的位置映射到不同的React组件 */}
-            {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
-            <Routes>
-                <Route path='/homepage' element={<Homepage />} />
-                <Route path='/page1' element={<Page1 />} />
-                <Route path='/page2' element={<Page2 />} />
-                <Route path='/page3' element={<Page3 />} />
-                <Route path='/page4' element={<Page4 />} />
-                <Route path='/page5' element={<Page5 />} />
-                <Route path='*' element={<Navigate to="/services/homepage" />} />
-            </Routes>
-        </Content>
-    </>
+        {/* Route用于将应用的位置映射到不同的React组件 */}
+        {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
+        <Routes>
+            <Route path='/homepage' element={<Homepage />} />
+            <Route path='/page1' element={<Page1 />} />
+            <Route path='/page2' element={<Page2 />} />
+            <Route path='/page3' element={<Page3 />} />
+            <Route path='/page4' element={<Page4 />} />
+            <Route path='/page5' element={<Page5 />} />
+            <Route path='/overview' element={<Overview />} />
+            <Route path='*' element={<Navigate to="/services/homepage" />} />
+        </Routes>
+    </Content>
 );
 
 export default Services;
