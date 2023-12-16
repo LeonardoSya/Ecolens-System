@@ -1,6 +1,6 @@
 import useEventListener from './useEventListener';
 import useSafeState from './useSafeState';
-import type { BasicTarget } from '../utils/target
+import type { BasicTarget } from '../../utils/target';
 
 interface Options {
     onEnter?: () => void;
@@ -9,7 +9,7 @@ interface Options {
 }
 
 const useHover = (target: BasicTarget, option?: Options): boolean => {
-    const { onEnter, onLeave, onChange } = options || {};
+    const { onEnter, onLeave, onChange } = option || {};
     const [isHover, setIsHover] = useSafeState<boolean>(false);
 
     useEventListener(

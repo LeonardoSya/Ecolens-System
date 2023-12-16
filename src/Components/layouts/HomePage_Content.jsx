@@ -65,6 +65,7 @@ const HomePage_Content = () => {
                     </Card>
 
                     <img
+                        alt='homepage-icon'
                         src={homepageIcon}
                         className='homepage-icon'
                         placeholder='blur'
