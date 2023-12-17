@@ -12,7 +12,7 @@ const MyHomePage = () => {
             <Layout
                 style={{
                     width: '75.6vw',
-                    height: '105vh'
+                    height: '115vh'
                 }}>
                 <HomePage_Header />
                 <HomePage_Content />
