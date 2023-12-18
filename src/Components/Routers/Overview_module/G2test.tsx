@@ -1,3 +1,11 @@
+/*
+ * @Author: LeonardoSya 2246866774@qq.com
+ * @Date: 2023-12-17 20:45:19
+ * @LastEditors: LeonardoSya 2246866774@qq.com
+ * @LastEditTime: 2023-12-18 09:48:23
+ * @FilePath: \React\05_antd\02_布局\vite-project\src\Components\Routers\Overview_module\G2test.tsx
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 import React from 'react';
 import { Chart } from '@antv/g2';
 import { useEffect, useRef } from 'react';
