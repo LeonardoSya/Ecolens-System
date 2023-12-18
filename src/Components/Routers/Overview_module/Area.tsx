@@ -33,6 +33,7 @@ const Area = () => {
                     .encode('color', 'industry')
                     .encode('shape', 'smooth');
 
+                    chartInstance.render();
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -41,7 +42,7 @@ const Area = () => {
         fetchData();
     }, []); 
 
-    return <div ref={chartContainerRef} style={{ width: '100%', height: '400px' }} />;
+    return <div id='area-container' ref={chartContainerRef} style={{ width: '100%', height: '400px' }} />;
 };
 
 export default Area;
