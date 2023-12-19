@@ -1,15 +1,38 @@
 import React, { useEffect, useRef } from 'react';
 import { Chart } from '@antv/g2';
+import useSafeState from '../../hooks/useSafeState';
+import styles from '../../../style/Overview.module.css';
 
-const Area = () => {
+interface AreaProps { }
+
+const Area: React.FC<AreaProps> = () => {
     const chartContainerRef = useRef(null);
     const chartRef = useRef(null);
+    const [loading, setLoading] = useSafeState(true);
 
     useEffect(() => {
+        //* 定义接口描述数据结构，通过as语法告诉ts该响应符合接口类型，这样在编译时会检查类型错误
+        interface Data {
+            date: string;
+            unemployed: number;
+            industry: string;
+        }
+
+        setLoading(true);
+
         const fetchData = async () => {
             try {
                 const response = await fetch('https://assets.antv.antgroup.com/g2/unemployment-by-industry.json');
-                const data = await response.json();
+                //* 告诉TypeScript这个response符合Data接口
+                const data = (await response.json()) as Data[];
+                //* 现在data被正确的类型化了
+                //* 这样TypeScript编译时就可以检查类型错误
+                // data.forEach(d => {
+                //     console.log(d.date);
+                //     console.log(d.unemployed);
+                //     console.log(d.industry);
+                // });
+
 
                 const chartInstance = new Chart({
                     container: chartContainerRef.current,
@@ -33,16 +56,27 @@ const Area = () => {
                     .encode('color', 'industry')
                     .encode('shape', 'smooth');
 
-                    chartInstance.render();
+                chartInstance.render();
+
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
+        setLoading(false);
 
         fetchData();
-    }, []); 
+    }, []);
 
-    return <div id='area-container' ref={chartContainerRef} style={{ width: '100%', height: '400px' }} />;
+    if (loading) return <LoadingSpinner />
+
+    return <div id='area-container' ref={chartContainerRef} className={styles.container} />;
 };
+
+
+export function LoadingSpinner() {
+    return <div className={styles.container}>
+        <div className={styles.text}>Loading...</div>
+    </div>
+}
 
 export default Area;

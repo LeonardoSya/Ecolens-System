@@ -5,11 +5,42 @@ import { Plugin as ThreeDPlugin, DirectionalLight } from '@antv/g-plugin-3d';
 import { Plugin as ControlPlugin } from '@antv/g-plugin-control';
 import { Runtime, corelib, extend } from '@antv/g2';
 import { threedlib } from '@antv/g2-extension-3d';
+import useSafeState from '../../hooks/useSafeState';
+import { LoadingSpinner } from './Area';
 
-interface G2Test3DProps { }
+interface G2Test3DProps {
+    width?: number;
+    height?: number;
+
+    data?: any[];
+
+    config?: {
+        xField?: string;
+        yField?: string;
+        zField?: string;
+        colorField?: string;
+        shapeField?: string;
+    };
+
+    theme?: string; 
+
+    options?: {
+        renderer?: 'canvas' | 'svg';
+        pixelRatio?: number;
+        camera?: {
+            type?: CameraType;
+            alpha?: number;
+            beta?: number;
+        }
+    };
+}
 
 const G2test3d: React.FC<G2Test3DProps> = () => {
+    const [loading, setLoading] = useSafeState(true);
+
     useEffect(() => {
+        setLoading(true);
+
         // Create a WebGL renderer.
         const renderer = new WebGLRenderer();
         renderer.registerPlugin(new ThreeDPlugin());
@@ -66,9 +97,12 @@ const G2test3d: React.FC<G2Test3DProps> = () => {
             canvas.appendChild(light);
         });
 
-        return () => {
-            chart.destroy();
-        }
+        setLoading(false);
+
+        // !! 这个卸载函数似乎有一些问题，以后再来探索它
+        // return () => {
+        //     chart.destroy();
+        // }
     }, []);
 
     function cameraButton(chart) {
@@ -154,7 +188,13 @@ const G2test3d: React.FC<G2Test3DProps> = () => {
         }
     }
 
-    return <div id="container" style={{ width: '100%', height: '500px' }} />;
+
+    return (
+        <>
+            {loading && <LoadingSpinner />}
+            <div id="container" style={{ width: '100%', height: '500px', marginTop: '2vw' }} />;
+        </>
+    )
 };
 
 export default G2test3d;
