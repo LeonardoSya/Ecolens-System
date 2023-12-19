@@ -8,7 +8,32 @@ import { threedlib } from '@antv/g2-extension-3d';
 import useSafeState from '../../hooks/useSafeState';
 import { LoadingSpinner } from './Area';
 
-interface G2Test3DProps { }
+interface G2Test3DProps {
+    width?: number;
+    height?: number;
+
+    data?: any[];
+
+    config?: {
+        xField?: string;
+        yField?: string;
+        zField?: string;
+        colorField?: string;
+        shapeField?: string;
+    };
+
+    theme?: string; 
+
+    options?: {
+        renderer?: 'canvas' | 'svg';
+        pixelRatio?: number;
+        camera?: {
+            type?: CameraType;
+            alpha?: number;
+            beta?: number;
+        }
+    };
+}
 
 const G2test3d: React.FC<G2Test3DProps> = () => {
     const [loading, setLoading] = useSafeState(true);
@@ -73,7 +98,7 @@ const G2test3d: React.FC<G2Test3DProps> = () => {
         });
 
         setLoading(false);
-        
+
         // !! 这个卸载函数似乎有一些问题，以后再来探索它
         // return () => {
         //     chart.destroy();

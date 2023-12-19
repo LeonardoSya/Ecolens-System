@@ -4,10 +4,7 @@ import G2test3d from './G2test3d';
 import Area from "./Area";
 import CardComponent from './CardComponent';
 
-import CardImage3 from '../../../assets/images/CardImage-3.png';
-import CardImage2 from '../../../assets/images/CardImage-2.png';
-import CardImage1 from '../../../assets/images/CardImage-1.png';
-import avatar from '../../../assets/images/Avatar.jpg';
+import { cardImage1, cardImage2, cardImage3, avatar } from '../../../assets/images/IndexImage';
 
 
 const Overview: React.FC = () => {
@@ -18,7 +15,7 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={CardImage3}
+                        coverImage={cardImage3}
                         avatarImage={avatar}
                     />
                 </Col>
@@ -26,7 +23,7 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={CardImage2}
+                        coverImage={cardImage2}
                         avatarImage={avatar}
                     />
                 </Col>
@@ -34,14 +31,14 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={CardImage1}
+                        coverImage={cardImage1}
                         avatarImage={avatar}
                     /></Col>
                 <Col span={5}>
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={CardImage3}
+                        coverImage={cardImage3}
                         avatarImage={avatar}
                     /></Col>
             </Row>

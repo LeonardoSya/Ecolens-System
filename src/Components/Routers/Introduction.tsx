@@ -6,7 +6,7 @@ const contentStyle = {
     overflow: 'hidden',
 }
 
-const HomePage = () => {
+const Introduction = () => {
     return (
         <Carousel
             autoplay
@@ -64,4 +64,4 @@ const CardImage = ({ src, textEN, textCN }) => (
     </Card>
 );
 
-export default HomePage;
+export default Introduction;
