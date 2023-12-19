@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Chart } from '@antv/g2';
 import useSafeState from '../../hooks/useSafeState';
-import styles from '../../../style/Loading.module.css';
+import styles from '../../../style/Overview.module.css';
 
 interface AreaProps { }
 
@@ -27,11 +27,11 @@ const Area: React.FC<AreaProps> = () => {
                 const data = (await response.json()) as Data[];
                 //* 现在data被正确的类型化了
                 //* 这样TypeScript编译时就可以检查类型错误
-                data.forEach(d => {
-                    console.log(d.date);
-                    console.log(d.unemployed);
-                    console.log(d.industry);
-                });
+                // data.forEach(d => {
+                //     console.log(d.date);
+                //     console.log(d.unemployed);
+                //     console.log(d.industry);
+                // });
 
 
                 const chartInstance = new Chart({
