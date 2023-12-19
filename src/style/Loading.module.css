@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 400px;
+    margin-top: 2vw;
+}
+
+.text {
+    font-family: Poppins;
+    font-size: 3vw;
+}

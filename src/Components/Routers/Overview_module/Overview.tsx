@@ -18,7 +18,7 @@ const Overview: React.FC = () => {
                 <Col span={5}>111</Col>
             </Row>
             <Row justify="space-evenly">
-                <Col span={10}></Col>
+                <Col span={10}><G2test3d /></Col>
                 <Col span={10}><Area /></Col>
             </Row>
         </>
