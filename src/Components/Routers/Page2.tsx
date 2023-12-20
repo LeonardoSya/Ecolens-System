@@ -86,24 +86,24 @@ const WMSMap = ({ geoServerUrl, layers }) => {
             });
 
             // 响应窗口大小变化
-            // const resizeViewToFit = () => {
-            //     mapStore.updateSize();  // 更新地图大小
-            //     view.fit(view.getProjection().getExtent(), {
-            //         size: mapStore.getSize(),
-            //         padding: [10, 10, 10, 10]  // 适当的边距
-            //     });
+            const resizeViewToFit = () => {
+                mapStore.updateSize();  // 更新地图大小
+                view.fit(view.getProjection().getExtent(), {
+                    size: mapStore.getSize(),
+                    padding: [10, 10, 10, 10]  // 适当的边距
+                });
                 
-            // };
-            // window.addEventListener('resize', resizeViewToFit);
+            };
+            window.addEventListener('resize', resizeViewToFit);
 
             // return () => {
             //     if (mapStore) {
             //         mapStore.setTarget(undefined);
             //     }
             // }
-            // return () => {
-            //     window.removeEventListener('resize', resizeViewToFit);
-            // };
+            return () => {
+                window.removeEventListener('resize', resizeViewToFit);
+            };
         }
     }, [mapStore]);
 
