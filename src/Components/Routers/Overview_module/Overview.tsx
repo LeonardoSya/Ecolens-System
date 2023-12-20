@@ -6,7 +6,7 @@ import CardComponent from './CardComponent';
 import Pathln from './Pathln';
 import MiniArea from './MiniArea';
 
-import { cardImage1, cardImage2, cardImage3, avatar } from '../../../assets/images/IndexImage';
+import { cardImage1, cardImage2, cardImage3, cardImage4, avatar } from '../../../assets/images/IndexImage';
 
 
 const Overview: React.FC = () => {
@@ -17,7 +17,7 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={cardImage3}
+                        coverImage={cardImage4}
                         avatarImage={avatar}
                     />
                 </Col>
@@ -32,11 +32,11 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={cardImage1}
+                        coverImage={cardImage3}
                         avatarImage={avatar}
                     /></Col>
                 <Col span={5}>
-                    <Pathln 
+                    <Pathln
                         title='TiTle'
                         description='在此编辑文案'
                         avatarImage={avatar} />
