@@ -33,7 +33,6 @@ const Area: React.FC<AreaProps> = () => {
                 //     console.log(d.industry);
                 // });
 
-
                 const chartInstance = new Chart({
                     container: chartContainerRef.current,
                     autoFit: true,
@@ -59,7 +58,7 @@ const Area: React.FC<AreaProps> = () => {
                 chartInstance.render();
 
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching data "Area" :', error);
             }
         };
         setLoading(false);
