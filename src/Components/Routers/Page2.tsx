@@ -13,12 +13,22 @@ const Page2 = () => {
     const mapContainerRef = useRef(null);
     const [mapStore, setMapStore] = useState(null);  // 懒加载
 
+    const layers = 'NDVI_sentinel';
+    const date = '2013-03-01';
+    const protocol = 'wms';
+    const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
+    const params = new URLSearchParams({
+        layers: layers,
+        date: date,
+        protocol: protocol,
+    })
+
+    const geoServerUrl = `${domain}?${params.toString()}`;
+
     useEffect(() => {
         if (!mapStore) {
             // GeoServer WMS 地图服务的 url
-            const geoServerUrl = 'https://electric-duly-peacock.ngrok-free.app/geoserver/yashixiang/wms';
             // const layers = 'yashixiang:2023-06-01';
-            const layers = 'NDVI_sentinel:2013-03-01';
             // const layers = 'yangshan:19711';
 
 
