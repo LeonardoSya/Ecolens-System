@@ -1,4 +1,5 @@
 import { Card, Carousel, Divider, Flex, Image, Typography } from 'antd';
+import React from 'react';
 const contentStyle = {
     color: '#fff',
     textAlign: 'center',
@@ -6,7 +7,7 @@ const contentStyle = {
     overflow: 'hidden',
 }
 
-const Introduction = () => {
+const Introduction: React.FC = () => {
     return (
         <Carousel
             autoplay

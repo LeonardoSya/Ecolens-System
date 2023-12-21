@@ -33,7 +33,7 @@ const Page4 = () => {
         // 创建地图
         const map = new Map({
             layers: layers,
-            target: mapElement.current,
+            target: mapElement.current!,
             view: new View({
                 center: [0,0],
                 zoom: 4,

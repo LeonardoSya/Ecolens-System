@@ -4,7 +4,7 @@ import { useSafeState } from '../hooks/hooks';
 
 const { Option } = Select;
 
-const workSpace = 'yashixiang';
+const workspace = 'yashixiang';
 const date = '2013-03-01';
 const protocol = 'wms';
 const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
@@ -30,7 +30,6 @@ const MapSelector: React.FC<MapSelectorProps> = ({ onSelect }) => {
         </Select>
     );
 };
-
 
 const generateDates = (startDate: Date, endDate: Date, monthInterval: number): string[] => {
     let current = new Date(startDate.getTime());

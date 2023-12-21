@@ -22,7 +22,7 @@ interface G2Test3DProps {
         shapeField?: string;
     };
 
-    theme?: string; 
+    theme?: string;
 
     options?: {
         renderer?: 'canvas' | 'svg';
@@ -81,10 +81,10 @@ const G2test3d: React.FC<G2Test3DProps> = () => {
             cameraButton(chart);
 
             const { canvas } = chart.getContext();
-            const camera = canvas.getCamera();
+            const camera = canvas?.getCamera();
             // Use perspective projection mode.
-            camera.setPerspective(0.1, 5000, 45, 640 / 480);
-            camera.setType(CameraType.ORBITING);
+            camera?.setPerspective(0.1, 5000, 45, 640 / 480);
+            camera?.setType(CameraType.ORBITING);
 
             // Add a directional light into scene.
             const light = new DirectionalLight({
@@ -94,7 +94,7 @@ const G2test3d: React.FC<G2Test3DProps> = () => {
                     direction: [-1, 0, 1],
                 },
             });
-            canvas.appendChild(light);
+            canvas?.appendChild(light);
         });
 
         setLoading(false);

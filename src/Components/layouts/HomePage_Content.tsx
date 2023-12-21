@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Col, Layout, Row, Flex, Typography, Image, Divider } from 'antd';
 import { InstagramFilled } from '@ant-design/icons';

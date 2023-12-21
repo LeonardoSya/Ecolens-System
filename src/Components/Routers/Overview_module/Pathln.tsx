@@ -23,7 +23,7 @@ const Pathln: React.FC<PathlnProps> = ({ title, description, avatarImage }) => {
         const fetchData = () => {
             try {
                 const chart = new Chart({
-                    container: chartRef.current,
+                    container: chartRef.current!,
                     autoFit: true,
 
                 })

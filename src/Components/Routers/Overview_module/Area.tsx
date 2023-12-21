@@ -27,14 +27,9 @@ const Area: React.FC<AreaProps> = () => {
                 const data = (await response.json()) as Data[];
                 //* 现在data被正确的类型化了
                 //* 这样TypeScript编译时就可以检查类型错误
-                // data.forEach(d => {
-                //     console.log(d.date);
-                //     console.log(d.unemployed);
-                //     console.log(d.industry);
-                // });
 
                 const chartInstance = new Chart({
-                    container: chartContainerRef.current,
+                    container: chartContainerRef.current!,
                     autoFit: true,
                 });
                 chartRef.current = chartInstance;

@@ -3,7 +3,7 @@ import { Route, Link, Routes, NavLink, Navigate, useNavigate } from 'react-route
 import { FloatButton, Col, Row, ColorPicker, Divider, ConfigProvider, App, Space, Select, Flex, Button, Layout, Menu, theme, Typography, Dropdown, Tooltip, Switch } from 'antd';
 import { AreaChartOutlined, BarChartOutlined, EditFilled, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, FundOutlined, ZoomInOutlined, ZoomOutOutlined, SyncOutlined, MenuFoldOutlined, MenuUnfoldOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 
-import { Introduction, Overview, Page1, AnnualNDVI, Page3, Page4, Page5 } from '../Components/Routers/services-routers';
+import { Introduction, Overview, Page1, QuarterlyChart, Page3, Page4, Page5 } from '../Components/Routers/services-routers';
 import { useSafeState } from '../Components/hooks/hooks';
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -76,7 +76,7 @@ function getItem(label, key, icon, path) {
 const items = [
     getItem('Overview', '1', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
     getItem('Page 1', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/page1"),
-    getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/annualndvi"),
+    getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/quarterlychart"),
     getItem('Page 3', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/page3"),
     getItem('Page 4', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/page4"),
     getItem('Page 5', '6', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
@@ -238,7 +238,7 @@ const MyMap = () => (
         <Routes>
             <Route path='/overview' element={<Overview />} />
             <Route path='/page1' element={<Page1 />} />
-            <Route path='/annualndvi' element={<AnnualNDVI />} />
+            <Route path='/quarterlychart' element={<QuarterlyChart />} />
             <Route path='/page3' element={<Page3 />} />
             <Route path='/page4' element={<Page4 />} />
             <Route path='/page5' element={<Page5 />} />
