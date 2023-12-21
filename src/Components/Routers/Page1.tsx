@@ -12,7 +12,7 @@ const Page1 = () => {
 
     useEffect(() => {
         const map = new Map({
-            target: mapRef.current,
+            target: mapRef.current!,  // *  !是非空断言操作符
             layers: [
                 // 无人机图像图层
                 new TileLayer({
