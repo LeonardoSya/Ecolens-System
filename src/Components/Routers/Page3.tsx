@@ -125,7 +125,7 @@ const styles = {
 const Page3: React.FC = () => {
     const [styleName, setStyleName] = useState<string>('trueColor');
     const mapRef = useRef<Map | null>(null);
-    const layerRef = useRef<TileLayer| null>(null);
+    const layerRef = useRef<TileLayer| null>(null)
 
     useEffect(() => {
         const layer = new TileLayer({

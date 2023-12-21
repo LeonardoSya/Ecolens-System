@@ -16,12 +16,22 @@ const protocol = 'wms';
 const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
 
 const WMSMap = ({ geoServerUrl, layers }) => {
-
-    const mapCotainerRef = useRef(null);
+    const mapRef = useRef(null);            //* 持有 ol/Map 实例
+    const mapContainerRef = useRef(null);   //* 持有地图容器DOM元素的ref
     const initialCenter = [112.6, 24.4];
     const initialZoom = 3;
+    const debounceResize = useDebounce(() => {
+        if (mapRef.current) {
+            mapRef.current.updateSize();
+            const view = mapRef.current.getView();
+            view.fit(view.getProjection().getExtent(), {
+                size: mapRef.current.getSize(),
+                padding: [1, 1, 1, 1]
+            });
+        }
+    }, 250);
 
-    const mapStore = useCreation(() => {
+    useEffect(() => {
         const wmsLayer = new TileLayer({
             source: new TileWMS({
                 url: geoServerUrl,
@@ -35,55 +45,35 @@ const WMSMap = ({ geoServerUrl, layers }) => {
             }),
         });
 
-        // 在TileLayer的定义中添加事件监听来检查图层是否加载
-        wmsLayer.on('error', function (event) {
-            console.error('WMS Layer failed to load:', event);
-        });
-
-        const extentInEPSG4326 = [111, 23, 114, 26];
-        const extent = transformExtent(extentInEPSG4326, 'EPSG:4326', 'EPSG:3857');
-
-        return new Map({
+        const map = new Map({
+            target: mapContainerRef.current,
             layers: [wmsLayer],
             view: new View({
+                projection: 'EPSG:4326',
                 center: initialCenter,
                 zoom: initialZoom,
-                projection: getProjection('EPSG:4326'),
-            }),
+            })
         });
-    }, [geoServerUrl, layers]);
 
+        mapRef.current = map;  // 持有ol/Map实例
 
-    const debounceResize = useDebounce(() => {
-        if (mapStore) {
-            mapStore.updateSize();
-            const view = mapStore.getView();
-            view.fit(view.getProjection().getExtent(), {
-                size: mapStore.getSize(),
-                padding: [1, 1, 1, 1]
-            });
-        }
-    }, 250);
-
-
-    useEffect(() => {
-        if (mapCotainerRef.current) {
-            mapStore.setTarget(mapCotainerRef.current);
+        if (mapContainerRef.current) {
+            map.setTarget(mapContainerRef.current);
 
             // 延迟更新地图大小
             setTimeout(() => {
-                mapStore.updateSize();
+                map.updateSize();
 
-                const view = mapStore.getView();
+                const view = map.getView();
                 view.setCenter(initialCenter);
                 view.setZoom(initialZoom + 7);
 
             }, 100);
 
             setTimeout(() => {
-                mapStore.updateSize();
+                map.updateSize();
 
-                const view = mapStore.getView();
+                const view = map.getView();
                 view.setCenter(initialCenter);
                 view.setZoom(initialZoom + 7);
 
@@ -91,24 +81,26 @@ const WMSMap = ({ geoServerUrl, layers }) => {
                 console.log('Updated View Zoom:', view.getZoom());
             }, 200);
 
-            // console.log('Map Size:', mapStore.getSize());
-            // console.log('View Center:', mapStore.getView().getCenter());
-            // console.log('View Zoom:', mapStore.getView().getZoom());
-
-            mapStore.on('change', () => {
-                console.log('Map view changed:', mapStore.getView().getCenter(), mapStore.getView().getZoom());
+            map.on('change', () => {
+                console.log('Map view changed:', map.getView().getCenter(), map.getView().getZoom());
             });
 
             window.addEventListener('resize', debounceResize);
-
-            return () => {
-                window.removeEventListener('resize', debounceResize);
-            };
         }
-    }, [mapStore]);
 
-    return <div ref={mapCotainerRef} className='map-container-page2'></div>
+        return () => {
+            window.removeEventListener('resize', debounceResize);
+            if (mapRef.current) {
+                mapRef.current.setTarget(null);
+                mapRef.current = null;
+            }
+        }
+    }, [geoServerUrl, layers, debounceResize]);
+
+    return <div ref={mapContainerRef} className='map-container-page2'></div>
 }
+
+
 
 const MapContainer = ({ date }) => {
     const layers = `${workSpace}:${date}`;
@@ -118,6 +110,7 @@ const MapContainer = ({ date }) => {
         <WMSMap geoServerUrl={geoServerUrl} layers={layers} />
     );
 };
+
 
 const AnnualNDVI = () => {
     const [date, setDate] = useSafeState('2013-03-01');
