@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
-import useSafeState from '../hooks/useSafeState';
+import React from 'react';
+import { Select } from 'antd';
+import { useSafeState } from '../hooks/hooks';
+
+const { Option } = Select;
 
 const workSpace = 'yashixiang';
 const date = '2013-03-01';
 const protocol = 'wms';
 const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
 
-const MapSelector = ({ onSelect }) => {
-    const [selectedDate, setSelectedDate] = useSafeState('2013-03-01');
+interface MapSelectorProps {
+    onSelect: (value: string) => void;
+}
 
-    const handleDateChange = (e) => {
-        setSelectedDate(e.target.value);
-        onSelect(e.target.value);
+const MapSelector: React.FC<MapSelectorProps> = ({ onSelect }) => {
+    const [selectedDate, setSelectedDate] = useSafeState('2023-06-01');
+    const dates = generateDates(new Date('2013-03-01'), new Date('2023-06-01'), 3);
+
+    const handleDateChange = (value: string) => {
+        setSelectedDate(value);
+        onSelect(value);
     };
 
     return (
-        <select value={selectedDate} onChange={handleDateChange}>
-            <option value="2013-03-01">2013-03-01</option>
-            <option value="2013-06-01">2013-06-01</option>
-            <option value="2013-09-01">2013-09-01</option>
-            <option value="2023-06-01">2023-06-01</option>
-        </select>
+        <Select value={selectedDate} onChange={handleDateChange} style={{ width: 200 }}>
+            {dates.map(date => (
+                <Option key={date} value={date}>{date}</Option>
+            ))}
+        </Select>
     );
 };
+
+
+const generateDates = (startDate: Date, endDate: Date, monthInterval: number): string[] => {
+    let current = new Date(startDate.getTime());
+    const dates: string[] = [];
+    while (current <= endDate) {
+        dates.push(current.toISOString().split('T')[0]);
+        current.setMonth(current.getMonth() + monthInterval);
+    }
+    return dates;
+}
 
 export default MapSelector;

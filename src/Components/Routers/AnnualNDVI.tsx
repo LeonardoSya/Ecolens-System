@@ -4,28 +4,40 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
 import { get as getProjection, transformExtent } from 'ol/proj';
+import { Flex, Row, Col } from 'antd';
 import { useCreation, useDebounce, useSafeState } from '../hooks/hooks';
 import MapSelector from './MapSelector';
 
 import 'ol/ol.css';
 import '../../style/map.css';
+import { set } from 'ol/transform';
+
+interface WMSMapProps {
+    geoServerUrl: string;
+    layers: string;
+}
+
+interface MapContainerProps {
+    date: string;
+}
 
 const workSpace = 'yashixiang';
-const date = '2013-03-01';
 const protocol = 'wms';
 const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
 
-const WMSMap = ({ geoServerUrl, layers }) => {
-    const mapRef = useRef(null);            //* 持有 ol/Map 实例
-    const mapContainerRef = useRef(null);   //* 持有地图容器DOM元素的ref
+const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
+    const mapRef = useRef<Map | null>(null);            // 持有 ol/Map 实例
+    const mapContainerRef = useRef<HTMLDivElement | null>(null);   // 持有地图容器DOM元素的ref
     const initialCenter = [112.6, 24.4];
-    const initialZoom = 3;
+    const initialZoom = 7;
+
     const debounceResize = useDebounce(() => {
-        if (mapRef.current) {
-            mapRef.current.updateSize();
-            const view = mapRef.current.getView();
+        mapRef.current?.updateSize();
+        const view = mapRef.current?.getView();
+
+        if (view) {
             view.fit(view.getProjection().getExtent(), {
-                size: mapRef.current.getSize(),
+                size: mapRef.current?.getSize(),
                 padding: [1, 1, 1, 1]
             });
         }
@@ -52,6 +64,8 @@ const WMSMap = ({ geoServerUrl, layers }) => {
                 projection: 'EPSG:4326',
                 center: initialCenter,
                 zoom: initialZoom,
+                minZoom: initialZoom + 2,
+                maxZoom: initialZoom + 9,
             })
         });
 
@@ -66,7 +80,7 @@ const WMSMap = ({ geoServerUrl, layers }) => {
 
                 const view = map.getView();
                 view.setCenter(initialCenter);
-                view.setZoom(initialZoom + 7);
+                view.setZoom(initialZoom + 3);
 
             }, 100);
 
@@ -75,7 +89,7 @@ const WMSMap = ({ geoServerUrl, layers }) => {
 
                 const view = map.getView();
                 view.setCenter(initialCenter);
-                view.setZoom(initialZoom + 7);
+                view.setZoom(initialZoom + 3);
 
                 console.log('Updated View Center:', view.getCenter());
                 console.log('Updated View Zoom:', view.getZoom());
@@ -90,10 +104,8 @@ const WMSMap = ({ geoServerUrl, layers }) => {
 
         return () => {
             window.removeEventListener('resize', debounceResize);
-            if (mapRef.current) {
-                mapRef.current.setTarget(null);
-                mapRef.current = null;
-            }
+            mapRef.current?.setTarget(null);
+            mapRef.current = null;
         }
     }, [geoServerUrl, layers, debounceResize]);
 
@@ -101,9 +113,8 @@ const WMSMap = ({ geoServerUrl, layers }) => {
 }
 
 
-
-const MapContainer = ({ date }) => {
-    const layers = `${workSpace}:${date}`;
+const MapContainer: React.FC<MapContainerProps> = ({ date }) => {
+    const layers = `yashixiang:${date}`;
     const geoServerUrl = `${domain}${workSpace}/${protocol}`;
 
     return (
@@ -112,14 +123,20 @@ const MapContainer = ({ date }) => {
 };
 
 
-const AnnualNDVI = () => {
+const AnnualNDVI: React.FC = () => {
     const [date, setDate] = useSafeState('2013-03-01');
 
     return (
-        <>
-            <MapSelector onSelect={setDate} />
+        <Flex gap="middle" vertical style={{ background: " linear-gradient(0deg, #000000cc 0%, #4b5876 60%, #f5f5f5 90%)" }}>
+            <Row justify="center" align="middle">
+                <Col span={4} style={{ fontFamily: 'Poppins' }}><span style={{ fontSize: '1vw', color:'#389e0d'}}>NDVI </span> on a quarterly basis</Col>
+                <Col span={4}><MapSelector onSelect={setDate} /></Col>
+                <Col span={3}></Col>
+                <Col span={6} style={{ fontFamily: 'Poppins' }}><span style={{ fontSize: '1vw', color: '#d4380d' }}>TEMPERATURE </span> on a quarterly basis</Col>
+                <Col span={4}><MapSelector onSelect={setDate} /></Col>
+            </Row>
             <MapContainer date={date} />
-        </>
+        </Flex>
     );
 }
 

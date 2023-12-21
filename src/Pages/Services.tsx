@@ -76,7 +76,7 @@ function getItem(label, key, icon, path) {
 const items = [
     getItem('Overview', '1', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
     getItem('Page 1', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/page1"),
-    getItem('Annual NDVI', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/annualndvi"),
+    getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/annualndvi"),
     getItem('Page 3', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/page3"),
     getItem('Page 4', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/page4"),
     getItem('Page 5', '6', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
