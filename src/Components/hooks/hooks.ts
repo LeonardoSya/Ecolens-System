@@ -9,9 +9,11 @@ import useEventListener from './useEventListener';
 import useReactive from './useReactive';
 import useSelections from './useSelections';
 import useNetWork from './useNetWork';
+import useDebounce from './useDebounce';
 
 
 export {
+    useDebounce,
     useLatest,
     useCreation,
     useMount,
