@@ -9,13 +9,10 @@ import './style/index.css'
 
 const App = () => {
   return (
-    <>
-      <Routes>
-        <Route path='/' element={<MyHomePage />} />
-        <Route path='/services/*' element={<Services />} />
-        {/* <Route path='*' element={<MyHomePage />} /> */}
-      </Routes>
-    </>
+    <Routes>
+      <Route path='/' element={<MyHomePage />} />
+      <Route path='/services/*' element={<Services />} />
+    </Routes>
   )
 }
 export default App;

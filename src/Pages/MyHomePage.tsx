@@ -8,7 +8,6 @@ import HomePage_Footer from '../Components/layouts/HomePage_Footer';
 
 const MyHomePage = () => {
     return (
-        <>
             <Layout
                 style={{
                     width: '75.6vw',
@@ -18,8 +17,6 @@ const MyHomePage = () => {
                 <HomePage_Content />
                 <HomePage_Footer />
             </Layout>
-        </>
-
     )
 }
 

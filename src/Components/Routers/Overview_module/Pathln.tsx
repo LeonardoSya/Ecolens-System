@@ -37,8 +37,8 @@ const Pathln: React.FC<PathlnProps> = ({ title, description, avatarImage }) => {
                     .encode('x', 'date')
                     .encode('y', 'close')
                     .animate('enter', { type: 'pathIn', duration: 2000 })
-                    // .axis('x', { line: null, label: null })
-                    // .axis('y', { line: null, label: null });
+                    .axis('x', { line: null, label: null })
+                    .axis('y', { line: null, label: null });
 
                 chart.render();
 
