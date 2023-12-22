@@ -3,11 +3,11 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
-import { get as getProjection, transformExtent } from 'ol/proj';
-import { useCreation, useDebounce, useSafeState } from '../hooks/hooks';
-
+import { useCreation, useDebounce, useSafeState } from '../../hooks/hooks';
+import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
+import { FloatButton } from 'antd';
 import 'ol/ol.css';
-import '../../style/map.css';
+import '../../../style/map.css';
 
 interface WMSMapProps {
     geoServerUrl: string;
@@ -19,29 +19,44 @@ interface MapContainerProps {
     workspace: string;
 }
 
-// const workspace = 'yashixiang';
+interface MyFloatButtonProps {
+    toggleFullScreen: () => void;
+}
+
 const protocol = 'wms';
 const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
 
 const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
     const mapRef = useRef<Map | null>(null);            // 持有 ol/Map 实例
-    const mapContainerRef = useRef<HTMLDivElement | null>(null);   // 持有地图容器DOM元素的ref
-    const initialCenter = [112.6, 24.4];
-    const initialZoom = 7;
+    const mapContainerRef = useRef<HTMLDivElement>(null);   // 持有地图容器DOM元素的ref
+    const initialCenter: [number, number] = [112.65, 24.4];
+    const initialZoom = 8;
+    const extent = [111.80036767426553, 23.946345613009882, 113.48241812801513, 25.018395073078118]
 
-    const debounceResize = useDebounce(() => {
-        mapRef.current?.updateSize();
-        const view = mapRef.current?.getView();
-
-        if (view) {
-            view.fit(view.getProjection().getExtent(), {
-                size: mapRef.current?.getSize(),
-                padding: [1, 1, 1, 1]
-            });
+    const toggleFullScreen = () => {
+        const mapElement = mapContainerRef.current;
+        if (!document.fullscreenElement && mapElement) {
+            mapElement.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
         }
-    }, 250);
+    };
+
+    // const debounceResize = useDebounce(() => {
+    //     mapRef.current?.updateSize();
+    //     const view = mapRef.current?.getView();
+
+    //     if (view) {
+    //         view.fit(view.getProjection().getExtent(), {
+    //             size: mapRef.current?.getSize(),
+    //             padding: [1, 1, 1, 1]
+    //         });
+    //     }
+    // }, 250);
 
     useEffect(() => {
+        if (!mapContainerRef.current) return;
+
         const wmsLayer = new TileLayer({
             source: new TileWMS({
                 url: geoServerUrl,
@@ -56,7 +71,8 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
         });
 
         const map = new Map({
-            target: mapContainerRef.current!,
+            controls: [],
+            target: mapContainerRef.current,
             layers: [wmsLayer],
             view: new View({
                 projection: 'EPSG:4326',
@@ -64,9 +80,8 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
                 zoom: initialZoom,
                 minZoom: initialZoom + 2,
                 maxZoom: initialZoom + 9,
-                // extent: transformExtent(
-                //     [110, 23, 114, 26], 'EPSG:4326', 'EPSG:3857'
-                // )
+                extent: extent,
+                rotation: 0,
             })
         });
 
@@ -102,17 +117,22 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
                 console.log('Map view changed:', map.getView().getCenter(), map.getView().getZoom());
             });
 
-            window.addEventListener('resize', debounceResize);
+            // window.addEventListener('resize', debounceResize);
         }
 
         return () => {
-            window.removeEventListener('resize', debounceResize);
-            mapRef.current?.setTarget();
+            // window.removeEventListener('resize', debounceResize);
+            mapRef.current?.setTarget(undefined);
             mapRef.current = null;
         }
-    }, [geoServerUrl, layers, debounceResize]);
+    }, [geoServerUrl, layers,]);
 
-    return <div ref={mapContainerRef} className='map-container-page2'></div>
+    return (
+        <>
+            <MyFloatButton toggleFullScreen={toggleFullScreen} />
+            <div ref={mapContainerRef} className='map-container-page2'></div>
+        </>
+    );
 }
 
 
@@ -122,6 +142,19 @@ const MapContainer: React.FC<MapContainerProps> = ({ date, workspace }) => {
 
     return (
         <WMSMap geoServerUrl={geoServerUrl} layers={layers} />
+    );
+};
+
+
+const MyFloatButton: React.FC<MyFloatButtonProps> = ({ toggleFullScreen }) => {
+    return (
+        <FloatButton.Group shape='circle' style={{ right: 24 }}>
+            <FloatButton icon={<ExpandOutlined />} onClick={toggleFullScreen} />
+            <FloatButton icon={<EditFilled />} />
+            <FloatButton />
+            <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
+            <FloatButton.BackTop visibilityHeight={70} />
+        </FloatButton.Group>
     );
 };
 

@@ -3,7 +3,6 @@ import { Avatar, Card } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Chart } from '@antv/g2';
 import styles from '../../../style/Overview.module.css';
-
 interface PathlnProps {
     title: string;
     description: string;

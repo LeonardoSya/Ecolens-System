@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, Suspense, lazy, ReactElement } from 'react';
 import { Flex, Row, Col } from 'antd';
-import { useSafeState } from '../hooks/hooks';
-import { MapSelector } from './services-routers';
+import { useSafeState } from '../../hooks/hooks';
+import { MapSelector } from '../services-routers';
 
 // 将MapContainer组件改为懒加载
 const MapContainer = lazy(() => import('./MapContainer'));
 
 const QuarterlyChart: React.FC = (): ReactElement => {
-    const [date, setDate] = useSafeState<string>('2023-03-01');
+    const [date, setDate] = useSafeState<string>('2022-12-01');
     const [workspace, setWorkspace] = useSafeState<string>('NDVI_sentinel');
 
     const handleNDVISelect = (newDate: string) => {
