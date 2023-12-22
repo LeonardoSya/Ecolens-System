@@ -4,18 +4,20 @@ import { useSafeState } from '../hooks/hooks';
 
 const { Option } = Select;
 
-const workspace = 'yashixiang';
-const date = '2013-03-01';
-const protocol = 'wms';
-const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
+// const workspace = 'yashixiang';
+// const date = '2013-03-01';
+// const protocol = 'wms';
+// const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
 
 interface MapSelectorProps {
     onSelect: (value: string) => void;
+    startDate: string;
+    endDate: string;
 }
 
-const MapSelector: React.FC<MapSelectorProps> = ({ onSelect }) => {
-    const [selectedDate, setSelectedDate] = useSafeState('2023-06-01');
-    const dates = generateDates(new Date('2013-03-01'), new Date('2023-06-01'), 3);
+const MapSelector: React.FC<MapSelectorProps> = ({ onSelect,startDate,endDate }) => {
+    const [selectedDate, setSelectedDate] = useSafeState<string>('2023-03-01');
+    const dates = generateDates(new Date(startDate), new Date(endDate), 3);
 
     const handleDateChange = (value: string) => {
         setSelectedDate(value);

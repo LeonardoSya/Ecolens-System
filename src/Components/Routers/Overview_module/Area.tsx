@@ -8,7 +8,7 @@ interface AreaProps { }
 const Area: React.FC<AreaProps> = () => {
     const chartContainerRef = useRef(null);
     const chartRef = useRef(null);
-    const [loading, setLoading] = useSafeState(true);
+    const [loading, setLoading] = useSafeState<boolean>(true);
 
     useEffect(() => {
         //* 定义接口描述数据结构，通过as语法告诉ts该响应符合接口类型，这样在编译时会检查类型错误

@@ -36,7 +36,7 @@ interface G2Test3DProps {
 }
 
 const G2test3d: React.FC<G2Test3DProps> = () => {
-    const [loading, setLoading] = useSafeState(true);
+    const [loading, setLoading] = useSafeState<boolean>(true);
 
     useEffect(() => {
         setLoading(true);
