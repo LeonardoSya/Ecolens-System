@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
   server: {
+    host: '0.0.0.0',
     proxy: {
       // 代理规则
       '/api': {

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Col, Layout, Row, Flex, Typography, Image, Divider } from 'antd';
 import { InstagramFilled } from '@ant-design/icons';
@@ -51,7 +52,7 @@ const HomePage_Content = () => {
                                 {/* 🚀 Kickstart Your Ecological Journey <br /> */}
                             </Title>
 
-                            <Link to="/services/homepage">
+                            <Link to="/services/overview">
                                 <button className="learn-more">
                                     <span className="circle" aria-hidden="true">
                                         <span className="icon arrow"></span>

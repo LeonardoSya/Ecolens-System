@@ -1,16 +1,13 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, Suspense, lazy } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
 import { get as getProjection, transformExtent } from 'ol/proj';
-import { Flex, Row, Col } from 'antd';
 import { useCreation, useDebounce, useSafeState } from '../hooks/hooks';
-import MapSelector from './MapSelector';
 
 import 'ol/ol.css';
 import '../../style/map.css';
-import { set } from 'ol/transform';
 
 interface WMSMapProps {
     geoServerUrl: string;
@@ -19,9 +16,10 @@ interface WMSMapProps {
 
 interface MapContainerProps {
     date: string;
+    workspace: string;
 }
 
-const workSpace = 'yashixiang';
+// const workspace = 'yashixiang';
 const protocol = 'wms';
 const domain = 'https://electric-duly-peacock.ngrok-free.app/geoserver/'
 
@@ -53,12 +51,12 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
                     'VERSION': '1.1.1',
                     'FORMAT': 'image/jpeg'
                 },
-                serverType: 'geoserver'
+                serverType: 'geoserver',
             }),
         });
 
         const map = new Map({
-            target: mapContainerRef.current,
+            target: mapContainerRef.current!,
             layers: [wmsLayer],
             view: new View({
                 projection: 'EPSG:4326',
@@ -66,10 +64,24 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
                 zoom: initialZoom,
                 minZoom: initialZoom + 2,
                 maxZoom: initialZoom + 9,
+                // extent: transformExtent(
+                //     [110, 23, 114, 26], 'EPSG:4326', 'EPSG:3857'
+                // )
             })
         });
 
         mapRef.current = map;  // 持有ol/Map实例
+
+        setTimeout(() => {
+            map.updateSize();
+
+            const view = map.getView();
+            view.setCenter(initialCenter);
+            view.setZoom(initialZoom + 3);
+
+            console.log('Updated View Center1:', view.getCenter());
+            console.log('Updated View Zoom1:', view.getZoom());
+        }, 100);
 
         if (mapContainerRef.current) {
             map.setTarget(mapContainerRef.current);
@@ -82,18 +94,9 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
                 view.setCenter(initialCenter);
                 view.setZoom(initialZoom + 3);
 
+                console.log('Updated View Center2:', view.getCenter());
+                console.log('Updated View Zoom2:', view.getZoom());
             }, 100);
-
-            setTimeout(() => {
-                map.updateSize();
-
-                const view = map.getView();
-                view.setCenter(initialCenter);
-                view.setZoom(initialZoom + 3);
-
-                console.log('Updated View Center:', view.getCenter());
-                console.log('Updated View Zoom:', view.getZoom());
-            }, 200);
 
             map.on('change', () => {
                 console.log('Map view changed:', map.getView().getCenter(), map.getView().getZoom());
@@ -104,7 +107,7 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
 
         return () => {
             window.removeEventListener('resize', debounceResize);
-            mapRef.current?.setTarget(null);
+            mapRef.current?.setTarget();
             mapRef.current = null;
         }
     }, [geoServerUrl, layers, debounceResize]);
@@ -113,9 +116,9 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
 }
 
 
-const MapContainer: React.FC<MapContainerProps> = ({ date }) => {
-    const layers = `yashixiang:${date}`;
-    const geoServerUrl = `${domain}${workSpace}/${protocol}`;
+const MapContainer: React.FC<MapContainerProps> = ({ date, workspace }) => {
+    const layers = `${workspace}:${date}`;
+    const geoServerUrl = `${domain}${workspace}/${protocol}`;
 
     return (
         <WMSMap geoServerUrl={geoServerUrl} layers={layers} />
@@ -123,21 +126,4 @@ const MapContainer: React.FC<MapContainerProps> = ({ date }) => {
 };
 
 
-const AnnualNDVI: React.FC = () => {
-    const [date, setDate] = useSafeState('2013-03-01');
-
-    return (
-        <Flex gap="middle" vertical style={{ background: " linear-gradient(0deg, #000000cc 0%, #4b5876 60%, #f5f5f5 90%)" }}>
-            <Row justify="center" align="middle">
-                <Col span={4} style={{ fontFamily: 'Poppins' }}><span style={{ fontSize: '1vw', color:'#389e0d'}}>NDVI </span> on a quarterly basis</Col>
-                <Col span={4}><MapSelector onSelect={setDate} /></Col>
-                <Col span={3}></Col>
-                <Col span={6} style={{ fontFamily: 'Poppins' }}><span style={{ fontSize: '1vw', color: '#d4380d' }}>TEMPERATURE </span> on a quarterly basis</Col>
-                <Col span={4}><MapSelector onSelect={setDate} /></Col>
-            </Row>
-            <MapContainer date={date} />
-        </Flex>
-    );
-}
-
-export default AnnualNDVI;
+export default MapContainer;

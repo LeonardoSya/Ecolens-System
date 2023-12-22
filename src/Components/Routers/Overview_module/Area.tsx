@@ -8,7 +8,7 @@ interface AreaProps { }
 const Area: React.FC<AreaProps> = () => {
     const chartContainerRef = useRef(null);
     const chartRef = useRef(null);
-    const [loading, setLoading] = useSafeState(true);
+    const [loading, setLoading] = useSafeState<boolean>(true);
 
     useEffect(() => {
         //* 定义接口描述数据结构，通过as语法告诉ts该响应符合接口类型，这样在编译时会检查类型错误
@@ -27,14 +27,9 @@ const Area: React.FC<AreaProps> = () => {
                 const data = (await response.json()) as Data[];
                 //* 现在data被正确的类型化了
                 //* 这样TypeScript编译时就可以检查类型错误
-                // data.forEach(d => {
-                //     console.log(d.date);
-                //     console.log(d.unemployed);
-                //     console.log(d.industry);
-                // });
 
                 const chartInstance = new Chart({
-                    container: chartContainerRef.current,
+                    container: chartContainerRef.current!,
                     autoFit: true,
                 });
                 chartRef.current = chartInstance;
