@@ -130,7 +130,7 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
     return (
         <>
             <MyFloatButton toggleFullScreen={toggleFullScreen} />
-            <div ref={mapContainerRef} className='map-container-page2'></div>
+            <div ref={mapContainerRef} className='map-container'></div>
         </>
     );
 }

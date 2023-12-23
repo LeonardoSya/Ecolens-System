@@ -1,55 +1,55 @@
 import React, { useEffect, useRef } from 'react';
-import {Map, View} from 'ol';
-import TileLayer from 'ol/layer/Tile.js';
-import { OSM, TileWMS } from 'ol/source';
-
-
+import Map from 'ol/Map';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import { XYZ, OSM, Vector as VectorSource } from 'ol/source';
+import VectorLayer from 'ol/layer/Vector';
+import GeoJSON from 'ol/format/GeoJSON';
 import '../../style/map.css';
-import 'ol/ol.css'
+import 'ol/ol.css';
 
-const Page4 = () => {
-    // 创建一个ref，指向地图的容器元素
-    const mapElement = useRef(null);
+const url = '../../assets/data/yangshan_geo.geojson'
+const initialCenter: [number, number] = [112.65, 24.4];
+const initialZoom = 8;
 
-    // 使用useEffect钩子，在组件挂载后初始化地图
+const Page4: React.FC = () => {
+    const mapRef = useRef<HTMLDivElement>(null);
+
     useEffect(() => {
-        // 创建图层
-        const layers = [
-            new TileLayer({
-                source: new OSM(),
-            }),
-            new TileLayer({
-                // extent: [-13884991, 2870341, -7455066, 6338219],
-                source: new TileWMS({
-                    url: 'https://electric-duly-peacock.ngrok-free.app/geoserver/yashixiang/wms',
-                    params: { 'LAYERS': 'yashixiang: 2023-06-01', 'TILED': true },
-                    serverType: 'geoserver',
-                    // Countries have transparency, so do not fade tiles:
-                    // transition: 0,
-                }),
-            }),
-        ];
+        if (!mapRef.current) return;
 
-        // 创建地图
+        const vectorSource = new VectorSource({
+            url: url,
+            format: new GeoJSON(),
+        });
+
         const map = new Map({
-            layers: layers,
-            target: mapElement.current!,
+            target: mapRef.current,
+            layers: [
+                // 添加OSM源的 base map 底图
+                new TileLayer({
+                    source: new OSM(),
+                }),
+                new VectorLayer({
+                    source: vectorSource,
+                }),
+            ],
             view: new View({
-                center: [0,0],
-                zoom: 4,
+                center: initialCenter,
+                zoom: initialZoom,
             }),
         });
 
-        // 在组件卸载时清理地图资源
-        return () => {
-            map.dispose();
-        };
-    }, []); // 只在组件挂载时运行
+        vectorSource.on('featuresloadend', () => {
+            alert('GeoJSON features have been loaded and rendered');
+        })
 
-    // 返回渲染的<div>元素
+        return () => map.setTarget(undefined);
+    }, []);
+
     return (
-        <div ref={mapElement} className='map-container-page4'></div>
-    );
+        <div ref={mapRef} className='map-container'></div>
+    )
 }
 
 export default Page4;

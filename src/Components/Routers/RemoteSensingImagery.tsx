@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
+import VectorLayer from 'ol/layer/Vector';
+import TileWMS from 'ol/source/TileWMS';
 import XYZ from 'ol/source/XYZ';
 import 'ol/ol.css';
 import '../../style/map.css'
@@ -18,16 +20,12 @@ const BASE_URL_2 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/61f9b270-a4
 const PATH_TEMPLATE = '/{z}/{x}/{y}/tile.png';
 const QUERY_PARAMS = '?tk=d26ca22d-a029-419e-9bdf-c2e7d3b52aa2';
 
-// const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
 const TILE_LAYER_PROJECTION = 'EPSG:4326';
 const TILE_LAYER_ATTRIBUTIONS = '松材线虫无人机影像';
 const TILE_LAYER_CROSS_ORIGIN = 'anonymous'
 
 const initialZoom = 12.5;
 const initialCenter = [12543291.408831256, 2795116.434460827];
-// const lonLat = [112.7611, 24.4084];
-// const initialCenter = fromLonLat(lonLat, 'EPSG:4326');
-
 interface MyFloatButtonProps {
     toggleFullScreen: () => void;
 }
@@ -52,6 +50,20 @@ const RemoteSensingImagery: React.FC = () => {
     useEffect(() => {
         const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
 
+        const wmsLayer = new TileLayer({
+            source: new TileWMS({
+                url: 'https://electric-duly-peacock.ngrok-free.app/geoserver/vector/wms',
+                params: {
+                    'LAYERS': 'vector:traffic',
+                    'TILED': true,
+                    'FORMAT': 'image/png',
+                },
+                projection:TILE_LAYER_PROJECTION,
+                serverType:'geoserver',
+                crossOrigin: TILE_LAYER_CROSS_ORIGIN,
+            })
+        });
+
         const map = new Map({
             controls: [],
             target: mapRef.current!,
@@ -63,8 +75,9 @@ const RemoteSensingImagery: React.FC = () => {
                         projection: TILE_LAYER_PROJECTION,
                         attributions: TILE_LAYER_ATTRIBUTIONS,
                         crossOrigin: TILE_LAYER_CROSS_ORIGIN,
-                    })
-                })
+                    }),
+                }),
+                wmsLayer,
             ],
             view: new View({
                 center: initialCenter,
@@ -91,7 +104,7 @@ const RemoteSensingImagery: React.FC = () => {
                 </Col>
                 <Col span={4}></Col>
             </Row>
-            <div ref={mapRef} className='map-container-page1' style={{ background: "#000000cc" }} ></div>
+            <div ref={mapRef} className='map-container' style={{ background: "#000000cc" }} ></div>
             <MyFloatButton toggleFullScreen={toggleFullScreen} />
         </Flex>
     );
