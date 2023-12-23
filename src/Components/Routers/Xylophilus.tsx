@@ -21,15 +21,24 @@ const TILE_LAYER_PROJECTION = 'EPSG:4326';
 const TILE_LAYER_ATTRIBUTIONS = '松材线虫影像';
 const TILE_LAYER_CROSS_ORIGIN = 'anonymous'
 
-const initialZoom = 15;
-const initialCenter = [112.611022, 24.49175];
+const initialZoom = 12;
+
+const URLCenter = [112.653558, 24.464315];  // Error
+// const URLCenter = [112.661442, 24.477552];  // Error
+// const URLCenter = [112.618188, 24.433336];  // Error
+// const URL2Center = [112.611022, 24.49175];  // Error
+
+const URLExtent = [112.645360413305, 24.455265024031199, 112.65991680094101, 24.471444934452599];   // Error
+// const URLExtent = [112.655110294347, 24.471407586841199, 112.66768036814, 24.4847441695463];        // Error
+// const URLExtent = [112.610644151188, 24.4268354163789, 112.629228165545, 24.442485058849101];       // Error
+// const URL2Extent = [112.60870226208201, 24.489847507396998, 112.614833302809, 24.493698583885301];  // Error
 
 interface MyFloatButtonProps {
     toggleFullScreen: () => void;
 }
 
 const RemoteSensingImagery: React.FC = () => {
-    const [BASE_URL, setBASE_URL] = useSafeState<string>(BASE_URL_2);
+    const [BASE_URL, setBASE_URL] = useSafeState<string>(BASE_URL_1);
     const mapRef = useRef<HTMLDivElement>(null);
 
     const handleRadioChange = (newURL: string) => {
@@ -47,7 +56,7 @@ const RemoteSensingImagery: React.FC = () => {
 
     useEffect(() => {
         // const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
-        const TILE_LAYER_URL = `http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/02067963-3cde-46b5-ab9d-b64247a5fbbf${PATH_TEMPLATE}${QUERY_PARAMS}`;
+        const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
 
         // const wmsLayer = new TileLayer({
         //     source: new TileWMS({
@@ -68,7 +77,7 @@ const RemoteSensingImagery: React.FC = () => {
             target: mapRef.current!,
             layers: [
                 new TileLayer({
-                    extent: [112.60870226208201, 24.489847507396998, 112.614833302809, 24.493698583885301],
+                    extent: URLExtent,
                     source: new XYZ({
                         url: TILE_LAYER_URL,
                         projection: TILE_LAYER_PROJECTION,
@@ -79,9 +88,9 @@ const RemoteSensingImagery: React.FC = () => {
                 // wmsLayer,
             ],
             view: new View({
-                center: initialCenter,
+                center: URLCenter,
                 zoom: initialZoom,
-                extent: [112.60870226208201, 24.489847507396998, 112.614833302809, 24.493698583885301],
+                extent: URLExtent,
             })
         });
         return () => map.setTarget(undefined);
