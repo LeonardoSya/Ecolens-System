@@ -4,7 +4,7 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import { XYZ, TileWMS } from 'ol/source';
-import { useSafeState } from '../../hooks/hooks';
+import { useSafeState } from '../../../hooks/hooks';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
 import './services.css';
