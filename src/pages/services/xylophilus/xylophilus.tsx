@@ -7,8 +7,8 @@ import { Projection, fromLonLat, toLonLat } from 'ol/proj';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
 import 'ol/ol.css';
-import  './services.css';
-import '../../assets/styles/map.css'
+import  '../services.css';
+import '../../../assets/styles/map.css'
 import { Coordinate } from '@antv/g2';
 import { ProjectionLike } from 'ol/proj';
 
