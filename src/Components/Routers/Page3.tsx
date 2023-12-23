@@ -182,7 +182,7 @@ const Page3: React.FC = () => {
                 <option value="ndviPalettePlasma">NDVI w/ palette 1</option>
                 <option value="ndviPaletteViridis">NDVI w/ palette 2</option>
             </select>
-            <div id='map' className='map-container-page3'></div>
+            <div id='map' className='map-container'></div>
         </>
     )
 
