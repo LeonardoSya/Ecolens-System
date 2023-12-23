@@ -8,6 +8,7 @@ import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
 import { FloatButton } from 'antd';
 import 'ol/ol.css';
 import '../../../style/map.css';
+import '../../../style/mapButton.css';
 
 interface WMSMapProps {
     geoServerUrl: string;

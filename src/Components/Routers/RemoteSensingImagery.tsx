@@ -5,8 +5,6 @@ import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
 import TileWMS from 'ol/source/TileWMS';
 import XYZ from 'ol/source/XYZ';
-import 'ol/ol.css';
-import '../../style/map.css'
 import { Attribution, FullScreen, MousePosition, Rotate, ScaleLine, ZoomToExtent } from 'ol/control';
 import { createStringXY } from 'ol/coordinate';
 import { fromLonLat } from 'ol/proj';
@@ -14,6 +12,10 @@ import { useSafeState } from '../hooks/hooks';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
 import { coordinateRelationship } from 'ol/extent';
+// import '../../../style/mapButton.css';
+import '../../style/map.css'
+import 'ol/ol.css';
+
 
 const BASE_URL_1 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/2ce48a09-3160-46ef-9349-76b5bde1caae';
 const BASE_URL_2 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/61f9b270-a42c-4d9e-a9dc-ac3af586b313';

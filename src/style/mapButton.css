@@ -1,14 +1,3 @@
-.map-container {
-    /* width: 100.3%; */
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.ol-mouse-position {
-    color: white;
-    /* 设置文本颜色为白色 */
-}
 
 /* The switch - the box around the slider */
 .switch {
@@ -45,7 +34,7 @@
     bottom: -0.45rem;
     transition: .15s;
     border-radius: var(--switch_height);
-    /* transform: scale(1.4); */
+    transform: scale(1.4);
 }
 
 .slider:before {
@@ -59,7 +48,7 @@
     left: -0.12rem;
     bottom: -0.12rem;
     background-color: var(--thumb_color);
-    /* transform: translateY(-0.2em); */
+    transform: translateY(-0.2em);
     box-shadow: 0 0.2em 0 var(--outline_color);
     transition: .15s;
 }
@@ -74,18 +63,18 @@
 
 /* Raise thumb when hovered */
 .input:hover+.slider:before {
-    /* transform: translateY(-0.3em); */
+    transform: translateY(-0.3em);
     box-shadow: 0 0.3em 0 var(--outline_color);
 }
 
 .input:checked+.slider:before {
-    /* transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.2em); */
+    transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.2em);
     background-color: rgb(207, 160, 4);
 }
 
 /* Raise thumb when hovered & checked */
 .input:hover:checked+.slider:before {
-    /* transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.3em); */
+    transform: translateX(calc(var(--switch_width) - var(--switch_height))) translateY(-0.3em);
     box-shadow: 0 0.3em 0 var(--outline_color);
 }
 
@@ -126,7 +115,7 @@
     position: absolute;
     top: 50%;
     left: 0;
-    /* transform: translateY(-50%); */
+    transform: translateY(-50%);
     width: 1.2rem;
     height: 1.2rem;
     border-radius: 50%;
@@ -135,7 +124,7 @@
 }
 
 .radio-button__input:checked+.radio-button__label .radio-button__custom {
-    /* transform: translateY(-50%) scale(0.95); */
+    transform: translateY(-50%) scale(0.95);
     border: 0.3rem solid #52c41a;
     color: #52c41a;
 }
@@ -145,7 +134,7 @@
 }
 
 .radio-button__label:hover .radio-button__custom {
-    /* transform: translateY(-50%) scale(1.2); */
+    transform: translateY(-50%) scale(1.2);
     border-color: #52c41a;
     box-shadow: 0 0 1rem #52c41a;
 }

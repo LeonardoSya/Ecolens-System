@@ -2,18 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
-import VectorLayer from 'ol/layer/Vector';
-import TileWMS from 'ol/source/TileWMS';
 import XYZ from 'ol/source/XYZ';
-import 'ol/ol.css';
-import '../../style/map.css'
-import { Attribution, FullScreen, MousePosition, Rotate, ScaleLine, ZoomToExtent } from 'ol/control';
-import { createStringXY } from 'ol/coordinate';
-import { fromLonLat } from 'ol/proj';
 import { useSafeState } from '../hooks/hooks';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
-import { coordinateRelationship } from 'ol/extent';
+import 'ol/ol.css';
+// import  '../../style/mapButton.css';
+import '../../style/map.css'
 
 const BASE_URL_1 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/e8826544-2b17-478c-b7bc-9523a8489777';
 const BASE_URL_2 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/02067963-3cde-46b5-ab9d-b64247a5fbbf';
@@ -26,15 +21,15 @@ const TILE_LAYER_PROJECTION = 'EPSG:4326';
 const TILE_LAYER_ATTRIBUTIONS = '松材线虫影像';
 const TILE_LAYER_CROSS_ORIGIN = 'anonymous'
 
-const initialZoom = 12.5;
-const initialCenter = [12543291.408831256, 2795116.434460827];
+const initialZoom = 15;
+const initialCenter = [112.611022, 24.49175];
 
 interface MyFloatButtonProps {
     toggleFullScreen: () => void;
 }
 
 const RemoteSensingImagery: React.FC = () => {
-    const [BASE_URL, setBASE_URL] = useSafeState<string>(BASE_URL_1);
+    const [BASE_URL, setBASE_URL] = useSafeState<string>(BASE_URL_2);
     const mapRef = useRef<HTMLDivElement>(null);
 
     const handleRadioChange = (newURL: string) => {
@@ -51,7 +46,8 @@ const RemoteSensingImagery: React.FC = () => {
     };
 
     useEffect(() => {
-        const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
+        // const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
+        const TILE_LAYER_URL = `http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/02067963-3cde-46b5-ab9d-b64247a5fbbf${PATH_TEMPLATE}${QUERY_PARAMS}`;
 
         // const wmsLayer = new TileLayer({
         //     source: new TileWMS({
@@ -72,7 +68,7 @@ const RemoteSensingImagery: React.FC = () => {
             target: mapRef.current!,
             layers: [
                 new TileLayer({
-                    extent: [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587],
+                    extent: [112.60870226208201, 24.489847507396998, 112.614833302809, 24.493698583885301],
                     source: new XYZ({
                         url: TILE_LAYER_URL,
                         projection: TILE_LAYER_PROJECTION,
@@ -85,7 +81,7 @@ const RemoteSensingImagery: React.FC = () => {
             view: new View({
                 center: initialCenter,
                 zoom: initialZoom,
-                extent: [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587],
+                extent: [112.60870226208201, 24.489847507396998, 112.614833302809, 24.493698583885301],
             })
         });
         return () => map.setTarget(undefined);
