@@ -7,7 +7,7 @@ import Page5 from './Page5';
 import Overview from './Overview_module/Overview';
 import MapSelector from './NDVI&Temp/MapSelector';
 import RemoteSensingImagery from './RemoteSensingImagery';
-import Xylophilus from './xylophilus';
+import Xylophilus from './Xylophilus';
 
 export {
     Introduction,

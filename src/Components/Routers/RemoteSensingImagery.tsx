@@ -3,41 +3,26 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
-import TileWMS from 'ol/source/TileWMS';
-import XYZ from 'ol/source/XYZ';
-import { Attribution, FullScreen, MousePosition, Rotate, ScaleLine, ZoomToExtent } from 'ol/control';
-import { createStringXY } from 'ol/coordinate';
-import { fromLonLat } from 'ol/proj';
+import { XYZ, TileWMS } from 'ol/source';
 import { useSafeState } from '../hooks/hooks';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
-import { coordinateRelationship } from 'ol/extent';
 // import '../../../style/mapButton.css';
 import '../../style/map.css'
 import 'ol/ol.css';
 
-
-const BASE_URL_1 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/2ce48a09-3160-46ef-9349-76b5bde1caae';
-const BASE_URL_2 = 'http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/61f9b270-a42c-4d9e-a9dc-ac3af586b313';
-const PATH_TEMPLATE = '/{z}/{x}/{y}/tile.png';
-const QUERY_PARAMS = '?tk=d26ca22d-a029-419e-9bdf-c2e7d3b52aa2';
-
-const TILE_LAYER_PROJECTION = 'EPSG:4326';
-const TILE_LAYER_ATTRIBUTIONS = '松材线虫无人机影像';
-const TILE_LAYER_CROSS_ORIGIN = 'anonymous'
-
-const initialZoom = 12.5;
-const initialCenter = [12543291.408831256, 2795116.434460827];
-interface MyFloatButtonProps {
-    toggleFullScreen: () => void;
-}
+const mapInfo = [
+    { id: '2ce48a09-3160-46ef-9349-76b5bde1caae', center: [12543291.408831256, 2795116.434460827], zoom: 12.5 },
+    { id: '61f9b270-a42c-4d9e-a9dc-ac3af586b313', center: [12543291.408831256, 2795116.434460827], zoom: 12.5 },
+];
+const extent = [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587];
 
 const RemoteSensingImagery: React.FC = () => {
-    const [BASE_URL, setBASE_URL] = useSafeState<string>(BASE_URL_1);
+    const [item, setItem] = useSafeState(mapInfo[0]);
     const mapRef = useRef<HTMLDivElement>(null);
 
-    const toggleBASE_URL = () => {
-        setBASE_URL(BASE_URL === BASE_URL_1 ? BASE_URL_2 : BASE_URL_1);
+    const toggleItem = () => {
+        setItem(item === mapInfo[0] ? mapInfo[1] : mapInfo[0]);
     };
 
     const toggleFullScreen = () => {
@@ -50,7 +35,7 @@ const RemoteSensingImagery: React.FC = () => {
     };
 
     useEffect(() => {
-        const TILE_LAYER_URL = `${BASE_URL}${PATH_TEMPLATE}${QUERY_PARAMS}`;
+        const url = `http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/${item.id}/{z}/{x}/{y}/tile.png?tk=d26ca22d-a029-419e-9bdf-c2e7d3b52aa2`;
 
         const wmsLayer = new TileLayer({
             source: new TileWMS({
@@ -60,9 +45,9 @@ const RemoteSensingImagery: React.FC = () => {
                     'TILED': true,
                     'FORMAT': 'image/png',
                 },
-                projection:TILE_LAYER_PROJECTION,
-                serverType:'geoserver',
-                crossOrigin: TILE_LAYER_CROSS_ORIGIN,
+                projection: 'EPSG:4326',
+                serverType: 'geoserver',
+                crossOrigin: 'anonymous',
             })
         });
 
@@ -71,24 +56,25 @@ const RemoteSensingImagery: React.FC = () => {
             target: mapRef.current!,
             layers: [
                 new TileLayer({
-                    extent: [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587],
+                    extent: extent,
                     source: new XYZ({
-                        url: TILE_LAYER_URL,
-                        projection: TILE_LAYER_PROJECTION,
-                        attributions: TILE_LAYER_ATTRIBUTIONS,
-                        crossOrigin: TILE_LAYER_CROSS_ORIGIN,
+                        url: url,
+                        projection: 'EPSG:4326',
+                        attributions: '阳山县遥感影像',
+                        crossOrigin: 'anonymous',
                     }),
                 }),
                 wmsLayer,
             ],
             view: new View({
-                center: initialCenter,
-                zoom: initialZoom,
+                center: item.center,
+                zoom: item.zoom,
                 extent: [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587],
             })
         });
+
         return () => map.setTarget(undefined);
-    }, [BASE_URL]);
+    }, [item]);
 
     return (
         <Flex gap="small" vertical>
@@ -99,7 +85,7 @@ const RemoteSensingImagery: React.FC = () => {
                     </span>
                 </Col>
                 <Col span={4}>
-                    <label className="switch" onClick={toggleBASE_URL}>
+                    <label className="switch" onClick={toggleItem}>
                         <input type="checkbox" className="input" />
                         <span className="slider"></span>
                     </label>
@@ -112,6 +98,9 @@ const RemoteSensingImagery: React.FC = () => {
     );
 };
 
+interface MyFloatButtonProps {
+    toggleFullScreen: () => void;
+}
 const MyFloatButton: React.FC<MyFloatButtonProps> = ({ toggleFullScreen }) => {
     return (
         <FloatButton.Group

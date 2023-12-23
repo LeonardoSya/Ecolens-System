@@ -1,5 +1,5 @@
 
-import homepageIcon from './homepage_icon.svg';
+import homepageIcon from './homepage-icon.svg';
 import reactLogo from './react.svg'
 import viteLogo from './vite.svg';
 import antdLogo from './antd.svg';

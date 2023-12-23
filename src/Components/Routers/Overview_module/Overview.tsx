@@ -5,9 +5,7 @@ import Area from "./Area";
 import CardComponent from './CardComponent';
 import Pathln from './Pathln';
 import MiniArea from './MiniArea';
-
-import { cardImage1, cardImage2, cardImage3, cardImage4, avatar } from '../../../assets/images/indexImage';
-
+import {  cardImage3, cardImage4, avatar } from '../../../assets/images/index-image';
 
 const Overview: React.FC = () => {
     return (
