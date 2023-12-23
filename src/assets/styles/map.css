@@ -1,0 +1,11 @@
+.map-container {
+    /* width: 100.3%; */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.ol-mouse-position {
+    color: white;
+    /* 设置文本颜色为白色 */
+}
