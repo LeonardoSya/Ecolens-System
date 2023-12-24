@@ -3,15 +3,13 @@ import { Chart } from '@antv/g2';
 import {useSafeState} from '../../../hooks/hooks';
 import  './index.css';
 
-interface AreaProps { }
-
-const Area: React.FC<AreaProps> = () => {
+const Area: React.FC = () => {
     const chartContainerRef = useRef(null);
     const chartRef = useRef(null);
     const [loading, setLoading] = useSafeState<boolean>(true);
 
     useEffect(() => {
-        //* 定义接口描述数据结构，通过as语法告诉ts该响应符合接口类型，这样在编译时会检查类型错误
+        // 定义接口描述数据结构，通过as语法告诉ts该响应符合接口类型，这样在编译时会检查类型错误
         interface Data {
             date: string;
             unemployed: number;
@@ -23,10 +21,9 @@ const Area: React.FC<AreaProps> = () => {
         const fetchData = async () => {
             try {
                 const response = await fetch('https://assets.antv.antgroup.com/g2/unemployment-by-industry.json');
-                //* 告诉TypeScript这个response符合Data接口
+                // 告诉TypeScript这个response符合Data接口
                 const data = (await response.json()) as Data[];
-                //* 现在data被正确的类型化了
-                //* 这样TypeScript编译时就可以检查类型错误
+                // 现在data被正确的类型化了  这样TypeScript编译时就可以检查类型错误
 
                 const chartInstance = new Chart({
                     container: chartContainerRef.current!,

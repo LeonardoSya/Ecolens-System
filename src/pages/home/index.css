@@ -13,6 +13,7 @@
     font-family: Silkscreen;
     width: 12vw;
     height: 3.2vh;
+    transform: scale(1.2);
 }
 
 button.learn-more .circle {

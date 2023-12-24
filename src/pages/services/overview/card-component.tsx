@@ -2,6 +2,7 @@ import React from 'react';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import './index.css';
+import { none } from 'ol/centerconstraint';
 
 interface LittleCardProps {
     title: string;
@@ -16,6 +17,10 @@ const CardComponent: React.FC<LittleCardProps> = ({ title, description, coverIma
     return (
         <Card
             className="card"
+            style={{
+                padding:0,
+                margin:0,
+            }}
             cover={
                 <img
                     alt='example'
@@ -29,6 +34,10 @@ const CardComponent: React.FC<LittleCardProps> = ({ title, description, coverIma
             ]}
         >
             <Card.Meta
+                style={{
+                    padding: 0,
+                    margin: 0,
+                }}
                 title={title}
                 description={description}
                 avatar={<Avatar src={avatarImage} />}
