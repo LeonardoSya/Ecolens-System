@@ -1,32 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, createContext } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes, Navigate, useNavigate } from 'react-router-dom';
-import { FloatButton, Col, Row, ColorPicker, Divider, ConfigProvider, App, Space, Select, Flex, Button, Layout, Menu, theme, Typography, Dropdown, Tooltip, Switch } from 'antd';
-import { AreaChartOutlined, BarChartOutlined, EditFilled, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, FundOutlined, ZoomInOutlined, ZoomOutOutlined, SyncOutlined, MenuFoldOutlined, MenuUnfoldOutlined, DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
+import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, theme, Typography, Tooltip } from 'antd';
+import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 import { Introduction, Overview, Xylophilus, QuarterlyChart, Page3, Page4, Page5, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
-
+import { ChartContext } from '../../models/chart-context';
 import './search-input.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
 
 const Services = () => {
+    const [primary, setPrimary] = useSafeState('#262626');
+    // const { collapsed, setCollapsed, forceCollapsed, toggleCollapsed } = useContext(ChartContext);
     const [collapsed, setCollapsed] = useSafeState(false);
-    const [primary, setPrimary] = useSafeState('#262626')
     // const { token: { colorBgContainer }, } = theme.useToken();
-
-    const toggleCollapsed = () => {
-        setCollapsed(!collapsed);
-    }
 
     const togglePrimaryColor = (color) => {
         setPrimary(color.toHexString())
     }
 
-    function forceCollapsed() {
-        if (collapsed === false) {
-            setCollapsed(true);
-        }
+    const toggleCollapsed = () => {
+        collapsed ? setCollapsed(false) : setCollapsed(true);
     }
 
 
@@ -36,26 +31,25 @@ const Services = () => {
                 token: {
                     // Seed Token 影响范围大
                     colorPrimary: primary,
-                    // // 派生变量，影响范围小
+                    // // 派生变量,影响范围小
                     // // colorBgContainer:''
                 }
             }}
         >
-            {/* <MyFloatButton /> */}
-
-            <Layout style={{ minHeight: '100vh', width: '103.2%' }}>
+            <Layout>
                 {/* Sider */}
                 <MySider collapsed={collapsed} />
 
-                <Layout onClick={forceCollapsed}>
+                <Layout onClick={toggleCollapsed}>
                     {/* Header */}
-                    <MyHeader collapsed={collapsed} togglePrimaryColor={togglePrimaryColor} />
+                    <MyHeader primary={primary} togglePrimaryColor={togglePrimaryColor} />
 
                     {/* Search module */}
                     <MySearchModule collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
 
                     {/* Router */}
                     <MyMap style={{ width: '100vw' }} />
+
                     {/* Footer */}
                     <Footer style={{ textAlign: 'center', background: 'rgba(0,0,0,.8)', color: '#bfbfbf' }}>
                         Ecolens System ©2023 Created by Zhangyiyang
@@ -63,9 +57,9 @@ const Services = () => {
                 </Layout>
             </Layout>
         </ConfigProvider>
-
     );
 }
+
 
 function getItem(label, key, icon, path) {
     return {
@@ -87,14 +81,14 @@ const items = [
 const MySider = ({ collapsed }) => {
     const renderMenuItems = (menuItems) => {
         return menuItems.map(item => (
-            <Menu.Item key={item.key} icon={item.icon}>
+            <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem" }}>
                 <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
         ));
     };
 
     return (
-        <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: "#2d5676" }}>
+        <Sider trigger={null} collapsible collapsed={collapsed} style={{ background: "#2d5676", }}>
             <div className='demo-log-vertical' />
             <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" style={{ backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 60%)" }} >
                 {renderMenuItems(items)}
@@ -105,13 +99,13 @@ const MySider = ({ collapsed }) => {
 
 
 const MyHeader = ({ primary, togglePrimaryColor }) => (
-    <Header style={{ width: '100%', height: '6vh', padding: 0, backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", }}>
+    <Header style={{ width: 'auto', height: '6vh', padding: 0, backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", }}>
         <Row>
             <Col span={12}>
                 <Flex justify="flex-start" align="flex-start" gap="small">
                     <ColorPicker value={primary} onChangeComplete={togglePrimaryColor} style={{ margin: '1vh', border: 'none', background: "inherit", }} />
                     <Title style={{ fontSize: "1.5vw", fontFamily: "Silkscreen", marginTop: '1vh', color: '#fff' }}>
-                        <Link to="https://buzzard-equipped-heavily.ngrok-free.app/" style={{ color: 'inherit' }}>Ecolens System</Link>
+                        <Link to="/" style={{ color: 'inherit' }}>Ecolens System</Link>
                     </Title>
                 </Flex>
             </Col>
@@ -178,11 +172,6 @@ const MyHeader = ({ primary, togglePrimaryColor }) => (
 const MySearchModule = ({ collapsed, toggleCollapsed }) => {
     const navigate = useNavigate();
 
-    const handleSelectChange = (value, option) => {
-        console.log('yes');
-        navigate(option.link);
-    }
-
     return (
         <Flex justify='flex-start' align='center' gap="large" style={{ background: '#f5f5f5', height: '10vh' }}>
             <Button
@@ -192,25 +181,6 @@ const MySearchModule = ({ collapsed, toggleCollapsed }) => {
                 style={{ fontSize: '16px', width: 64, height: 64, marginTop: '0' }}
             />
 
-            {/* <Select
-                showSearch
-                style={{
-                    width: 200,
-                }}
-                placeholder="Search to Select"
-                defaultActiveFirstOption
-                optionFilterProp="children"
-                filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                filterSort={(optionA, optionB) =>
-                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                }
-                options={selectOptions.map((option) => ({
-                    key: option.value,
-                    label: option.label,
-                    link: option.path,
-                }))}
-                onSelect={handleSelectChange}  // ?? 切换路由失败了，再研究一下
-            /> */}
             <div className="search-input-container">
                 <input className="search-input" name="text" type="text" />
                 <label className="search-label" htmlFor="input">Enter Your Query</label>
@@ -222,35 +192,24 @@ const MySearchModule = ({ collapsed, toggleCollapsed }) => {
     );
 };
 
-// const MyFloatButton = () => {  // ?? 通过 Button setZoom 失败了，再研究一下
-//     return (
-//         <FloatButton.Group
-//             shape='circle'
-//             style={{ right: 24 }}
-//         >
-//             <FloatButton icon={<EditFilled />} />
-//             <FloatButton />
-//             <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
-//             <FloatButton.BackTop visibilityHeight={70} />
-//         </FloatButton.Group>
-//     );
-// }
+export const MyMap = () => {
 
-const MyMap = () => (
-    <Content>
-        {/* Route用于将应用的位置映射到不同的React组件 */}
-        {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
-        <Routes>
-            <Route path='/overview' element={<Overview />} />
-            <Route path='/rsimagery' element={<RSImagery />} />
-            <Route path='/ndvitemp' element={<QuarterlyChart />} />
-            <Route path='/xylophilus' element={<Xylophilus />} />
-            <Route path='/page4' element={<Page4 />} />
-            <Route path='/page5' element={<Page5 />} />
-            <Route path='/introduction' element={<Introduction />} />
-            <Route path='/' element={<Navigate replace to="/overview" />} />
-        </Routes>
-    </Content>
-);
+    return (
+        <Content>
+            {/* Route用于将应用的位置映射到不同的React组件 */}
+            {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
+            <Routes>
+                <Route path='/overview' element={<Overview />} />
+                <Route path='/rsimagery' element={<RSImagery />} />
+                <Route path='/ndvitemp' element={<QuarterlyChart />} />
+                <Route path='/xylophilus' element={<Xylophilus />} />
+                <Route path='/page4' element={<Page4 />} />
+                <Route path='/page5' element={<Page5 />} />
+                <Route path='/introduction' element={<Introduction />} />
+                <Route path='/' element={<Navigate replace to="/overview" />} />
+            </Routes>
+        </Content>
+    );
+};
 
 export default Services;

@@ -1,11 +1,12 @@
 import React from 'react';
 import { Col, Row } from 'antd';
 import G23d from './g2-3d';
-import Area from "./area";
+import Area from './area';
 import CardComponent from './card-component';
 import Pathln from './pathln';
 import MiniArea from './mini-area';
 import { cardImage3, cardImage4, avatar } from '../../../assets/images/images';
+import { ChartProvider } from '../../../models/chart-context';
 
 const Overview: React.FC = () => {
     return (
@@ -21,8 +22,8 @@ const Overview: React.FC = () => {
                 </Col>
                 <Col span={5}>
                     <MiniArea
-                        title='TiTle'
-                        description='在此编辑文案'
+                        title='植被指数'
+                        description='2000-2020清远市NDVI年际变化'
                         avatarImage={avatar}
                     />
                 </Col>
@@ -34,10 +35,12 @@ const Overview: React.FC = () => {
                         avatarImage={avatar}
                     /></Col>
                 <Col span={5}>
-                    <Pathln
-                        title='TiTle'
-                        description='在此编辑文案'
-                        avatarImage={avatar} />
+                    <ChartProvider>
+                        <Pathln
+                            title='森林储蓄量'
+                            description='清远市2000-2020森林储蓄量 (万立方米)'
+                            avatarImage={avatar} />
+                    </ChartProvider>
                 </Col>
             </Row>
             <Row justify="space-evenly">

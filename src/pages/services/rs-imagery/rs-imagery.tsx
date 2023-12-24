@@ -7,8 +7,8 @@ import { XYZ, TileWMS } from 'ol/source';
 import { useSafeState } from '../../../hooks/hooks';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
-import './services.css';
-import '../../assets/styles/map.css'
+import '../services.css';
+import '../../../assets/styles/map.css'
 import 'ol/ol.css';
 
 const mapInfo = [

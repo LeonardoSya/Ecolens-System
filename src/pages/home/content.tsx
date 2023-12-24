@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Col, Layout, Row, Flex, Typography, Image, Divider } from 'antd';
-import { InstagramFilled } from '@ant-design/icons';
+import { } from '@ant-design/icons';
 import { Content } from 'antd/es/layout/layout';
-
 import { homepageIcon, reactLogo, viteLogo, antdLogo, babelLogo, tsLogo, GEELogo, } from '../../assets/icons/icons';
 import './index.css';
 
@@ -13,7 +12,7 @@ const HomepageContent = () => (
     <Content
         style={{
             backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",
-            padding: "5vh 10vw"
+            padding: "5vh 12vw"
         }}
     >
         <Flex
@@ -32,14 +31,14 @@ const HomepageContent = () => (
                     justify='center'
                     align='flex-start'
                 >
-                    <Title level={1} style={{ color: "#fff", fontSize: "2.8vw", fontFamily: "Poppins" }} >
+                    <Title level={1} style={{ color: "#fff", fontSize: "3.5vw", fontFamily: "Poppins" }} >
                         <span>Kickstart your</span>
                         <br />
                         exploration with
                         <br />
-                        <span style={{ color: "#a78bfa", fontFamily: "Shadows Into Light", fontSize: "4.5vw" }}> Ecolens</span>
+                        <span style={{ color: "#a78bfa", fontFamily: "Shadows Into Light", fontSize: "6vw" }}> Ecolens</span>
                     </Title>
-                    <Title level={4} style={{ color: "#fff", fontSize: '1.15vw', fontFamily: 'Poppins' }}>
+                    <Title level={4} style={{ color: "#fff", fontSize: '1.8vw', fontFamily: 'Poppins' }}>
                         🌍 Comprehensive Mapping <br />
                         📡 Remote Sensing Integration <br />
                         🌱 Ecosystem Monitoring <br />
@@ -54,6 +53,15 @@ const HomepageContent = () => (
                                 <span className="icon arrow"></span>
                             </span>
                             <span className="button-text">Start NOW !</span>
+                        </button>
+                    </Link>
+
+                    <Link to="/spotlight">
+                        <button className="learn-more" style={{ top: "1.5vw" }}>
+                            <span className="circle" aria-hidden="true" style={{ background: "#efdbff" }}>
+                                <span className="icon arrow"></span>
+                            </span>
+                            <span className="button-text" style={{ color: '#000' }}>?? 12.24 ??</span>
                         </button>
                     </Link>
 
@@ -74,7 +82,7 @@ const HomepageContent = () => (
                 marginTop: "8vh",
                 color: "#fff",
                 fontFamily: "Shadows Into Light",
-                fontSize: '2vw',
+                fontSize: '3vw',
             }}
         >
             Build with

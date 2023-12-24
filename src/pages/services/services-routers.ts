@@ -6,6 +6,7 @@ import Page5 from './page5';
 import Overview from './overview/index';
 import RSImagery from './rs-imagery/rs-imagery';
 import Xylophilus from './xylophilus/xylophilus';
+import Spotlight from './Christmas';
 
 export {
     Introduction,
@@ -16,4 +17,5 @@ export {
     Page5,
     Overview,
     RSImagery,
+    // Spotlight,
 }

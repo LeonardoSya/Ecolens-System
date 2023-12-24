@@ -3,7 +3,7 @@ import { Flex, Row, Col } from 'antd';
 import { useSafeState } from '../../../hooks/hooks';
 import MapSelector from './map-selector';
 
-// 将MapContainer组件改为懒加载
+// MapContainer组件 懒加载
 const MapContainer = lazy(() => import('./map-container'));
 
 const QuarterlyChart: React.FC = (): ReactElement => {

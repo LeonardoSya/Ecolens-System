@@ -26,20 +26,7 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  /* ?? */
-  padding: 0;
-  box-sizing: border-box;
-  display: block;
-
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-
-  zoom: 131%;
-  /* all browsers */
-  /* -moz-transform: scale(2); */
-  /* Firefox */
 }
 
 h1 {
@@ -59,13 +46,6 @@ button {
   transition: border-color 0.25s;
 }
 
-/* button:hover {
-  border-color: #213547;
-} */
-/* button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
 
 @media (prefers-color-scheme: light) {
   :root {
