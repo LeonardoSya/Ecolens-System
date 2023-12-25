@@ -61,7 +61,7 @@ const HomepageContent = () => (
                             <span className="circle" aria-hidden="true" style={{ background: "#efdbff" }}>
                                 <span className="icon arrow"></span>
                             </span>
-                            <span className="button-text" style={{ color: '#000' }}>?? 12.24 ??</span>
+                            <span className="button-text" style={{ color: '#000' }}>?? 12.25 ??</span>
                         </button>
                     </Link>
 

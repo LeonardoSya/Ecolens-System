@@ -49,7 +49,6 @@
 
 #bg,
 #bg_mask {
-    /* ふちボケ対策 */
     position: absolute;
     top: 0;
     right: 0;
@@ -90,4 +89,13 @@
 
 #bg_mask {
     mask-size: var(--size), 0;
+}
+
+.spotlight-container main {
+    position: relative;
+    color: crimson;
+    mix-blend-mode: color-burn;
+    z-index: 0;
+    margin-top: 200px;
+    /* Add this line */
 }

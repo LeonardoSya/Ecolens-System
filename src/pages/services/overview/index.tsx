@@ -5,7 +5,7 @@ import Area from './area';
 import CardComponent from './card-component';
 import Pathln from './pathln';
 import MiniArea from './mini-area';
-import { cardImage3, cardImage4, avatar } from '../../../assets/images/images';
+import { cardImage3, cardImage4, avatar, ndviLinear, ndviOverallTrend } from '../../../assets/images/images';
 import { ChartProvider } from '../../../models/chart-context';
 
 const Overview: React.FC = () => {
@@ -31,7 +31,7 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='TiTle'
                         description='在此编辑文案'
-                        coverImage={cardImage3}
+                        coverImage={ndviOverallTrend}
                         avatarImage={avatar}
                     /></Col>
                 <Col span={5}>

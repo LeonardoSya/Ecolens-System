@@ -26,8 +26,8 @@ const Spotlight: React.FC = () => {
             <div id='bg'></div>
             <div id="bg_mask"></div>
             <main>
-                <h1>Spotlight</h1>
-                <h2>- focus -</h2>
+                <h1>TO Xuanxuan, WITH LOVE</h1>
+                <h2>- Immersed in love, here and now -</h2>
             </main>
             <div id="spotlight"></div>
         </div>
