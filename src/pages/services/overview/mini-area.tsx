@@ -33,8 +33,8 @@ const MiniArea: React.FC<MiniAreaProps> = ({ title, description, avatarImage }) 
 
                     chart
                         .area()
-                        .encode('x', (_, idx) => idx)
-                        .encode('y', (d) => d)
+                        .encode('x', (_: any, idx: any) => idx)
+                        .encode('y', (d: any) => d)
                         .encode('shape', 'smooth')
                         .scale('y', { zero: true, domain: [0.45, 0.65] })
                         .style('fill', 'linear-gradient(-90deg, white 0%, #10239e 50%)')
@@ -43,7 +43,7 @@ const MiniArea: React.FC<MiniAreaProps> = ({ title, description, avatarImage }) 
                         .axis(false)
 
                     chart.interaction('tooltip', {
-                        render: (e, { title, items }) => items[0].value,
+                        render: (e: any, { title, items }: any) => items[0].value,
                     })
 
                     chart.render();

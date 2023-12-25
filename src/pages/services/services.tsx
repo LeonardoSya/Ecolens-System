@@ -173,7 +173,6 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
 // ]
 
 const MySearchModule = ({ collapsed, toggleCollapsed }) => {
-    const navigate = useNavigate();
 
     return (
         <Flex justify='flex-start' align='center' gap="large" style={{ background: '#f5f5f5', height: '10vh' }}>

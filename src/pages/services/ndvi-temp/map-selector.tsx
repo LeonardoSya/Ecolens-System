@@ -1,5 +1,5 @@
 import React from 'react';
-import { Select } from 'antd';
+import { Select,message } from 'antd';
 import { useSafeState } from '../../../hooks/hooks';
 
 const { Option } = Select;
@@ -13,11 +13,16 @@ interface MapSelectorProps {
 const MapSelector: React.FC<MapSelectorProps> = ({ onSelect, startDate, endDate }) => {
     const [selectedDate, setSelectedDate] = useSafeState<string>('2022-12-01');
     const dates = generateDates(new Date(startDate), new Date(endDate), 3);
+    const [messageApi, contextHolder] = message.useMessage();
 
     const handleDateChange = (value: string) => {
         setSelectedDate(value);
         onSelect(value);
+    }; 
+    const info = () => {
+        messageApi.info('You have switched to xxx page.');
     };
+
 
     return (
         <Select value={selectedDate} onChange={handleDateChange} style={{ width: 200 }}>

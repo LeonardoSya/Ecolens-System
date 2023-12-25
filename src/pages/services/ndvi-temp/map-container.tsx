@@ -3,8 +3,7 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { TileWMS } from 'ol/source';
-import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
-import { FloatButton } from 'antd';
+import Floatbutton from '../../../components/floatbutton';
 import 'ol/ol.css';
 import '../../../assets/styles/map.css';
 
@@ -16,10 +15,6 @@ interface WMSMapProps {
 interface MapContainerProps {
     date: string;
     workspace: string;
-}
-
-interface MyFloatButtonProps {
-    toggleFullScreen: () => void;
 }
 
 const protocol = 'wms';
@@ -128,7 +123,7 @@ const WMSMap: React.FC<WMSMapProps> = ({ geoServerUrl, layers }) => {
 
     return (
         <>
-            <MyFloatButton toggleFullScreen={toggleFullScreen} />
+            <Floatbutton toggleFullScreen={toggleFullScreen} />
             <div ref={mapContainerRef} className='map-container'></div>
         </>
     );
@@ -143,19 +138,5 @@ const MapContainer: React.FC<MapContainerProps> = ({ date, workspace }) => {
         <WMSMap geoServerUrl={geoServerUrl} layers={layers} />
     );
 };
-
-
-const MyFloatButton: React.FC<MyFloatButtonProps> = ({ toggleFullScreen }) => {
-    return (
-        <FloatButton.Group shape='circle' style={{ right: 24 }}>
-            <FloatButton icon={<ExpandOutlined />} onClick={toggleFullScreen} />
-            <FloatButton icon={<EditFilled />} />
-            <FloatButton />
-            <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
-            <FloatButton.BackTop visibilityHeight={70} />
-        </FloatButton.Group>
-    );
-};
-
 
 export default MapContainer;
