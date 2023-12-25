@@ -4,8 +4,8 @@ import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ } from 'ol/source';
 import { fromLonLat, toLonLat } from 'ol/proj';
-import { FloatButton, Flex, Row, Col } from 'antd';
-import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
+import { Flex, Row, Col, message } from 'antd';
+import Floatbutton from '../../../components/floatbutton';
 import useSafeState from '../../../hooks/useSafeState';
 import 'ol/ol.css';
 import '../services.css';
@@ -34,6 +34,11 @@ declare global {
 const Xylophilus: React.FC = () => {
     const mapRef = useRef<HTMLDivElement>(null);
     const [item, setItem] = useSafeState(mapInfo[0]);
+    const [messageApi, contextHolder] = message.useMessage();
+
+    const infoMessage = () => {
+        messageApi.info('You have switched to xxx page.');
+    };
 
     // 全屏切换
     const toggleFullScreen = () => {
@@ -83,56 +88,41 @@ const Xylophilus: React.FC = () => {
     }, [mapRef, item]);
 
     return (
-        <Flex gap="small" vertical>
-            <Row justify="center" align="top">
-                <Col span={8}>
-                    <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
-                        🔍change xylophilus Imagery!
-                    </span>
-                </Col>
-                <Col span={8}>
-                    <div className='radio-buttons-container'>
-                        {mapInfo.map((info, index) => (
-                            <div className="radio-button" key={index}>
-                                <input
-                                    name="radio-group"
-                                    id={`radio${index}`}
-                                    className="radio-button__input"
-                                    type="radio"
-                                    onChange={() => toggleItem(index)}
-                                />
-                                <label htmlFor={`radio${index}`} className="radio-button__label">
-                                    <span className="radio-button__custom"></span>
-                                    {info.label}
-                                </label>
-                            </div>
-                        ))}
-                    </div>
-                </Col>
-                <Col span={2}></Col>
-            </Row>
-            <MyFloatButton toggleFullScreen={toggleFullScreen} />
-            <div ref={mapRef} className='map-container' style={{ background: '#000000cc' }} ></div>
-        </Flex>
+        <>
+            {contextHolder}
+            <Flex gap="small" vertical>
+                <Row justify="center" align="top">
+                    <Col span={8}>
+                        <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
+                            🔍change xylophilus Imagery!
+                        </span>
+                    </Col>
+                    <Col span={8}>
+                        <div className='radio-buttons-container'>
+                            {mapInfo.map((info, index) => (
+                                <div className="radio-button" key={index}>
+                                    <input
+                                        name="radio-group"
+                                        id={`radio${index}`}
+                                        className="radio-button__input"
+                                        type="radio"
+                                        onChange={() => { toggleItem(index); infoMessage(); }}
+                                    />
+                                    <label htmlFor={`radio${index}`} className="radio-button__label">
+                                        <span className="radio-button__custom"></span>
+                                        {info.label}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                    </Col>
+                    <Col span={2}></Col>
+                </Row>
+                <Floatbutton toggleFullScreen={toggleFullScreen} />
+                <div ref={mapRef} className='map-container' style={{ background: '#000000cc' }} ></div>
+            </Flex>
+
+        </>
     )
 };
-
-interface MyFloatButtonProps {
-    toggleFullScreen: () => void;
-}
-
-const MyFloatButton: React.FC<MyFloatButtonProps> = React.memo(({ toggleFullScreen }) => (
-    <FloatButton.Group
-        shape='circle'
-        style={{ right: 24 }}
-    >
-        <FloatButton icon={<ExpandOutlined />} onClick={toggleFullScreen} />
-        <FloatButton icon={<EditFilled />} />
-        <FloatButton />
-        <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} />
-        <FloatButton.BackTop visibilityHeight={70} />
-    </FloatButton.Group>
-));
-
-
 export default Xylophilus;

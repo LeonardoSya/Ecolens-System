@@ -5,13 +5,8 @@ import TileLayer from 'ol/layer/WebGLTile.js';
 import View from 'ol/View.js';
 import 'ol/ol.css'
 
-interface StyleOptions {
-    color: any;
-    gamma: number;
-}
-
 const max = 3000;
-function normalize(value) {
+function normalize(value: (string | number)[]) {
     return ['/', value, max];
 }
 
@@ -122,9 +117,9 @@ const styles = {
 // const styleSelector = document.getElementById('style');
 
 const Page3: React.FC = () => {
-    const [styleName, setStyleName] = useState<string>('trueColor');
+    const [styleName, setStyleName] = useState<keyof typeof styles>('trueColor');
     const mapRef = useRef<Map | null>(null);
-    const layerRef = useRef<TileLayer| null>(null)
+    const layerRef = useRef<TileLayer | null>(null)
 
     useEffect(() => {
         const layer = new TileLayer({
@@ -167,7 +162,7 @@ const Page3: React.FC = () => {
     }, [styleName])
 
     const handleStyleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        setStyleName(e.target.value);
+        setStyleName(e.target.value as keyof typeof styles);
     };
 
 
@@ -186,6 +181,7 @@ const Page3: React.FC = () => {
     )
 
 }
+
 
 
 export default Page3;

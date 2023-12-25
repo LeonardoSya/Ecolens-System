@@ -105,7 +105,7 @@ const G23d: React.FC<G23dProps> = () => {
         // }
     }, []);
 
-    function cameraButton(chart) {
+    function cameraButton(chart: any) {
         const node = chart.getContainer();
         const button = document.createElement('button');
         button.textContent = 'Reset camera to default';
@@ -127,8 +127,9 @@ const G23d: React.FC<G23dProps> = () => {
         };
     }
 
+
     // 添加图例
-    function legendColor(chart) {
+    function legendColor(chart:any) {
         // 创建 Legend 并且挂在图例
         const node = chart.getContainer();
         const legend = document.createElement('div');
@@ -138,7 +139,7 @@ const G23d: React.FC<G23dProps> = () => {
         // 创建并挂载 Items
         const { color: scale } = chart.getScale();
         const { domain } = scale.getOptions();
-        const items = domain.map((value) => {
+        const items = domain.map((value:any) => {
             const item = document.createElement('div');
             const color = scale.map(value);
             item.style.marginLeft = '1em';
@@ -153,7 +154,7 @@ const G23d: React.FC<G23dProps> = () => {
         `;
             return item;
         });
-        items.forEach((d) => legend.append(d));
+        items.forEach((d:any) => legend.append(d));
 
         // 监听事件
         const selectedValues = [...domain];
@@ -176,7 +177,7 @@ const G23d: React.FC<G23dProps> = () => {
         }
 
         // 重新渲染视图
-        function changeColor(value) {
+        function changeColor(value:any) {
             const { transform = [] } = options;
             const newTransform = [{ type: 'filter', color: { value } }, ...transform];
             chart.options({
