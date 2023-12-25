@@ -3,20 +3,20 @@ import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ } from 'ol/source';
-import { Projection, fromLonLat, toLonLat } from 'ol/proj';
+import { fromLonLat, toLonLat } from 'ol/proj';
 import { FloatButton, Flex, Row, Col } from 'antd';
 import { EditFilled, SyncOutlined, ExpandOutlined, } from '@ant-design/icons';
+import useSafeState from '../../../hooks/useSafeState';
 import 'ol/ol.css';
-import  '../services.css';
+import '../services.css';
+import './index.css';
 import '../../../assets/styles/map.css'
-import { Coordinate } from '@antv/g2';
-import { ProjectionLike } from 'ol/proj';
 
 const mapInfo = [
-    { id: 'e8826544-2b17-478c-b7bc-9523a8489777', center: [], zoom: 1 },
-    { id: '02067963-3cde-46b5-ab9d-b64247a5fbbf', center: [112.61178989861932, 24.49146364092972], zoom: 18.5 },
-    { id: '66ba550a-a9f6-473e-af66-d22d8d1d1a9b', center: [], zoom: 1 },
-    { id: 'a91ffe76-5903-4911-9cc9-18b3fb4651a6', center: [], zoom: 1 },
+    { id: '02067963-3cde-46b5-ab9d-b64247a5fbbf', center: [112.61178989861932, 24.49146364092972], zoom: 18.5, label: "First" },
+    { id: 'e8826544-2b17-478c-b7bc-9523a8489777', center: [112.654095, 24.462341], zoom: 17.5, label: "Second" },
+    { id: '66ba550a-a9f6-473e-af66-d22d8d1d1a9b', center: [112.661316, 24.474848], zoom: 17.9, label: "Third" },
+    { id: 'a91ffe76-5903-4911-9cc9-18b3fb4651a6', center: [112.619898, 24.432980], zoom: 16.9, label: "Forth" },
 ];
 
 interface MapKitState {
@@ -31,8 +31,9 @@ declare global {
     }
 }
 
-const MapContainer: React.FC = () => {
+const Xylophilus: React.FC = () => {
     const mapRef = useRef<HTMLDivElement>(null);
+    const [item, setItem] = useSafeState(mapInfo[0]);
 
     // 全屏切换
     const toggleFullScreen = () => {
@@ -44,10 +45,12 @@ const MapContainer: React.FC = () => {
         }
     };
 
-    useEffect(() => {
-        if (!mapRef.current) return;
+    const toggleItem = (index: number) => {
+        setItem(mapInfo[index]);
+    }
 
-        const item = mapInfo[1];
+    useEffect(() => {
+        if (!mapRef.current || !item) return;
 
         const map = new Map({
             controls: [],
@@ -62,6 +65,7 @@ const MapContainer: React.FC = () => {
                 }),
             ],
             view: new View({
+                // extent:
                 center: fromLonLat(item.center),
                 zoom: item.zoom,
                 minZoom: item.zoom - 1.5,
@@ -76,13 +80,40 @@ const MapContainer: React.FC = () => {
         };
 
         return () => map.setTarget(undefined);
-    }, [mapRef]);
+    }, [mapRef, item]);
 
     return (
-        <>
+        <Flex gap="small" vertical>
+            <Row justify="center" align="top">
+                <Col span={8}>
+                    <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
+                        🔍change xylophilus Imagery!
+                    </span>
+                </Col>
+                <Col span={8}>
+                    <div className='radio-buttons-container'>
+                        {mapInfo.map((info, index) => (
+                            <div className="radio-button" key={index}>
+                                <input
+                                    name="radio-group"
+                                    id={`radio${index}`}
+                                    className="radio-button__input"
+                                    type="radio"
+                                    onChange={() => toggleItem(index)}
+                                />
+                                <label htmlFor={`radio${index}`} className="radio-button__label">
+                                    <span className="radio-button__custom"></span>
+                                    {info.label}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                </Col>
+                <Col span={2}></Col>
+            </Row>
             <MyFloatButton toggleFullScreen={toggleFullScreen} />
             <div ref={mapRef} className='map-container' style={{ background: '#000000cc' }} ></div>
-        </>
+        </Flex>
     )
 };
 
@@ -103,52 +134,5 @@ const MyFloatButton: React.FC<MyFloatButtonProps> = React.memo(({ toggleFullScre
     </FloatButton.Group>
 ));
 
-const Xylophilus = () => {
-    return (
-        <Flex gap="small" vertical>
-            <Row justify="center" align="top">
-                <Col span={10}>
-                    <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
-                        🔍change xylophilus Imagery!
-                    </span>
-                </Col>
-                <Col span={6}>
-                    <div className="radio-buttons-container" >
-                        <div className="radio-button">
-                            <input name="radio-group" id="radio2" className="radio-button__input" type="radio" />
-                            <label htmlFor="radio2" className="radio-button__label">
-                                <span className="radio-button__custom"></span>
-                                First
-                            </label>
-                        </div>
-                        <div className="radio-button">
-                            <input name="radio-group" id="radio1" className="radio-button__input" type="radio" />
-                            <label htmlFor="radio1" className="radio-button__label">
-                                <span className="radio-button__custom"></span>
-                                Second
-                            </label>
-                        </div>
-                        <div className="radio-button">
-                            <input name="radio-group" id="radio3" className="radio-button__input" type="radio" />
-                            <label htmlFor="radio3" className="radio-button__label">
-                                <span className="radio-button__custom"></span>
-                                Third
-                            </label>
-                        </div>
-                        <div className="radio-button">
-                            <input name="radio-group" id="radio4" className="radio-button__input" type="radio" />
-                            <label htmlFor="radio4" className="radio-button__label">
-                                <span className="radio-button__custom"></span>
-                                Forth
-                            </label>
-                        </div>
-                    </div>
-                </Col>
-                <Col span={4}></Col>
-            </Row>
-            <MapContainer />
-        </Flex>
-    );
-};
 
 export default Xylophilus;

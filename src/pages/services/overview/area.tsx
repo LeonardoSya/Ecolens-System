@@ -1,15 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { Chart } from '@antv/g2';
-import {useSafeState} from '../../../hooks/hooks';
-import  './index.css';
+import { useSafeState } from '../../../hooks/hooks';
+import './index.css';
 
 const Area: React.FC = () => {
     const chartContainerRef = useRef(null);
-    const chartRef = useRef(null);
+    const chartRef = useRef<Chart | null>(null);
     const [loading, setLoading] = useSafeState<boolean>(true);
 
     useEffect(() => {
-        // 定义接口描述数据结构，通过as语法告诉ts该响应符合接口类型，这样在编译时会检查类型错误
+        // 定义接口描述数据结构,通过as语法告诉ts该响应符合接口类型,这样在编译时会检查类型错误
         interface Data {
             date: string;
             unemployed: number;
@@ -23,12 +23,15 @@ const Area: React.FC = () => {
                 const response = await fetch('https://assets.antv.antgroup.com/g2/unemployment-by-industry.json');
                 // 告诉TypeScript这个response符合Data接口
                 const data = (await response.json()) as Data[];
-                // 现在data被正确的类型化了  这样TypeScript编译时就可以检查类型错误
+
+                // 读取data的值以消除ts warning
+                console.log(data);
 
                 const chartInstance = new Chart({
                     container: chartContainerRef.current!,
                     autoFit: true,
                 });
+
                 chartRef.current = chartInstance;
 
                 // 数据请求和图表配置
@@ -39,10 +42,7 @@ const Area: React.FC = () => {
 
                 chartInstance
                     .area()
-                    .transform([
-                        { type: 'stackY' }, // Try to remove this line.
-                    ])
-                    .encode('x', (d) => new Date(d.date))
+                    .encode('x', (d: { date: string | number | Date; }) => new Date(d.date))
                     .encode('y', 'unemployed')
                     .encode('color', 'industry')
                     .encode('shape', 'smooth');
@@ -62,6 +62,9 @@ const Area: React.FC = () => {
 
     return <div id='area-container' ref={chartContainerRef} className="container" />;
 };
+
+
+
 
 
 export function LoadingSpinner() {

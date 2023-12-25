@@ -2,7 +2,6 @@ import React from 'react';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Avatar, Card } from 'antd';
 import './index.css';
-import { none } from 'ol/centerconstraint';
 
 interface LittleCardProps {
     title: string;

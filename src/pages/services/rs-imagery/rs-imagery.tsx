@@ -12,8 +12,8 @@ import '../../../assets/styles/map.css'
 import 'ol/ol.css';
 
 const mapInfo = [
-    { id: '2ce48a09-3160-46ef-9349-76b5bde1caae', center: [12543291.408831256, 2795116.434460827], zoom: 12.5 },
     { id: '61f9b270-a42c-4d9e-a9dc-ac3af586b313', center: [12543291.408831256, 2795116.434460827], zoom: 12.5 },
+    { id: '2ce48a09-3160-46ef-9349-76b5bde1caae', center: [12543291.408831256, 2795116.434460827], zoom: 12.5 },
 ];
 const extent = [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587];
 
@@ -24,6 +24,7 @@ const RSImagery: React.FC = () => {
     const toggleItem = () => {
         setItem(item === mapInfo[0] ? mapInfo[1] : mapInfo[0]);
     };
+    console.log(item);
 
     const toggleFullScreen = () => {
         const mapElement = mapRef.current;
@@ -84,12 +85,14 @@ const RSImagery: React.FC = () => {
                         🚀change RS Imagery!
                     </span>
                 </Col>
+
                 <Col span={4}>
-                    <label className="switch" onClick={toggleItem}>
-                        <input type="checkbox" className="input" />
+                    <label className="switch" onChange={toggleItem}>
+                        <input type="checkbox" className="input"  />
                         <span className="slider"></span>
                     </label>
                 </Col>
+
                 <Col span={4}></Col>
             </Row>
             <div ref={mapRef} className='map-container' style={{ background: "#000000cc" }} ></div>

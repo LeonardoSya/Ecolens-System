@@ -1,11 +1,12 @@
-import React, { useContext, createContext } from 'react';
-import { BrowserRouter as Router, Route, Link, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes, Navigate, useNavigate, To } from 'react-router-dom';
 import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, theme, Typography, Tooltip } from 'antd';
 import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 import { Introduction, Overview, Xylophilus, QuarterlyChart, Page3, Page4, Page5, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
-import { ChartContext } from '../../models/chart-context';
 import './search-input.css';
+import { SetStateAction } from 'react';
+import { JSX } from 'react/jsx-runtime';
+import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
@@ -16,7 +17,7 @@ const Services = () => {
     const [collapsed, setCollapsed] = useSafeState(false);
     // const { token: { colorBgContainer }, } = theme.useToken();
 
-    const togglePrimaryColor = (color) => {
+    const togglePrimaryColor = (color: { toHexString: () => SetStateAction<string>; }) => {
         setPrimary(color.toHexString())
     }
 
@@ -40,7 +41,7 @@ const Services = () => {
                 {/* Sider */}
                 <MySider collapsed={collapsed} />
 
-                <Layout onClick={toggleCollapsed}>
+                <Layout>
                     {/* Header */}
                     <MyHeader primary={primary} togglePrimaryColor={togglePrimaryColor} />
 
@@ -61,7 +62,7 @@ const Services = () => {
 }
 
 
-function getItem(label, key, icon, path) {
+function getItem(label: string, key: string, icon: JSX.Element, path: string) {
     return {
         label, key, icon, path
     };
@@ -78,9 +79,9 @@ const items = [
 
 ];
 
-const MySider = ({ collapsed }) => {
-    const renderMenuItems = (menuItems) => {
-        return menuItems.map(item => (
+const MySider = ({ collapsed }: { collapsed: boolean }) => {
+    const renderMenuItems = (menuItems: any[]) => {
+        return menuItems.map((item: { key: Key | null | undefined; icon: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; path: To; label: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
             <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem" }}>
                 <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
@@ -98,7 +99,8 @@ const MySider = ({ collapsed }) => {
 };
 
 
-const MyHeader = ({ primary, togglePrimaryColor }) => (
+
+const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrimaryColor: (color: string) => void }) => (
     <Header style={{ width: 'auto', height: '6vh', padding: 0, backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", }}>
         <Row>
             <Col span={12}>
@@ -119,7 +121,7 @@ const MyHeader = ({ primary, togglePrimaryColor }) => (
                         <Button href='https://github.com/LeonardoSya/Ecolens-System' target='_blank' size="large" style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<GithubOutlined />} />
                     </Tooltip>
                     <Tooltip placement='bottom' title={<span>Docs</span>}>
-                        <Button href='#' target='_blank' size='large' style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<FileFilled />} />
+                        <Button href='https://github.com/LeonardoSya/Ecolens-System/blob/main/README.md' target='_blank' size='large' style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<FileFilled />} />
                     </Tooltip>
                     <Tooltip placement='bottomRight' title={<span>Developer Log</span>}>
                         <Button href='https://github.com/LeonardoSya/React-studynote/pulse/monthly' target='_blank' size='large' style={{ boxShadow: 'none', border: 'none', background: 'inherit' }} icon={<CodeFilled />} />
@@ -129,6 +131,7 @@ const MyHeader = ({ primary, togglePrimaryColor }) => (
         </Row>
     </Header>
 );
+
 
 // const selectOptions = [
 //     {
