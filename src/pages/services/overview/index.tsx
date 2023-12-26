@@ -29,8 +29,8 @@ const Overview: React.FC = () => {
                 </Col>
                 <Col span={5}>
                     <CardComponent
-                        title='TiTle'
-                        description='在此编辑文案'
+                        title='归一化植被系数拟合'
+                        description='2000-2020清远市NDVI线性拟合'
                         coverImage={ndviOverallTrend}
                         avatarImage={avatar}
                     /></Col>
