@@ -1,19 +1,30 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ, OSM, Vector as VectorSource } from 'ol/source';
+import { fromLonLat } from 'ol/proj';
 import VectorLayer from 'ol/layer/Vector';
 import GeoJSON from 'ol/format/GeoJSON';
-import '../../assets/styles/map.css';
+import '../../../assets/styles/map.css';
 import 'ol/ol.css';
+import Floatbutton from '../../../components/floatbutton';
 
-const url = '../../assets/data/yangshan_geo.geojson'
-const initialCenter: [number, number] = [112.65, 24.4];
-const initialZoom = 8;
+const url = '../../assets/data/yangshan_geo.geojson';
+const center = [112.678303857182, 24.341823323344173];
+const transformedCenter = fromLonLat(center);
 
-const Page4: React.FC = () => {
+const Boundary: React.FC = () => {
     const mapRef = useRef<HTMLDivElement>(null);
+
+    const toggleFullScreen = useCallback(() => {
+        const mapElement = mapRef.current;
+        if (!document.fullscreenElement && mapElement) {
+            mapElement.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    }, []);
 
     useEffect(() => {
         if (!mapRef.current) return;
@@ -24,6 +35,7 @@ const Page4: React.FC = () => {
         });
 
         const map = new Map({
+            controls: [],
             target: mapRef.current,
             layers: [
                 // 添加OSM源的 base map 底图
@@ -35,8 +47,8 @@ const Page4: React.FC = () => {
                 }),
             ],
             view: new View({
-                center: initialCenter,
-                zoom: initialZoom,
+                center: transformedCenter,
+                zoom: 10,
             }),
         });
 
@@ -48,8 +60,11 @@ const Page4: React.FC = () => {
     }, []);
 
     return (
-        <div ref={mapRef} className='map-container'></div>
+        <>
+            <div ref={mapRef} className='map-container'></div>
+            <Floatbutton toggleFullScreen={toggleFullScreen} />
+        </>
     )
 }
 
-export default Page4;
+export default Boundary;

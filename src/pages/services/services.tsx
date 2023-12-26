@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Link, Routes, Navigate, useNavigate, To } from 'react-router-dom';
 import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, theme, Typography, Tooltip } from 'antd';
 import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
-import { Introduction, Overview, Xylophilus, QuarterlyChart, Page3, Page4, Page5, RSImagery } from './services-routers';
+import { Introduction, Overview, Xylophilus, QuarterlyChart, Page3, Boundary, Page5, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
 import './search-input.css';
 import { SetStateAction } from 'react';
@@ -73,7 +73,7 @@ const items = [
     getItem('RS Imagery', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
     getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
     getItem('Xylophilus', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
-    getItem('Page 4', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/page4"),
+    getItem('Boundary map', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/boundary"),
     getItem('Page 5', '6', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
     getItem('Introduction', '7', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
 
@@ -205,7 +205,7 @@ export const MyMap = () => {
                 <Route path='/rsimagery' element={<RSImagery />} />
                 <Route path='/ndvitemp' element={<QuarterlyChart />} />
                 <Route path='/xylophilus' element={<Xylophilus />} />
-                <Route path='/page4' element={<Page4 />} />
+                <Route path='/boundary' element={<Boundary />} />
                 <Route path='/page5' element={<Page5 />} />
                 <Route path='/introduction' element={<Introduction />} />
                 <Route path='/' element={<Navigate replace to="/overview" />} />
