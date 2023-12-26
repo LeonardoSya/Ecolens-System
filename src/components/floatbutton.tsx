@@ -1,11 +1,12 @@
 import { FloatButton, message } from 'antd';
+import React from 'react';
 import { EditFilled, SyncOutlined, FileSearchOutlined, ExpandOutlined, } from '@ant-design/icons';
 
 interface floatbuttonProps {
     toggleFullScreen: () => void;
 }
 
-const Floatbutton: React.FC<floatbuttonProps> = ({ toggleFullScreen }) => {
+const Floatbutton: React.FC<floatbuttonProps> = React.memo(({ toggleFullScreen }) => {
     const [messageApi, contextHolder] = message.useMessage();
     const info = () => {
         messageApi.info('You have exited full-screen mode.');
@@ -24,6 +25,6 @@ const Floatbutton: React.FC<floatbuttonProps> = ({ toggleFullScreen }) => {
         </>
 
     );
-};
+});
 
 export default Floatbutton;

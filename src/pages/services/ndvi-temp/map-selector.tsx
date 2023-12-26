@@ -23,7 +23,6 @@ const MapSelector: React.FC<MapSelectorProps> = ({ onSelect, startDate, endDate 
         messageApi.info('You have switched to xxx page.');
     };
 
-
     return (
         <Select value={selectedDate} onChange={handleDateChange} style={{ width: 200 }}>
             {dates.map(date => (

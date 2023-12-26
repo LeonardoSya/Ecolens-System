@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, Suspense, lazy, ReactElement } from 'react';
+import React, { Suspense, lazy, ReactElement } from 'react';
 import { Flex, Row, Col } from 'antd';
 import { useSafeState } from '../../../hooks/hooks';
 import MapSelector from './map-selector';
@@ -6,7 +6,7 @@ import MapSelector from './map-selector';
 // MapContainer组件 懒加载
 const MapContainer = lazy(() => import('./map-container'));
 
-const QuarterlyChart: React.FC = (): ReactElement => {
+const QuarterlyChart: React.FC = React.memo((): ReactElement => {
     const [date, setDate] = useSafeState<string>('2022-12-01');
     const [workspace, setWorkspace] = useSafeState<string>('NDVI_sentinel');
 
@@ -35,6 +35,6 @@ const QuarterlyChart: React.FC = (): ReactElement => {
             </Suspense>
         </Flex>
     );
-}
+});
 
 export default QuarterlyChart;
