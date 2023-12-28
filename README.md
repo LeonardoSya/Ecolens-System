@@ -1,4 +1,4 @@
-# Ecolens System -- 基于 React + Vite + OpenLayers 的 跨平台生态监测地图服务
+# Ecolens System -- 基于 React + Vite + TypeScript 的高精度生态监测地图平台
 
 Ecolens System是一款开源地图服务平台，结合了高分辨率遥感数据和先进的图像处理技术，为用户提供全面、实时的生态环境信息
 
