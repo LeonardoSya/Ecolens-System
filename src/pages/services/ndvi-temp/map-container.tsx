@@ -120,7 +120,7 @@ const WMSMap: React.FC<WMSMapProps> = React.memo(({ geoServerUrl, layers }) => {
     return (
         <>
             <Loader isLoading={isLoading} />
-            <Floatbutton toggleFullScreen={toggleFullScreen} />
+            <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription={'this is ndvi&temp page'} />
             <div ref={mapContainerRef} className='map-container'></div>
         </>
     );

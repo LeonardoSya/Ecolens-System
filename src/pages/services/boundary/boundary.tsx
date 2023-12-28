@@ -62,7 +62,7 @@ const Boundary: React.FC = () => {
     return (
         <>
             <div ref={mapRef} className='map-container'></div>
-            <Floatbutton toggleFullScreen={toggleFullScreen} />
+            <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription='This is boundary map page' />
         </>
     )
 }

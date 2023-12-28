@@ -13,7 +13,7 @@ interface MapSelectorProps {
 const MapSelector: React.FC<MapSelectorProps> = ({ onSelect, startDate, endDate }) => {
     const [selectedDate, setSelectedDate] = useSafeState<string>('2022-12-01');
     const dates = generateDates(new Date(startDate), new Date(endDate), 3);
-    const [messageApi, contextHolder] = message.useMessage();
+    const [messageApi] = message.useMessage();
 
     const handleDateChange = (value: string) => {
         setSelectedDate(value);

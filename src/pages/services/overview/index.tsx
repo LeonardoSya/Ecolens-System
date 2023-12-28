@@ -1,11 +1,14 @@
 import React from 'react';
 import { Col, Row } from 'antd';
+import QueueAnim from 'rc-queue-anim';
+import { OverPack } from 'rc-scroll-anim';
+import TweenOne from 'rc-tween-one';
 import G23d from './g2-3d';
 import Area from './area';
 import CardComponent from './card-component';
 import Pathln from './pathln';
 import MiniArea from './mini-area';
-import { cardImage3, cardImage4, avatar, ndviLinear, ndviOverallTrend } from '../../../assets/images/images';
+import { cardImage4, avatar, ndviLinear, ndviOverallTrend } from '../../../assets/images/images';
 import { ChartProvider } from '../../../models/chart-context';
 
 const Overview: React.FC = () => {
@@ -29,8 +32,8 @@ const Overview: React.FC = () => {
                 </Col>
                 <Col span={5}>
                     <CardComponent
-                        title='TiTle'
-                        description='在此编辑文案'
+                        title='归一化植被系数拟合'
+                        description='2000-2020清远市NDVI线性拟合'
                         coverImage={ndviOverallTrend}
                         avatarImage={avatar}
                     /></Col>
