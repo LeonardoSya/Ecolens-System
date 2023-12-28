@@ -147,7 +147,7 @@ const Xylophilus: React.FC = React.memo(() => {
                     </Col>
                     <Col span={2}></Col>
                 </Row>
-                <Floatbutton toggleFullScreen={toggleFullScreen} />
+                <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription={'this is 线虫 page'} />
                 <div ref={mapRef} className='map-container' style={{ background: '#000000cc' }} ></div>
             </Flex>
 

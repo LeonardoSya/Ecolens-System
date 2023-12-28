@@ -11,9 +11,11 @@ import useSelections from './useSelections';
 import useNetWork from './useNetWork';
 import useDebounce from './useDebounce';
 import useHover from './useHover';
+import useDebounceFn from './useDebounceFn';
 
 
 export {
+    useDebounceFn,
     useHover,
     useDebounce,
     useLatest,

@@ -1,29 +1,25 @@
-import React, { useEffect, useRef, useCallback } from "react";
+import { useDebounceFn, useSafeState, useCreation } from './hooks';
 
-function useDebounce<T extends (...args: any[]) => void>(callback: T, delay: number): T {
-    const latestCallback = useRef(callback);
-    const latestTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+import type DebounceOptions from './useDebounceFn';
 
-    useEffect(() => {
-        latestCallback.current = callback;
-    }, [callback]);
+const useDebounce = <T,>(value: T, options?: DebounceOptions) => {
+    const [debounced, setDebounced] = useSafeState(value);
 
-    useEffect(() => {
-        return () => {
-            if (latestTimeout.current) {
-                clearTimeout(latestTimeout.current);
-            }
-        }
-    }, []);
+    const run = useDebounceFn(() => {
+        setDebounced(value);
+    }, options);
 
-    return useCallback((...args: Parameters<T>) => {
-        if (latestTimeout.current) {
-            clearTimeout(latestTimeout.current);
-        }
-        latestTimeout.current = setTimeout(() => {
-            latestCallback.current(...args);
-        }, delay);
-    }, [delay]) as T;
-}
+    useCreation(() => {
+        run();
+    }, [value]);
+
+    return debounced;
+};
 
 export default useDebounce;
+
+// 使用方法：
+// const debouncedValue = useDebounce(
+//     value:any,
+//     options?:Options
+// )
