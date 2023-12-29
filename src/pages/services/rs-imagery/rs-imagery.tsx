@@ -1,16 +1,18 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
 import { XYZ, TileWMS } from 'ol/source';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import { useSafeState, useCreation } from '../../../hooks/hooks';
-import { Flex, Row, Col, message } from 'antd';
+import { Flex, Row, Col, message, Tour } from 'antd';
 import Floatbutton from '../../../components/floatbutton';
 import '../services.css';
 import '../../../assets/styles/map.css'
 import 'ol/ol.css';
 import Loader from '../../../components/loader';
+import RoamingGuide from '../../../components/tour';
+import { GuideContext, GuideProvider } from '../../../models/tour-context';
 
 const mapInfo = [
     { id: '61f9b270-a42c-4d9e-a9dc-ac3af586b313', center: [112.678303857182, 24.341823323344173], zoom: 12.5 },
@@ -22,8 +24,9 @@ const RSImagery: React.FC = React.memo(() => {
     const [item, setItem] = useSafeState(mapInfo[0]);
     const mapRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useSafeState<boolean>(false);
-    let timeoutId: number | null | undefined = null;
     const [messageApi, contextHolder] = message.useMessage();
+    const { refs, open, setOpen } = useContext(GuideContext);
+    let timeoutId: number | null | undefined = null;
 
     const info = () => {
         messageApi.info(`You have switched to remote sensing image of ${item === mapInfo[0] ? 'winter' : 'summer'}.`);
@@ -107,8 +110,9 @@ const RSImagery: React.FC = React.memo(() => {
     }, [item]);
 
     return (
-        <>
+        <GuideProvider>
             {contextHolder}
+            <RoamingGuide />
             <Loader isLoading={isLoading} />
             <Flex gap="small" vertical>
                 <Row justify="center" align="top">
@@ -118,7 +122,7 @@ const RSImagery: React.FC = React.memo(() => {
                         </span>
                     </Col>
 
-                    <Col span={4}>
+                    <Col span={4} ref={refs.ref1}>
                         <label className="switch" onChange={() => { toggleItem(); info(); }}>
                             <input type="checkbox" className="input" />
                             <span className="slider"></span>
@@ -130,8 +134,7 @@ const RSImagery: React.FC = React.memo(() => {
                 <div ref={mapRef} className='map-container' style={{ background: "#000000cc" }} ></div>
                 <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription={'this is rs-imagery page'} />
             </Flex>
-
-        </>
+        </GuideProvider>
     );
 });
 

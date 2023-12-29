@@ -56,14 +56,14 @@ const HomepageContent = () => (
                         </button>
                     </Link>
 
-                    <Link to="/spotlight">
+                    {/* <Link to="/spotlight">
                         <button className="learn-more" style={{ top: "1.5vw" }}>
                             <span className="circle" aria-hidden="true" style={{ background: "#efdbff" }}>
                                 <span className="icon arrow"></span>
                             </span>
                             <span className="button-text" style={{ color: '#000' }}>?? 12.25 ??</span>
                         </button>
-                    </Link>
+                    </Link> */}
 
                 </Flex>
             </Card>

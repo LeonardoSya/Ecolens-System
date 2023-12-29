@@ -16,7 +16,7 @@ const Floatbutton: React.FC<floatbuttonProps> = React.memo(({ toggleFullScreen, 
     };
     const openNotification = () => {
         api.open({
-            message: 'Notifition Title',
+            message: '阳山县概况',
             description: infoDescription,
             icon: <FileSearchOutlined />,
             style: {},
