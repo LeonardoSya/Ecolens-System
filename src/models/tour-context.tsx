@@ -18,7 +18,7 @@ export const GuideProvider = ({ children }) => {
     const ref3 = useRef(null);
     const ref4 = useRef(null);
     const ref5 = useRef(null);
-    const [open, setOpen] = useState<boolean>(false);
+    const [open, setOpen] = useState<boolean>(true);
 
     const value = {
         refs: { ref1, ref2, ref3, ref4, ref5 },
