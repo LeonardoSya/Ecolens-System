@@ -25,7 +25,6 @@ const Services = () => {
         collapsed ? setCollapsed(false) : setCollapsed(true);
     }
 
-
     return (
         <ConfigProvider
             theme={{
@@ -61,7 +60,6 @@ const Services = () => {
     );
 }
 
-
 function getItem(label: string, key: string, icon: JSX.Element, path: string) {
     return {
         label, key, icon, path
@@ -71,12 +69,11 @@ function getItem(label: string, key: string, icon: JSX.Element, path: string) {
 const items = [
     getItem('Overview', '1', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
     getItem('RS Imagery', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
-    getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
     getItem('Xylophilus', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
     getItem('Boundary map', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/boundary"),
+    getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
     getItem('Page 5', '6', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
     getItem('Introduction', '7', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
-
 ];
 
 const MySider = ({ collapsed }: { collapsed: boolean }) => {
@@ -97,8 +94,6 @@ const MySider = ({ collapsed }: { collapsed: boolean }) => {
         </Sider>
     );
 };
-
-
 
 const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrimaryColor: (color: string) => void }) => (
     <Header style={{ width: 'auto', height: '6vh', padding: 0, backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", }}>
@@ -131,7 +126,6 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
         </Row>
     </Header>
 );
-
 
 // const selectOptions = [
 //     {
