@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import type { TourProps } from 'antd';
 import { Tour } from 'antd';
 import { GuideContext } from '../models/tour-context';
+import { QuestionCircleFilled } from '@ant-design/icons';
+import {rsButtonImage, rsTooltipImage} from '../assets/images/images';
 
 const RoadmingGuide: React.FC = () => {
     const { refs, open, setOpen } = useContext(GuideContext);
@@ -10,6 +12,20 @@ const RoadmingGuide: React.FC = () => {
         {
             title: "Switch The Map",
             description: "点此切换地图",
+            cover: (
+                <>
+                    <img
+                        alt='tour.png'
+                        src={rsButtonImage}
+                        style={{ width: '6rem' }}
+                    />
+                    <img
+                        alt='tour.png'
+                        src={rsTooltipImage}
+                        style={{ width: '18rem' }}
+                    />
+                </>
+            ),
             target: () => refs.ref1.current,
         }, {
             title: "View the Map Documentation",
@@ -34,11 +50,15 @@ const RoadmingGuide: React.FC = () => {
 
 
     return (
-        <Tour
-            steps={steps}
-            open={open}
-            onClose={() => setOpen(false)}
-        />
+        <>
+            <Tour
+                steps={steps}
+                open={open}
+                onClose={() => setOpen(false)}
+            />
+            <QuestionCircleFilled type='primary' onClick={() => setOpen(true)} style={{ position: 'absolute', fontSize: '2rem', right: "2.2vw", top: "10vh" }}>Tour</QuestionCircleFilled>
+        </>
+
     )
 }
 

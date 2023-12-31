@@ -6,9 +6,13 @@ import cardImage4 from './card-image-4.webp';
 import wechat from './wechat.jpg';
 import ndviLinear from './NDVI变化趋势(NDVI线性拟合斜率)_tight.png';
 import ndviOverallTrend from './总体NDVI变化趋势(区域平均NDVI折线与其线性拟合).svg';
+import rsButtonImage from "./rs-button-image.png";
+import rsTooltipImage from './rs-tooltip-image.png';
 
 export {
     avatar,
+    rsTooltipImage,
+    rsButtonImage,
     cardImage1,
     cardImage2,
     cardImage3,
@@ -16,4 +20,5 @@ export {
     cardImage4,
     ndviLinear,
     ndviOverallTrend,
+
 }
