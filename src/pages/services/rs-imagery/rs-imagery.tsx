@@ -133,7 +133,7 @@ const RSImagery: React.FC = React.memo(() => {
                     <Col span={4}></Col>
                 </Row>
                 <div ref={mapRef} className='map-container' style={{ background: "#000000cc" }} ></div>
-                <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription={'this is rs-imagery page'} />
+                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription={'阳山县2m遥感影像图'} infoDescription={'this is rs-imagery page'} />
             </Flex>
         </GuideProvider>
     );

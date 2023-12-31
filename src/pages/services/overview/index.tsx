@@ -1,8 +1,5 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import QueueAnim from 'rc-queue-anim';
-import { OverPack } from 'rc-scroll-anim';
-import TweenOne from 'rc-tween-one';
 import G23d from './g2-3d';
 import Area from './area';
 import CardComponent from './card-component';
@@ -10,6 +7,7 @@ import Pathln from './pathln';
 import MiniArea from './mini-area';
 import { cardImage4, avatar, ndviLinear, ndviOverallTrend } from '../../../assets/images/images';
 import { ChartProvider } from '../../../models/chart-context';
+import Honeycomb from './honeycomb-heat-map';
 
 const Overview: React.FC = () => {
     return (
