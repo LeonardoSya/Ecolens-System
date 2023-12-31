@@ -7,7 +7,6 @@ import Pathln from './pathln';
 import MiniArea from './mini-area';
 import { cardImage4, avatar, ndviLinear, ndviOverallTrend } from '../../../assets/images/images';
 import { ChartProvider } from '../../../models/chart-context';
-import Honeycomb from './honeycomb-heat-map';
 
 const Overview: React.FC = () => {
     return (
@@ -32,7 +31,7 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='归一化植被系数拟合'
                         description='2000-2020清远市NDVI线性拟合'
-                        coverImage={ndviOverallTrend}
+                        coverImage={ndviLinear}
                         avatarImage={avatar}
                     /></Col>
                 <Col span={5}>

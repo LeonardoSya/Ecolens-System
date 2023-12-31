@@ -31,7 +31,7 @@ const Honeycomb: React.FC = () => {
     }
     const config = {
         map: {
-            type: 'mapbox',
+            type: 'amap',
             style: 'dark',
             pitch: 43,
             center: [120.13383079335335, 29.9],
