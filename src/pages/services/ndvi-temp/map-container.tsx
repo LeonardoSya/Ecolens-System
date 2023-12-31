@@ -120,7 +120,7 @@ const WMSMap: React.FC<WMSMapProps> = React.memo(({ geoServerUrl, layers }) => {
     return (
         <>
             <Loader isLoading={isLoading} />
-            <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription={'this is ndvi&temp page'} />
+            <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription={'归一化植被指数 20年研究成果'} infoDescription={'该项目选取了阳山县作为研究区域，时间范围为2002年1月至2022年12月。获取Sentinel-2和MODIS影像数据。使用了GEE平台提供的Sentinel-2 Level-2A和MODIS MOD13Q1数据集，分别具有10m和250m的空间分辨率，以及5天和16天的时间分辨率。对Sentinel-2影像矫正、裁剪和对波段进行NDVI值计算(float(b8)-float(b4))/(float(b8)+float(b4))，得到15m中分辨率NDVI影像。为了减少云层的干扰，进行了云掩膜处理，只保留了云量小于10%的影像。通过获取modis卫星产品，得到阳山县区域20年时间跨度的30天NDVI影像。对比分析植被指数变化。从空间和时间两个方面对比了Sentinel-2和MODIS影像的NDVI变化。从空间方面，本文选取了阳山县的几个受松材线虫影响和自然状态下的典型样点，分别将其放入监督分类样本集，分析了几个样本间的差值，在空间角度上对比受线虫影响区域的NDVI变化，并将规律性结果投射至整个阳山区域。从时间方面，分别对两种影像的NDVI值进行了时间序列合成，得到了月尺度和季节尺度的NDVI值，绘制了两者的NDVI值的变化曲线。在空间上，通过对NDVI影像的直方图分析，可以发现该区域的NDVI值呈现出双峰分布，其中一个峰值约为0.3，另一个峰值约为0.6。这说明该区域的松树存在两种不同的生长状态，一种是健康的松树林，其NDVI值较高，另一种是受松材线虫影响的松树林，其NDVI值较低。在时间跨度上，通过对NDVI影像的动态监测，可以发现该区域的松树的NDVI值随着时间的推移呈现出上升的趋势，表明尽管松材线虫病对松树的生长造成了持续的负面影响，但在多年对松材线虫的防控和对森林资源的补充下，对抗松材线虫成果显著。'} />
             <div ref={mapContainerRef} className='map-container'></div>
         </>
     );

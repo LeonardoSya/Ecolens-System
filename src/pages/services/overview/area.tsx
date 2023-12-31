@@ -25,7 +25,7 @@ const Area: React.FC = () => {
                 const data = (await response.json()) as Data[];
 
                 // 读取data的值以消除ts warning
-                console.log(data);
+                // console.log(data);
 
                 const chartInstance = new Chart({
                     container: chartContainerRef.current!,
@@ -62,9 +62,6 @@ const Area: React.FC = () => {
 
     return <div id='area-container' ref={chartContainerRef} className="container" />;
 };
-
-
-
 
 
 export function LoadingSpinner() {

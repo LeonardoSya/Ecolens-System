@@ -1,8 +1,5 @@
 import React from 'react';
 import { Col, Row } from 'antd';
-import QueueAnim from 'rc-queue-anim';
-import { OverPack } from 'rc-scroll-anim';
-import TweenOne from 'rc-tween-one';
 import G23d from './g2-3d';
 import Area from './area';
 import CardComponent from './card-component';
@@ -34,7 +31,7 @@ const Overview: React.FC = () => {
                     <CardComponent
                         title='归一化植被系数拟合'
                         description='2000-2020清远市NDVI线性拟合'
-                        coverImage={ndviOverallTrend}
+                        coverImage={ndviLinear}
                         avatarImage={avatar}
                     /></Col>
                 <Col span={5}>
