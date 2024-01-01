@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
@@ -39,7 +39,7 @@ const WMSMap: React.FC<WMSMapProps> = React.memo(({ geoServerUrl, layers }) => {
         }
     };
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         if (!mapContainerRef.current) return;
 
         const wmsSource = new TileWMS({
@@ -86,36 +86,19 @@ const WMSMap: React.FC<WMSMapProps> = React.memo(({ geoServerUrl, layers }) => {
 
         mapRef.current = map;  // 持有ol/Map实例
 
-        setTimeout(() => {
-            map.updateSize();
+        map.setTarget(mapContainerRef.current);
+        map.updateSize();
 
-            const view = map.getView();
-            view.setCenter(initialCenter);
-            view.setZoom(initialZoom + 3);
-        }, 100);
-
-        if (mapContainerRef.current) {
-            map.setTarget(mapContainerRef.current);
-
-            // 延迟更新地图大小
-            setTimeout(() => {
-                map.updateSize();
-
-                const view = map.getView();
-                view.setCenter(initialCenter);
-                view.setZoom(initialZoom + 3);
-            }, 100);
-
-            map.on('change', () => {
-                console.log('Map view changed:', map.getView().getCenter(), map.getView().getZoom());
-            });
-        }
+        map.on('change', () => {
+            console.log('Map view changed:', map.getView().getCenter(), map.getView().getZoom());
+        });
 
         return () => {
             mapRef.current?.setTarget(undefined);
             mapRef.current = null;
-        }
-    }, [geoServerUrl, layers,]);
+        };
+
+    }, [geoServerUrl, layers]);
 
     return (
         <>
