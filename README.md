@@ -126,7 +126,7 @@ Ecolens 采用高度模块化和开箱即用的配置项，能够轻松地适应
 ## 地图控制组件 MapControlsz
 在 Ecolens 中，map-control 组件负责地图的交互部分，如缩放按钮、平移控件、旋转控件等。每个控制组件都是独立的，可以被添加到地图容器中，并能够控制地图的某一特定行为。
 > Map-controls 代码示例
-> ![图片13](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/28943409-7d82-411b-8f79-78f1df9eea0f)
+![图片13](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/28943409-7d82-411b-8f79-78f1df9eea0f)
 
 ## 数据加载组件 DataLoaderComponent
 在 Ecolens 中，data-loader-component 组件负责从外部源异步加载数据进行计算和渲染地图和图表，包括加载GeoJSON、WMS服务、WFS服务等。

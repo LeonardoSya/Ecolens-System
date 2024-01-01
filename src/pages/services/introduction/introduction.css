@@ -1,0 +1,35 @@
+.readme-container img {
+    max-width: 70%;
+    height: auto;
+    position: relative;
+}
+
+.readme-container {
+    width: 100%;
+    height: auto;
+    padding: 5rem;
+    padding-left: 8rem;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: flex-start;
+    font-size: 1rem;
+    list-style: none;
+    color: #fff;
+    background-color: #000000e4;
+}
+
+.readme-container h1 {
+    color: #7764bc;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.readme-container h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
