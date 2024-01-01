@@ -1,11 +1,3 @@
-/*
- * @Author: LeonardoSya 2246866774@qq.com
- * @Date: 2023-12-08 13:02:28
- * @LastEditors: LeonardoSya 2246866774@qq.com
- * @LastEditTime: 2023-12-31 13:12:25
- * @FilePath: \React\05_antd\02_布局\vite-project\src\pages\home\header.tsx
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, } from 'antd';
@@ -32,9 +24,9 @@ const HomepageHeader = () => (
         <Col span={4}></Col>
         <Col span={8}
             style={{ textAlign: "center", fontSize: "1.2vw" }}>
-            <Link to="/services/rsimagery" style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Services</Link>
-            <Link to="#" style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Documents</Link>
-            <Link to="https://github.com/LeonardoSya/Ecolens-System" style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Star us on GitHub <GithubOutlined style={{ fontSize: '1rem', marginLeft: '0.3rem' }} /></Link>
+            <Link to="/services/rsimagery" target='_blank' style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Services</Link>
+            <Link to="https://github.com/LeonardoSya/Ecolens-System/blob/main/README.md" target='_blank' style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Documents</Link>
+            <Link to="https://github.com/LeonardoSya/Ecolens-System" target='_blank' style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Star us on GitHub <GithubOutlined style={{ fontSize: '1rem', marginLeft: '0.3rem' }} /></Link>
         </Col>
         <Col span={1}></Col>
     </Row>
