@@ -17,6 +17,7 @@ const Floatbutton: React.FC<floatbuttonProps> = React.memo(({ toggleFullScreen, 
     const info = () => {
         messageApi.info('You have exited full-screen mode.');
     };
+    
     const openNotification = () => {
         api.open({
             message: titleDescription,

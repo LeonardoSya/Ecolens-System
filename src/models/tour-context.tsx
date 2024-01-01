@@ -1,6 +1,18 @@
 import React, { createContext, useRef, useState } from 'react';
 
-export const GuideContext = createContext({
+interface GuideContextType {
+    refs: {
+        ref1: React.RefObject<HTMLElement>;
+        ref2: React.RefObject<HTMLElement>;
+        ref3: React.RefObject<HTMLElement>;
+        ref4: React.RefObject<HTMLElement>;
+        ref5: React.RefObject<HTMLElement>;
+    };
+    open: boolean;
+    setOpen: (value: boolean) => void;
+}
+
+export const GuideContext = createContext<GuideContextType>({
     refs: {
         ref1: { current: null },
         ref2: { current: null },
@@ -9,10 +21,10 @@ export const GuideContext = createContext({
         ref5: { current: null },
     },
     open: false,
-    setOpen: (value: boolean) => { }
+    setOpen: () => { }
 });
 
-export const GuideProvider = ({ children }) => {
+export const GuideProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const ref3 = useRef(null);

@@ -75,7 +75,7 @@ const RSImagery: React.FC = React.memo(() => {
             if (timeoutId !== null) {
                 clearTimeout(timeoutId);
             }
-            timeoutId = setTimeout(() => {
+            timeoutId = window.setTimeout(() => {
                 setIsLoading(false);
                 timeoutId = null;
             }, 2000);

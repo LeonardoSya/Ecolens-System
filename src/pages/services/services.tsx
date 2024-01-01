@@ -127,45 +127,6 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
     </Header>
 );
 
-// const selectOptions = [
-//     {
-//         value: '1',
-//         label: 'Services',
-//         path: "/",
-//         page: 'Services',
-//     },
-//     {
-//         value: '2',
-//         label: 'Page 1',
-//         path: '/page1',
-//         page: 'Page1',
-//     },
-//     {
-//         value: '3',
-//         label: 'Page 2',
-//         path: '/page2',
-//         page: 'Page2',
-//     },
-//     {
-//         value: '4',
-//         label: 'Page 3',
-//         path: '/page3',
-//         page: 'Page3',
-//     },
-//     {
-//         value: '5',
-//         label: 'Page 4',
-//         path: '/page4',
-//         page: 'Page4',
-//     },
-//     {
-//         value: '6',
-//         label: 'Page 5',
-//         path: '/page5',
-//         page: 'Page5',
-//     },
-// ]
-
 const MySearchModule = ({ collapsed, toggleCollapsed }) => {
 
     return (
