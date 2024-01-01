@@ -25,7 +25,6 @@ const Services = () => {
         collapsed ? setCollapsed(false) : setCollapsed(true);
     }
 
-
     return (
         <ConfigProvider
             theme={{
@@ -61,7 +60,6 @@ const Services = () => {
     );
 }
 
-
 function getItem(label: string, key: string, icon: JSX.Element, path: string) {
     return {
         label, key, icon, path
@@ -69,14 +67,13 @@ function getItem(label: string, key: string, icon: JSX.Element, path: string) {
 }
 
 const items = [
-    getItem('Overview', '1', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
-    getItem('RS Imagery', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
-    getItem('NDVI&Tempe', '3', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
+    getItem('Introduction', '1', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
+    getItem('Overview', '2', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
+    getItem('RS Imagery', '3', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
     getItem('Xylophilus', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
     getItem('Boundary map', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/boundary"),
-    getItem('Page 5', '6', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
-    getItem('Introduction', '7', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
-
+    getItem('NDVI&Tempe', '6', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
+    getItem('Page 7', '7', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
 ];
 
 const MySider = ({ collapsed }: { collapsed: boolean }) => {
@@ -97,8 +94,6 @@ const MySider = ({ collapsed }: { collapsed: boolean }) => {
         </Sider>
     );
 };
-
-
 
 const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrimaryColor: (color: string) => void }) => (
     <Header style={{ width: 'auto', height: '6vh', padding: 0, backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)", }}>
@@ -132,46 +127,6 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
     </Header>
 );
 
-
-// const selectOptions = [
-//     {
-//         value: '1',
-//         label: 'Services',
-//         path: "/",
-//         page: 'Services',
-//     },
-//     {
-//         value: '2',
-//         label: 'Page 1',
-//         path: '/page1',
-//         page: 'Page1',
-//     },
-//     {
-//         value: '3',
-//         label: 'Page 2',
-//         path: '/page2',
-//         page: 'Page2',
-//     },
-//     {
-//         value: '4',
-//         label: 'Page 3',
-//         path: '/page3',
-//         page: 'Page3',
-//     },
-//     {
-//         value: '5',
-//         label: 'Page 4',
-//         path: '/page4',
-//         page: 'Page4',
-//     },
-//     {
-//         value: '6',
-//         label: 'Page 5',
-//         path: '/page5',
-//         page: 'Page5',
-//     },
-// ]
-
 const MySearchModule = ({ collapsed, toggleCollapsed }) => {
 
     return (
@@ -201,14 +156,14 @@ export const MyMap = () => {
             {/* Route用于将应用的位置映射到不同的React组件 */}
             {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
             <Routes>
+                <Route path='/introduction' element={<Introduction />} />
                 <Route path='/overview' element={<Overview />} />
                 <Route path='/rsimagery' element={<RSImagery />} />
                 <Route path='/ndvitemp' element={<QuarterlyChart />} />
                 <Route path='/xylophilus' element={<Xylophilus />} />
                 <Route path='/boundary' element={<Boundary />} />
                 <Route path='/page5' element={<Page5 />} />
-                <Route path='/introduction' element={<Introduction />} />
-                <Route path='/' element={<Navigate replace to="/overview" />} />
+                <Route path='/' element={<Navigate replace to="/introduction" />} />
             </Routes>
         </Content>
     );

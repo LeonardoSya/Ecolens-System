@@ -1,5 +1,6 @@
 import React, { createContext, useRef, useState } from 'react';
 
+
 export const GuideContext = createContext({
     refs: {
         ref1: { current: null },
@@ -9,10 +10,10 @@ export const GuideContext = createContext({
         ref5: { current: null },
     },
     open: false,
-    setOpen: (value: boolean) => { }
+    setOpen: (value: any) => { }
 });
 
-export const GuideProvider = ({ children }) => {
+export const GuideProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const ref3 = useRef(null);

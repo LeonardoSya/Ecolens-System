@@ -47,7 +47,7 @@ const HomepageContent = () => (
                         {/* 🚀 Kickstart Your Ecological Journey <br /> */}
                     </Title>
 
-                    <Link to="/services/overview">
+                    <Link to="/services/introduction">
                         <button className="learn-more">
                             <span className="circle" aria-hidden="true">
                                 <span className="icon arrow"></span>

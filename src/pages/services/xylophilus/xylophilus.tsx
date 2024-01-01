@@ -36,10 +36,9 @@ const Xylophilus: React.FC = React.memo(() => {
     const mapRef = useRef<HTMLDivElement>(null);
     const [item, setItem] = useSafeState(mapInfo[0]);
     const [isLoading, setIsLoading] = useSafeState<boolean>(false);
-    let timeoutId: number | null | undefined = null;
     const [messageApi, contextHolder] = message.useMessage();
+    let timeoutId: number | null | undefined = null;
 
-    // 全屏切换
     const toggleFullScreen = useCallback(() => {
         const mapElement = mapRef?.current;
         if (!document.fullscreenElement && mapElement) {
@@ -51,7 +50,7 @@ const Xylophilus: React.FC = React.memo(() => {
 
     const toggleItem = useCallback((index: number) => {
         setItem(mapInfo[index]);
-        infoMessage(mapInfo[index]);  // 传递最新的 item
+        infoMessage(mapInfo[index]);
     }, []);
 
     interface seletedItemProps {
@@ -83,7 +82,7 @@ const Xylophilus: React.FC = React.memo(() => {
             if (timeoutId !== null) {
                 clearTimeout(timeoutId);
             }
-            timeoutId = setTimeout(() => {
+            timeoutId = window.setTimeout(() => {
                 setIsLoading(false);
                 timeoutId = null;
             }, 3000);
@@ -147,7 +146,7 @@ const Xylophilus: React.FC = React.memo(() => {
                     </Col>
                     <Col span={2}></Col>
                 </Row>
-                <Floatbutton toggleFullScreen={toggleFullScreen} infoDescription={'this is 线虫 page'} />
+                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription='松材线虫受灾区无人机监测影像' infoDescription={'this is 线虫 page'} />
                 <div ref={mapRef} className='map-container' style={{ background: '#000000cc' }} ></div>
             </Flex>
 

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import type { TourProps } from 'antd';
 import { Tour } from 'antd';
 import { GuideContext } from '../models/tour-context';
-import { QuestionCircleFilled } from '@ant-design/icons';
 import { rsButtonImage, rsTooltipImage } from '../assets/images/images';
 import './tour.css';
 
