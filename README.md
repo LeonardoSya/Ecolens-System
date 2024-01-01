@@ -120,18 +120,22 @@ Ecolens 采用高度模块化和开箱即用的配置项，能够轻松地适应
 
 ## 地图容器组件 MapContainer
 在 Ecolens 中，map-container 组件负责初始化 OpenLayers 的地图实例并将其嵌入React的生态系统中。map-container只关注地图的初始化和基本的生命周期管理，例如创建地图、设置视图(View)、加载地图(Layers)、注册事件监听器等
+
 ![图片12](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/94aeb883-7a7a-4dc2-bfe9-92a40b26ac02)
 
 ## 地图控制组件 MapControlsz
 在 Ecolens 中，map-control 组件负责地图的交互部分，如缩放按钮、平移控件、旋转控件等。每个控制组件都是独立的，可以被添加到地图容器中，并能够控制地图的某一特定行为。
+
 ![图片13](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/28943409-7d82-411b-8f79-78f1df9eea0f)
 
 ## 数据加载组件 DataLoaderComponent
 在 Ecolens 中，data-loader-component 组件负责从外部源异步加载数据进行计算和渲染地图和图表，包括加载GeoJSON、WMS服务、WFS服务等。
+
 ![图片14](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/0d3c8886-fb0e-4975-bfa3-71778ff57606)
 
 地图状态管理组件 StateComponent
 在 Ecolens 中，状态管理组件是一个高阶组件或自定义Hook，它封装了对地图状态（如加载状态、当前视图、选中的图层、标记的位置等）的管理逻辑，能够在全局组件中管理和使用。
+
 ![图片15](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/4cc6135b-0f91-4604-a521-dc24e6672fa0)
 
 ## 图层组件 LayerComponent
