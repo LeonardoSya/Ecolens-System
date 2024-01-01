@@ -119,7 +119,7 @@ Ecolens 采用高度模块化和开箱即用的配置项，能够轻松地适应
 在React中，组件的封装思路就是面向对象思想，分而治之。Ecolens System 中的代码组件化提供了一种功能的抽象方式，有效降低了系统各个功能之间的耦合性，提高功能内部的聚合性，也同时最小化了diff算法以避免不必要的DOM操作。
 
 ## 地图容器组件 MapContainer
-在 Ecolens 中，map-container 组件负责初始化 OpenLayers 的地图实例并将其嵌入React的生态系统中。map-container只关注地图的初始化和基本的生命周期管理，例如创建地图、设置视图(View)、加载地图(Layers)、注册事件监听器等
+在 Ecolens 中，map-container 组件负责初始化 OpenLayers 的地图实例并将其嵌入React的生态系统中。map-container只关注地图的初始化和基本的生命周期管理。
 
 ![图片12](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/94aeb883-7a7a-4dc2-bfe9-92a40b26ac02)
 
