@@ -65,13 +65,23 @@
 // );
 
 // export default Introduction;
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback,useRef } from 'react';
 import Floatbutton from '../../../components/floatbutton';
 import {marked} from 'marked';
 import './introduction.css'
 
 const Introduction = () => {
-    const [readme, setReadme] = useState('')
+    const [readme, setReadme] = useState('');
+    const mapRef = useRef<HTMLDivElement>(null);
+
+    const toggleFullScreen = useCallback(() => {
+        const mapElement = mapRef?.current;
+        if (!document.fullscreenElement && mapElement) {
+            mapElement.requestFullscreen?.();
+        } else {
+            document.exitFullscreen?.();
+        }
+    }, []);
 
     useEffect(() => {
         fetch('https://api.github.com/repos/LeonardoSya/Ecolens-System/readme')
@@ -87,8 +97,8 @@ const Introduction = () => {
 
     return (
         <>
-            <div className='readme-container' dangerouslySetInnerHTML={{ __html: readme }} />
-            <Floatbutton />
+            <div ref={mapRef} className='readme-container' dangerouslySetInnerHTML={{ __html: readme }} />
+            <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription='产品文档' infoDescription='Ecolens System 地图服务介绍' />
         </>
     )
 }
