@@ -133,7 +133,7 @@ const RSImagery: React.FC = React.memo(() => {
                     <Col span={4}></Col>
                 </Row>
                 <div ref={mapRef} className='map-container' style={{ background: "#000000cc" }} ></div>
-                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription={'阳山县2m遥感影像图'} infoDescription={'this is rs-imagery page'} />
+                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription={'阳山县2m遥感影像图'} infoDescription={'地区：清远市阳山县 分辨率：2m 时间：2020年 & 2021年 影像来源：国产公益卫星 — 资源系列、 高分系列 '} />
             </Flex>
         </GuideProvider>
     );

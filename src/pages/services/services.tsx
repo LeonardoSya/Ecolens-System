@@ -1,16 +1,17 @@
-import { BrowserRouter as Router, Route, Link, Routes, Navigate, useNavigate, To } from 'react-router-dom';
+import React, { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
+import { BrowserRouter as Router, Route, Link, Routes, Navigate, To } from 'react-router-dom';
 import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, theme, Typography, Tooltip } from 'antd';
 import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
-import { Introduction, Overview, Xylophilus, QuarterlyChart, Page3, Boundary, Page5, RSImagery } from './services-routers';
+import { Introduction, Overview, Xylophilus, QuarterlyChart, Swipe, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
-import './search-input.css';
 import { JSX } from 'react/jsx-runtime';
-import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
+import './search-input.css';
+
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
 
-const Services = () => {
+const Services: React.FC = () => {
     const [primary, setPrimary] = useSafeState('#262626');
     const [collapsed, setCollapsed] = useSafeState(false);
     const togglePrimaryColor = (color: string) => {
@@ -45,19 +46,19 @@ function getItem(label: string, key: string, icon: JSX.Element, path: string) {
 }
 
 const items = [
-    getItem('Introduction', '1', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
-    getItem('Overview', '2', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
-    getItem('RS Imagery', '3', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
-    getItem('Xylophilus', '4', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
-    getItem('Boundary map', '5', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/boundary"),
-    getItem('NDVI&Tempe', '6', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
-    getItem('Page 7', '7', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
+    getItem('遥感影像', '1', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
+    getItem('虫害监测', '2', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
+    getItem('区域概况', '3', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/swipe"),
+    getItem('生态状况', '4', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
+    getItem('监控分析', '5', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
+    getItem('产品文档', '6', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
+    // getItem('Page 7', '7', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
 ];
 
 const MySider = ({ collapsed }: { collapsed: boolean }) => {
     const renderMenuItems = (menuItems: any[]) => {
         return menuItems.map((item: { key: Key | null | undefined; icon: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; path: To; label: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem" }}>
+            <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem", fontFamily: "Noto Sans SC" }}>
                 <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
         ));
@@ -134,13 +135,12 @@ export const MyMap = () => {
             {/* Route用于将应用的位置映射到不同的React组件 */}
             {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
             <Routes>
-                <Route path='/introduction' element={<Introduction />} />
-                <Route path='/overview' element={<Overview />} />
                 <Route path='/rsimagery' element={<RSImagery />} />
-                <Route path='/ndvitemp' element={<QuarterlyChart />} />
                 <Route path='/xylophilus' element={<Xylophilus />} />
-                <Route path='/boundary' element={<Boundary />} />
-                <Route path='/page5' element={<Page5 />} />
+                <Route path='/swipe' element={<Swipe />} />
+                <Route path='/ndvitemp' element={<QuarterlyChart />} />
+                <Route path='/overview' element={<Overview />} />
+                <Route path='/introduction' element={<Introduction />} />
                 <Route path='/' element={<Navigate replace to="/introduction" />} />
             </Routes>
         </Content>

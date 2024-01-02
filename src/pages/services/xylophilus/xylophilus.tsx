@@ -146,7 +146,7 @@ const Xylophilus: React.FC = React.memo(() => {
                     </Col>
                     <Col span={2}></Col>
                 </Row>
-                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription='松材线虫受灾区无人机监测影像' infoDescription={'this is 线虫 page'} />
+                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription='松材线虫受灾区无人机监测影像' infoDescription={'空间引用标识符（SRID/EPSG）：4326 图像宽度：256 图像高度：256 瓦片数量：128 缩放级别：14-21 第一张 (2023年11月18日) 图片数量：36张 分辨率：0.058米 第二张 (2023年11月18日) 图片数量：197张 分辨率：0.089米 第三张 (2023年11月19日) 图片数量：120张 分辨率：0.113米 第四张 (2020年11月20日) 图片数量：119张 分辨率：0.126米'} />
                 <div ref={mapRef} className='map-container' style={{ background: '#000000cc' }} ></div>
             </Flex>
 
