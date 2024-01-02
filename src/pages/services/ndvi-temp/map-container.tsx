@@ -59,7 +59,7 @@ const WMSMap: React.FC<WMSMapProps> = React.memo(({ geoServerUrl, layers }) => {
             if (timeoutId !== null) {
                 clearTimeout(timeoutId);
             }
-            timeoutId = setTimeout(() => {
+            timeoutId = window.setTimeout(() => {
                 setIsLoading(false);
                 timeoutId = null;
             }, 3000);
