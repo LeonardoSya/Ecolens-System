@@ -4,7 +4,6 @@ import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutline
 import { Introduction, Overview, Xylophilus, QuarterlyChart, Page3, Boundary, Page5, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
 import './search-input.css';
-import { SetStateAction } from 'react';
 import { JSX } from 'react/jsx-runtime';
 import { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
 
@@ -13,44 +12,22 @@ const { Title } = Typography;
 
 const Services = () => {
     const [primary, setPrimary] = useSafeState('#262626');
-    // const { collapsed, setCollapsed, forceCollapsed, toggleCollapsed } = useContext(ChartContext);
     const [collapsed, setCollapsed] = useSafeState(false);
-    // const { token: { colorBgContainer }, } = theme.useToken();
-
-    const togglePrimaryColor = (color: { toHexString: () => SetStateAction<string>; }) => {
-        setPrimary(color.toHexString())
+    const togglePrimaryColor = (color: string) => {
+        setPrimary(color)
     }
-
     const toggleCollapsed = () => {
         collapsed ? setCollapsed(false) : setCollapsed(true);
     }
 
     return (
-        <ConfigProvider
-            theme={{
-                token: {
-                    // Seed Token 影响范围大
-                    colorPrimary: primary,
-                    // // 派生变量,影响范围小
-                    // // colorBgContainer:''
-                }
-            }}
-        >
+        <ConfigProvider theme={{ token: { colorPrimary: primary, } }}>
             <Layout>
-                {/* Sider */}
                 <MySider collapsed={collapsed} />
-
                 <Layout>
-                    {/* Header */}
                     <MyHeader primary={primary} togglePrimaryColor={togglePrimaryColor} />
-
-                    {/* Search module */}
                     <MySearchModule collapsed={collapsed} toggleCollapsed={toggleCollapsed} />
-
-                    {/* Router */}
                     <MyMap style={{ width: '100vw' }} />
-
-                    {/* Footer */}
                     <Footer style={{ textAlign: 'center', background: 'rgba(0,0,0,.8)', color: '#bfbfbf' }}>
                         Ecolens System ©2023 Created by Zhangyiyang
                     </Footer>
@@ -59,6 +36,7 @@ const Services = () => {
         </ConfigProvider>
     );
 }
+
 
 function getItem(label: string, key: string, icon: JSX.Element, path: string) {
     return {

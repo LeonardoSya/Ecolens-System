@@ -5,7 +5,7 @@ import TileLayer from 'ol/layer/Tile';
 import { XYZ, TileWMS } from 'ol/source';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import { useSafeState, useCreation } from '../../../hooks/hooks';
-import { Flex, Row, Col, message, Tour } from 'antd';
+import { Flex, Row, Col, message } from 'antd';
 import Floatbutton from '../../../components/floatbutton';
 import '../services.css';
 import '../../../assets/styles/map.css'
