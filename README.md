@@ -30,7 +30,7 @@ Visit us today and kickstart your next ecological adventure!
 ![图片5](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/bb96b985-867e-413c-b8d4-434e73c9f1d5)
 
 #### 研究地区概况
-![图片6](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/089bdc8b-6fe6-48e6-8118-14b812a9f476)
+![图片6](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/48aa824a-a1dc-4040-a477-4eb36d947953)
 
 #### 研究地区生态状况
 ![图片7](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/32a5fc34-319a-4d9d-b77a-17702594fbfc)
@@ -129,7 +129,7 @@ Ecolens 采用高度模块化和开箱即用的配置项，能够轻松地适应
   - 四张不同松材线虫受灾林区的无人机影像监测图
   - 受灾林区地图说明和产品文档
 - 地区概况
-  - 研究地区区划图
+  - 研究地区行政区划图与卫星地图(滑块切换)
   - 研究地区基本概况说明和产品文档
 - 生态状况
   - 研究地区归一化植被系数五年渲染图
