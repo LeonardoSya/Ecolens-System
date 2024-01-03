@@ -1,4 +1,4 @@
-import React, { createContext, useCallback } from 'react';
+import { createContext, useCallback } from 'react';
 import useSafeState from '../hooks/useSafeState';
 
 export const ChartContext = createContext<{

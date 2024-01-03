@@ -5,7 +5,7 @@ import Area from './area';
 import CardComponent from './card-component';
 import Pathln from './pathln';
 import MiniArea from './mini-area';
-import { cardImage4, avatar, ndviLinear, ndviOverallTrend } from '../../../assets/images/images';
+import { cardImage4, avatar, ndviLinear } from '../../../assets/images/images';
 import { ChartProvider } from '../../../models/chart-context';
 
 const Overview: React.FC = () => {

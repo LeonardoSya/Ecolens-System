@@ -6,7 +6,7 @@ import { Plugin as ControlPlugin } from '@antv/g-plugin-control';
 import { Runtime, corelib, extend } from '@antv/g2';
 import { threedlib } from '@antv/g2-extension-3d';
 import { useSafeState } from '../../../hooks/hooks';
-import { LoadingSpinner } from './Area';
+import { LoadingSpinner } from './area';
 
 interface G23dProps {
     width?: number;
