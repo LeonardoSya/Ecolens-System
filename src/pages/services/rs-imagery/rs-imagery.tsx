@@ -25,11 +25,11 @@ const RSImagery: React.FC = React.memo(() => {
     const mapRef = useRef<HTMLDivElement>(null);
     const [isLoading, setIsLoading] = useSafeState<boolean>(false);
     const [messageApi, contextHolder] = message.useMessage();
-    const { refs, open, setOpen } = useContext(GuideContext);
+    const { refs } = useContext(GuideContext);
     let timeoutId: number | null | undefined = null;
 
     const info = () => {
-        messageApi.info(`You have switched to remote sensing image of ${item === mapInfo[0] ? 'winter' : 'summer'}.`);
+        messageApi.info(`You have switched to remote sensing image of ${item === mapInfo[0] ? '2022' : '2023'}.`);
     };
 
     const toggleItem = useCallback(() => {
@@ -133,7 +133,7 @@ const RSImagery: React.FC = React.memo(() => {
                     <Col span={4}></Col>
                 </Row>
                 <div ref={mapRef} className='map-container' style={{ background: "#000000cc" }} ></div>
-                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription={'阳山县2m遥感影像图'} infoDescription={'地区：清远市阳山县 分辨率：2m 时间：2020年 & 2021年 影像来源：国产公益卫星 — 资源系列、 高分系列 '} />
+                <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription={'阳山县2m遥感影像图'} infoDescription={'地区：清远市阳山县 分辨率：2m 时间：2022年 & 2023年 影像来源：国产公益卫星 — 资源系列、 高分系列 '} />
             </Flex>
         </GuideProvider>
     );

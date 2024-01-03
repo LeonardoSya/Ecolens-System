@@ -1,12 +1,11 @@
 import React, { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
-import { BrowserRouter as Router, Route, Link, Routes, Navigate, To } from 'react-router-dom';
-import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, theme, Typography, Tooltip } from 'antd';
-import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, RadarChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
+import { Route, Link, Routes, Navigate, To } from 'react-router-dom';
+import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, Typography, Tooltip } from 'antd';
+import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 import { Introduction, Overview, Xylophilus, QuarterlyChart, Swipe, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
 import { JSX } from 'react/jsx-runtime';
 import './search-input.css';
-
 
 const { Header, Content, Footer, Sider } = Layout;
 const { Title } = Typography;
@@ -79,6 +78,7 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
         <Row>
             <Col span={12}>
                 <Flex justify="flex-start" align="flex-start" gap="small">
+                    {/* @ts-ignore */}
                     <ColorPicker value={primary} onChangeComplete={togglePrimaryColor} style={{ margin: '1vh', border: 'none', background: "inherit", }} />
                     <Title style={{ fontSize: "1.5vw", fontFamily: "Silkscreen", marginTop: '1vh', color: '#fff' }}>
                         <Link to="/" style={{ color: 'inherit' }}>Ecolens System</Link>
@@ -106,7 +106,7 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
     </Header>
 );
 
-const MySearchModule = ({ collapsed, toggleCollapsed }) => {
+const MySearchModule = ({ collapsed, toggleCollapsed }: { collapsed: boolean, toggleCollapsed: () => void }) => {
 
     return (
         <Flex justify='flex-start' align='center' gap="large" style={{ background: '#f5f5f5', height: '10vh' }}>
@@ -128,23 +128,25 @@ const MySearchModule = ({ collapsed, toggleCollapsed }) => {
     );
 };
 
-export const MyMap = () => {
 
-    return (
-        <Content>
-            {/* Route用于将应用的位置映射到不同的React组件 */}
-            {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
-            <Routes>
-                <Route path='/rsimagery' element={<RSImagery />} />
-                <Route path='/xylophilus' element={<Xylophilus />} />
-                <Route path='/swipe' element={<Swipe />} />
-                <Route path='/ndvitemp' element={<QuarterlyChart />} />
-                <Route path='/overview' element={<Overview />} />
-                <Route path='/introduction' element={<Introduction />} />
-                <Route path='/' element={<Navigate replace to="/introduction" />} />
-            </Routes>
-        </Content>
-    );
-};
+interface MyMapProps {
+    style?: React.CSSProperties;
+}
+
+export const MyMap: React.FC<MyMapProps> = () => (
+    <Content>
+        {/* Route用于将应用的位置映射到不同的React组件 */}
+        {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
+        <Routes>
+            <Route path='/rsimagery' element={<RSImagery />} />
+            <Route path='/xylophilus' element={<Xylophilus />} />
+            <Route path='/swipe' element={<Swipe />} />
+            <Route path='/ndvitemp' element={<QuarterlyChart />} />
+            <Route path='/overview' element={<Overview />} />
+            <Route path='/introduction' element={<Introduction />} />
+            <Route path='/' element={<Navigate replace to="/introduction" />} />
+        </Routes>
+    </Content>
+);
 
 export default Services;

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Avatar, Card } from 'antd';
+import { Card } from 'antd';
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
 import { Chart } from '@antv/g2';
 import './index.css';
@@ -15,7 +15,7 @@ const data = [
     0.55, 0.592, 0.572, 0.593, 0.612, 0.526, 0.549, 0.573, 0.56, 0.591, 0.527, 0.593, 0.545, 0.587, 0.59, 0.572, 0.632, 0.635, 0.637, 0.578, 0.615
 ];
 
-const MiniArea: React.FC<MiniAreaProps> = ({ title, description, avatarImage }) => {
+const MiniArea: React.FC<MiniAreaProps> = ({ title, description }) => {
     const chartRef = useRef(null);
 
     useEffect(() => {
@@ -43,6 +43,7 @@ const MiniArea: React.FC<MiniAreaProps> = ({ title, description, avatarImage }) 
                         .axis(false)
 
                     chart.interaction('tooltip', {
+                        // @ts-ignore
                         render: (e: any, { title, items }: any) => items[0].value,
                     })
 
@@ -82,7 +83,6 @@ const MiniArea: React.FC<MiniAreaProps> = ({ title, description, avatarImage }) 
                 title={title}
                 description={description}
                 className='text'
-                avatar={<Avatar src={avatarImage} />}
             />
         </Card>
     )

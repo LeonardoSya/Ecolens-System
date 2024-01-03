@@ -3,7 +3,7 @@ import Floatbutton from '../../../components/floatbutton';
 import { marked } from 'marked';
 import './introduction.css'
 
-const Introduction = () => {
+const Introduction:React.FC = () => {
     const [readme, setReadme] = useState('');
     const mapRef = useRef<HTMLDivElement>(null);
 
@@ -19,11 +19,15 @@ const Introduction = () => {
     useEffect(() => {
         fetch('https://api.github.com/repos/LeonardoSya/Ecolens-System/readme')
             .then(response => response.json())
-            .then(data => {
+            .then(async data => {
                 // github api 返回的内容是 base64编码的，因此需要解码
-                // 使用 decodeURIComponent 和 escape 函数来处理 UTF-8 编码的文本
-                const markdown = decodeURIComponent(escape(atob(data.content)));
-                setReadme(marked(markdown));
+                // 使用 TextDecoder 来处理 UTF-8编码的文本
+                const base64decoded = atob(data.content);
+                const uint8Array = new Uint8Array(base64decoded.split("").map(char => char.charCodeAt(0)));
+                const markdown = new TextDecoder('utf-8').decode(uint8Array);
+
+                // 处理可能的异步 marked 函数  确保只有在Promise解决后，渲染后的markdown内容才会被传递给setReadme
+                setReadme(await marked(markdown));
             })
             .catch(error => console.error('failed to fetch README', error));
     }, []);

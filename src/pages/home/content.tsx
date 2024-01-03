@@ -1,14 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Card, Col, Layout, Row, Flex, Typography, Image, Divider } from 'antd';
+import { Card, Col, Row, Flex, Typography, Divider } from 'antd';
 import { } from '@ant-design/icons';
 import { Content } from 'antd/es/layout/layout';
-import { homepageIcon, reactLogo, viteLogo, antdLogo, babelLogo, tsLogo, GEELogo, } from '../../assets/icons/icons';
+// @ts-ignore
+import { homepageIcon, reactLogo, viteLogo, antdLogo, babelLogo, tsLogo, GEELogo, } from '../../assets/icons/icons.js';
 import './index.css';
 
 const { Title } = Typography;
 
-const HomepageContent = () => (
+const HomepageContent:React.FC = () => (
     <Content
         style={{
             backgroundImage: " linear-gradient(-20deg, #2b5876 0%, #4e4376 100%)",
@@ -47,7 +48,7 @@ const HomepageContent = () => (
                         {/* 🚀 Kickstart Your Ecological Journey <br /> */}
                     </Title>
 
-                    <Link to="/services/introduction">
+                    <Link to="/services/rsimagery">
                         <button className="learn-more">
                             <span className="circle" aria-hidden="true">
                                 <span className="icon arrow"></span>

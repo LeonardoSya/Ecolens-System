@@ -16,8 +16,8 @@ const center = [112.668303857182, 24.46182332334417];
 const transformedCenter = fromLonLat(center);
 
 const Swipe: React.FC = () => {
-    const mapRef = useRef<HTMLElement>(null);
-    const [map, setMap] = useState<Map>();
+    const mapRef = useRef<HTMLDivElement>(null);
+    const [map, setMap] = useState<Map | null>();
     const [swipe, setSwipe] = useState<number>(50);
 
     const toggleFullScreen = useCallback(() => {
@@ -37,6 +37,7 @@ const Swipe: React.FC = () => {
         });
 
         const key = 'TZSZyGDj9GmOgxlhADBU';
+        // 版权信息
         const attributions = '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> ' +
             '<a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>';
 
@@ -60,18 +61,20 @@ const Swipe: React.FC = () => {
 
         setMap(initialMap);
 
-        return () => map?.setTarget(undefined);
+        return () => initialMap.setTarget(undefined);
     }, []);
 
     useEffect(() => {
         if (!map) return;
 
-        const aerialLayer = map.getLayers().getArray()[1] as TileLayer;
+        const aerialLayer = map.getLayers().getArray()[1] as TileLayer<XYZ>;  // TileLayer类需要一个类型参数来指定其所使用的源类型
 
         const handleSwipe = (e: any) => {
             const ctx = e.context;
-            const mapSize = map?.getSize();
-            const width = mapSize ? mapSize[0] * (swipe / 100) : 0;
+            const mapSize = map.getSize();
+            if(!mapSize) return;
+
+            const width = mapSize[0] * (swipe / 100);
             const tl = getRenderPixel(e, [width, 0]);
             const tr = getRenderPixel(e, [mapSize ? mapSize[0] : 0, 0]);
             const bl = getRenderPixel(e, [width, mapSize ? mapSize[1] : 0]);

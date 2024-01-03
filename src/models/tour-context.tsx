@@ -1,6 +1,5 @@
 import React, { createContext, useRef, useState } from 'react';
 
-
 export const GuideContext = createContext({
     refs: {
         ref1: { current: null },
@@ -10,7 +9,7 @@ export const GuideContext = createContext({
         ref5: { current: null },
     },
     open: false,
-    setOpen: (value: any) => { }
+    setOpen: (_value: any) => { }
 });
 
 export const GuideProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
