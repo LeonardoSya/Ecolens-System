@@ -1,4 +1,3 @@
-import avatar from './avatar.jpg';
 import cardImage1 from './card-image-1.png';
 import cardImage2 from './card-image-2.png';
 import cardImage3 from './card-image-3.png';
@@ -8,9 +7,10 @@ import ndviLinear from './ndvi-line.svg';
 import ndviOverallTrend from './ndvi-image.png';
 import rsButtonImage from "./rs-button-image.png";
 import rsTooltipImage from './rs-tooltip-image.png';
+import Plots from './plots.svg';
 
 export {
-    avatar,
+    Plots,
     rsTooltipImage,
     rsButtonImage,
     cardImage1,
@@ -20,5 +20,4 @@ export {
     cardImage4,
     ndviLinear,
     ndviOverallTrend,
-
 }

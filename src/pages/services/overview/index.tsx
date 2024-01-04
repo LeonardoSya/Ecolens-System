@@ -5,7 +5,7 @@ import Area from './area';
 import CardComponent from './card-component';
 import Pathln from './pathln';
 import MiniArea from './mini-area';
-import { cardImage4, avatar, ndviLinear } from '../../../assets/images/images';
+import { Plots, ndviLinear } from '../../../assets/images/images';
 import { ChartProvider } from '../../../models/chart-context';
 
 const Overview: React.FC = () => {
@@ -13,18 +13,9 @@ const Overview: React.FC = () => {
         <>
             <Row justify="space-evenly">
                 <Col span={5}>
-                    <CardComponent
-                        title='TiTle'
-                        description='在此编辑文案'
-                        coverImage={cardImage4}
-                        avatarImage={avatar}
-                    />
-                </Col>
-                <Col span={5}>
                     <MiniArea
                         title='植被指数'
                         description='2000-2020清远市NDVI年际变化'
-                        avatarImage={avatar}
                     />
                 </Col>
                 <Col span={5}>
@@ -32,14 +23,21 @@ const Overview: React.FC = () => {
                         title='归一化植被系数拟合'
                         description='2000-2020清远市NDVI线性拟合'
                         coverImage={ndviLinear}
-                        avatarImage={avatar}
-                    /></Col>
+                    />
+                </Col>
+                <Col span={5}>
+                    <CardComponent
+                        title='植被系数分类占比'
+                        description='2000-2020清远市NDVI分类占比'
+                        coverImage={Plots}
+                    />
+                </Col>
                 <Col span={5}>
                     <ChartProvider>
                         <Pathln
                             title='森林储蓄量'
                             description='清远市2000-2020森林储蓄量 (万立方米)'
-                            avatarImage={avatar} />
+                        />
                     </ChartProvider>
                 </Col>
             </Row>
