@@ -6,7 +6,7 @@
 
 Visit us today and kickstart your next ecological adventure!
 
-- [Ecolens System](https://buzzard-equipped-heavily.ngrok-free.app)https://buzzard-equipped-heavily.ngrok-free.app
+- [Ecolens System](http://www.ecolens.cn)ecolens.cn
 
 
 # 产品功能展示
