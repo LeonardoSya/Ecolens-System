@@ -6,7 +6,7 @@
 
 Visit us today and kickstart your next ecological adventure!
 
-- [Ecolens System](http://www.ecolens.cn)ecolens.cn
+- [Ecolens System](http://www.ecolens.cn)
 
 
 # 产品功能展示
