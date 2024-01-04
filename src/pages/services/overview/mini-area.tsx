@@ -7,7 +7,6 @@ import './index.css';
 interface MiniAreaProps {
     title: string;
     description: string;
-    avatarImage: string;
     cardStyle?: React.CSSProperties;
 }
 

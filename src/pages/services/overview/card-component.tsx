@@ -7,7 +7,6 @@ interface LittleCardProps {
     title: string;
     description: string;
     coverImage: string;
-    avatarImage: string;
     cardStyle?: React.CSSProperties;  // 卡片样式(可选)
 }
 

@@ -8,7 +8,6 @@ import './index.css';
 interface PathlnProps {
     title: string;
     description: string;
-    avatarImage: string;
     cardStyle?: React.CSSProperties;
 }
 const Pathln: React.FC<PathlnProps> = ({ title, description }) => {
