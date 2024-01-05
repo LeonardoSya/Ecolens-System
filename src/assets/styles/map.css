@@ -9,3 +9,8 @@
     color: white;
     /* 设置文本颜色为白色 */
 }
+
+.swipe-map-container {
+    height: 70vh;
+    margin-bottom: 2rem;
+}
