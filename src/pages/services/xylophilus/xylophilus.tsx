@@ -14,10 +14,10 @@ import './index.css';
 import '../../../assets/styles/map.css'
 
 const mapInfo = [
-    { id: '02067963-3cde-46b5-ab9d-b64247a5fbbf', center: [112.61178989861932, 24.49146364092972], zoom: 18.5, label: "First", index: 0 },
-    { id: 'e8826544-2b17-478c-b7bc-9523a8489777', center: [112.654095, 24.462341], zoom: 17.5, label: "Second", index: 1 },
-    { id: '66ba550a-a9f6-473e-af66-d22d8d1d1a9b', center: [112.661316, 24.474848], zoom: 17.9, label: "Third", index: 2 },
-    { id: 'a91ffe76-5903-4911-9cc9-18b3fb4651a6', center: [112.619898, 24.432980], zoom: 16.9, label: "Forth", index: 3 },
+    { id: '02067963-3cde-46b5-ab9d-b64247a5fbbf', center: [112.61178989861932, 24.49146364092972], zoom: 18.5, label: "测区1", index: 0 },
+    { id: 'e8826544-2b17-478c-b7bc-9523a8489777', center: [112.654095, 24.462341], zoom: 17.5, label: "测区2", index: 1 },
+    { id: '66ba550a-a9f6-473e-af66-d22d8d1d1a9b', center: [112.661316, 24.474848], zoom: 17.9, label: "测区3", index: 2 },
+    { id: 'a91ffe76-5903-4911-9cc9-18b3fb4651a6', center: [112.619898, 24.432980], zoom: 16.9, label: "测区4", index: 3 },
 ];
 
 interface MapKitState {
@@ -121,8 +121,8 @@ const Xylophilus: React.FC = React.memo(() => {
             <Flex gap="small" vertical>
                 <Row justify="center" align="top">
                     <Col span={8}>
-                        <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
-                            🔍change xylophilus Imagery!
+                        <span style={{ fontSize: '1.3vw' }}>
+                            🔍松材线虫害受灾区域监测图
                         </span>
                     </Col>
                     <Col span={8}>

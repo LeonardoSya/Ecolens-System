@@ -10,7 +10,7 @@
     padding: 0;
     margin-top: 3vh;
     font-size: 1vw;
-    font-family: Silkscreen;
+    font-family: Poppins, Arial, sans-serif;
     width: 12vw;
     height: 3.2vh;
     transform: scale(1.2);
@@ -94,4 +94,8 @@ button.learn-more .button-text {
 .logo {
     width: 2vw;
     cursor: pointer;
+}
+
+.button-text {
+    letter-spacing: 0.3rem;
 }

@@ -1,5 +1,6 @@
 .search-input-container {
   position: relative;
+  letter-spacing: 0.01rem;
 }
 
 .search-input {
@@ -18,7 +19,6 @@
   box-shadow: 0.4rem 0.4rem 0px 0px #0B2447;
   transition: all 0.5s;
   color: #0B2447;
-  font-family: Silkscreen;
 }
 
 .search-input:focus {

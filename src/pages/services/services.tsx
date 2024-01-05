@@ -57,7 +57,7 @@ const items = [
 const MySider = ({ collapsed }: { collapsed: boolean }) => {
     const renderMenuItems = (menuItems: any[]) => {
         return menuItems.map((item: { key: Key | null | undefined; icon: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; path: To; label: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem", fontFamily: "Noto Sans SC" }}>
+            <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem" }}>
                 <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
         ));
@@ -80,8 +80,8 @@ const MyHeader = ({ primary, togglePrimaryColor }: { primary: string, togglePrim
                 <Flex justify="flex-start" align="flex-start" gap="small">
                     {/* @ts-ignore */}
                     <ColorPicker value={primary} onChangeComplete={togglePrimaryColor} style={{ margin: '1vh', border: 'none', background: "inherit", }} />
-                    <Title style={{ fontSize: "1.5vw", fontFamily: "Silkscreen", marginTop: '1vh', color: '#fff' }}>
-                        <Link to="/" style={{ color: 'inherit' }}>Ecolens System</Link>
+                    <Title style={{ fontSize: "1.5vw", marginTop: '1vh', color: '#fff' }}>
+                        <Link to="/" style={{ color: 'inherit' }}>Ecolens 生态监测系统</Link>
                     </Title>
                 </Flex>
             </Col>

@@ -118,8 +118,8 @@ const RSImagery: React.FC = React.memo(() => {
 
                 <Row justify="center" align="top">
                     <Col span={7}>
-                        <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
-                            🚀change RS Imagery!
+                        <span style={{fontSize: '1.3vw' }}>
+                            🚀 区域变化遥感影像
                         </span>
                     </Col>
 
