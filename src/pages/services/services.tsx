@@ -2,7 +2,7 @@ import React, { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal
 import { Route, Link, Routes, Navigate, To } from 'react-router-dom';
 import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, Typography, Tooltip } from 'antd';
 import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
-import { Introduction, Overview, Xylophilus, QuarterlyChart, Swipe, RSImagery } from './services-routers';
+import { Introduction, Xylophilus, QuarterlyChart, Swipe, RSImagery } from './services-routers';
 import { useSafeState } from '../../hooks/hooks';
 import { JSX } from 'react/jsx-runtime';
 import './search-input.css';
@@ -47,10 +47,9 @@ function getItem(label: string, key: string, icon: JSX.Element, path: string) {
 const items = [
     getItem('遥感影像', '1', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
     getItem('虫害监测', '2', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
-    getItem('区域概况', '3', <LineChartOutlined style={{ fontSize: 20 }} />, "/services/swipe"),
+    getItem('区域概况', '3', <PieChartOutlined style={{ fontSize: 20 }} />, "/services/swipe"),
     getItem('生态状况', '4', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
-    getItem('监控分析', '5', <PieChartOutlined style={{ fontSize: 18 }} />, "/services/overview"),
-    getItem('产品文档', '6', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
+    getItem('产品文档', '5', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
     // getItem('Page 7', '7', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
 ];
 
@@ -142,7 +141,6 @@ export const MyMap: React.FC<MyMapProps> = () => (
             <Route path='/xylophilus' element={<Xylophilus />} />
             <Route path='/swipe' element={<Swipe />} />
             <Route path='/ndvitemp' element={<QuarterlyChart />} />
-            <Route path='/overview' element={<Overview />} />
             <Route path='/introduction' element={<Introduction />} />
             <Route path='/' element={<Navigate replace to="/introduction" />} />
         </Routes>

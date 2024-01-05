@@ -8,8 +8,10 @@ import ndviOverallTrend from './ndvi-image.png';
 import rsButtonImage from "./rs-button-image.png";
 import rsTooltipImage from './rs-tooltip-image.png';
 import Plots from './plots.svg';
+import landuse from './landuse.jpg'
 
 export {
+    landuse,
     Plots,
     rsTooltipImage,
     rsButtonImage,

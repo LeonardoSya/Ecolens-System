@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row } from 'antd';
+import { Col, Divider, Row } from 'antd';
 import G23d from './g2-3d';
 import Area from './area';
 import CardComponent from './card-component';
@@ -12,27 +12,30 @@ const Overview: React.FC = () => {
     return (
         <>
             <Row justify="space-evenly">
-                <Col span={5}>
+                <Col span={10}>
                     <MiniArea
                         title='植被指数'
                         description='2000-2020清远市NDVI年际变化'
                     />
                 </Col>
-                <Col span={5}>
-                    <CardComponent
-                        title='归一化植被系数拟合'
-                        description='2000-2020清远市NDVI线性拟合'
-                        coverImage={ndviLinear}
-                    />
-                </Col>
-                <Col span={5}>
+
+                <Col span={10}>
                     <CardComponent
                         title='植被系数分类占比'
                         description='2000-2020清远市NDVI分类占比'
                         coverImage={Plots}
                     />
                 </Col>
-                <Col span={5}>
+            </Row>
+            <Row justify="space-evenly">
+                <Col span={10}>
+                    <CardComponent
+                        title='归一化植被系数拟合'
+                        description='2000-2020清远市NDVI线性拟合'
+                        coverImage={ndviLinear}
+                    />
+                </Col>
+                <Col span={10}>
                     <ChartProvider>
                         <Pathln
                             title='森林储蓄量'
@@ -41,10 +44,11 @@ const Overview: React.FC = () => {
                     </ChartProvider>
                 </Col>
             </Row>
-            <Row justify="space-evenly">
+
+            {/* <Row justify="space-evenly">
                 <Col span={10}><G23d /></Col>
                 <Col span={10}><Area /></Col>
-            </Row>
+            </Row> */}
         </>
     );
 }
