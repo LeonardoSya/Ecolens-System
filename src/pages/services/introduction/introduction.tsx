@@ -34,7 +34,7 @@ const Introduction:React.FC = () => {
 
     return (
         <>
-            <div ref={mapRef} style={{ fontFamily: "Noto Sans SC ,Poppins" }} className='readme-container' dangerouslySetInnerHTML={{ __html: readme }} />
+            <div ref={mapRef} className='readme-container' dangerouslySetInnerHTML={{ __html: readme }} />
             <Floatbutton toggleFullScreen={toggleFullScreen} titleDescription='产品文档' infoDescription='Ecolens System 地图服务介绍' />
         </>
     )

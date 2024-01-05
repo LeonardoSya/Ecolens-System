@@ -39,7 +39,6 @@ const Floatbutton: React.FC<floatbuttonProps> = React.memo(({ toggleFullScreen, 
                     <FloatButton ref={refs.ref5} tooltip={<div>业务文档</div>} />
                 </a>
                 <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} tooltip={<div>刷新页面</div>} />
-                {/* 虽然不知道这边为什么要加两次 不然不显示 ... */}
                 <FloatButton icon={<SyncOutlined />} onClick={() => window.location.reload()} tooltip={<div>刷新页面</div>} /> 
                 <FloatButton.BackTop visibilityHeight={70} tooltip={<div>返回顶部</div>} />
             </FloatButton.Group>

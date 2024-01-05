@@ -5,9 +5,11 @@ import antdLogo from './antd.svg';
 import babelLogo from './babel.svg';
 import tsLogo from './ts.svg';
 import GEELogo from './gee.svg';
+import Ol from './ol.svg';
 
 
 export {
+    Ol,
     homepageIcon,
     reactLogo,
     viteLogo,

@@ -13,7 +13,7 @@ const RoadmingGuide: React.FC = () => {
         setClicked(open);
     }
 
-    const clickContent = <div style={{fontFamily:'Poppins'}}>Click me !</div>;
+    const clickContent = <div>Click me !</div>;
 
     const steps: TourProps['steps'] = [
         {

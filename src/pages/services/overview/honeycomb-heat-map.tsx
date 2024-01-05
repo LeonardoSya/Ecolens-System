@@ -81,6 +81,7 @@ const Honeycomb: React.FC = () => {
         },
     };
 
+    // @ts-ignore
     return <HexbinMap {...config} />;
 }
 

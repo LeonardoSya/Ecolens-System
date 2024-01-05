@@ -19,14 +19,14 @@ const HomepageHeader = () => (
             <InstagramFilled style={{ fontSize: "2.8vw" }} />
         </Col>
         <Col span={8}>
-            <span style={{ fontSize: "2vw", fontFamily: "Silkscreen" }}><Link to="/" style={{ color: 'inherit' }}>Ecolens System</Link></span>
+            <span style={{ fontSize: "2rem" }}><Link to="/" style={{ color: 'inherit' }}>Ecolens System <i style={{fontSize:'1.6rem'}}>生态监测系统</i></Link></span>
         </Col>
         <Col span={4}></Col>
         <Col span={8}
-            style={{ textAlign: "center", fontSize: "1.2vw" }}>
-            <Link to="/services/rsimagery" target='_blank' style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Services</Link>
-            <Link to="https://github.com/LeonardoSya/Ecolens-System/blob/main/README.md" target='_blank' style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Documents</Link>
-            <Link to="https://github.com/LeonardoSya/Ecolens-System" target='_blank' style={{ margin: "auto 1vw", fontFamily: "Poppins", color: 'inherit' }}>Star us on GitHub <GithubOutlined style={{ fontSize: '1rem', marginLeft: '0.3rem' }} /></Link>
+            style={{ textAlign: "center", fontSize: "1.2rem", letterSpacing:'0.12rem' }}>
+            <Link to="/services/rsimagery" target='_blank' style={{ margin: "auto 1vw", color: 'inherit' }}>地图服务</Link>
+            <Link to="https://github.com/LeonardoSya/Ecolens-System/blob/main/README.md" target='_blank' style={{ margin: "auto 1vw", color: 'inherit' }}>产品文档</Link>
+            <Link to="https://github.com/LeonardoSya/Ecolens-System" target='_blank' style={{ margin: "auto 1vw",  color: 'inherit' }}>在GitHub上查看 <GithubOutlined style={{ fontSize: '2rem', marginLeft: '0.3rem' }} /></Link>
         </Col>
         <Col span={1}></Col>
     </Row>

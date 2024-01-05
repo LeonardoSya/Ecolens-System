@@ -13,7 +13,7 @@
                 },
                 {
                     "key": "Access-Control-Allow-Headers",
-                    "value": "X-Requested-With, Content-Type, Accept, Origin, Authorization"
+                    "vlue": "X-Requested-With, Content-Type, Accept, Origin, Authorization"
                 }
             ]
         }

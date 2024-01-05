@@ -55,7 +55,7 @@ const Swipe: React.FC = () => {
             target: mapRef.current,
             view: new View({
                 center: transformedCenter,
-                zoom: 14,
+                zoom: 12,
             }),
         });
 
@@ -72,7 +72,7 @@ const Swipe: React.FC = () => {
         const handleSwipe = (e: any) => {
             const ctx = e.context;
             const mapSize = map.getSize();
-            if(!mapSize) return;
+            if (!mapSize) return;
 
             const width = mapSize[0] * (swipe / 100);
             const tl = getRenderPixel(e, [width, 0]);
@@ -102,27 +102,27 @@ const Swipe: React.FC = () => {
     }, [swipe, map]);
 
     return (
-            <Flex gap="small" vertical>
-                <Row justify="center" align="top">
-                    <Col span={5}>
-                        <span style={{ fontFamily: 'Silkscreen', fontSize: '1.3vw' }}>
-                            🕹️ Drag the slider!
-                        </span>
-                    </Col>
-                    <Col span={6}>
-                        <div className="PB-range-slider-div">
-                            <input onChange={(e) => setSwipe(Number(e.target.value))} type="range" min="0" max="100" value={swipe} className="PB-range-slider" id="myRange" />
-                        </div>
-                    </Col>
-                    <Col span={5} />
-                </Row>
-                <div ref={mapRef} className='map-container' />
-                <Floatbutton toggleFullScreen={toggleFullScreen}
-                    infoDescription='阳山县位于北回归线北侧，属南亚热带向中亚热带过渡的季风气候区，春季温和潮湿，夏季炎热多雨，秋季凉爽干燥，冬季寒冷少雨。由于季风交替的不稳定性，阳山县灾害性天气频繁。阳山县地形复杂，总体地形为南、北高峻，并以单斜山地不规则地由两端向腹地倾斜，形成中间低缓，四周较高的船形地貌。山地约占全县总面积的90%。
+        <Flex gap="small" vertical>
+            <Row justify="center" align="top">
+                <Col span={5}>
+                    <span style={{ fontSize: '1.3vw' }}>
+                        🕹️ 拖动滑块查看区域概况
+                    </span>
+                </Col>
+                <Col span={6}>
+                    <div className="PB-range-slider-div">
+                        <input onChange={(e) => setSwipe(Number(e.target.value))} type="range" min="0" max="100" value={swipe} className="PB-range-slider" id="myRange" />
+                    </div>
+                </Col>
+                <Col span={5} />
+            </Row>
+            <div ref={mapRef} className='map-container' />
+            <Floatbutton toggleFullScreen={toggleFullScreen}
+                infoDescription='阳山县位于北回归线北侧，属南亚热带向中亚热带过渡的季风气候区，春季温和潮湿，夏季炎热多雨，秋季凉爽干燥，冬季寒冷少雨。由于季风交替的不稳定性，阳山县灾害性天气频繁。阳山县地形复杂，总体地形为南、北高峻，并以单斜山地不规则地由两端向腹地倾斜，形成中间低缓，四周较高的船形地貌。山地约占全县总面积的90%。
 森林资源概况：阳山县林业用地面积2623.88平方千米，占全县土地面积的79.85%。全县森林覆盖率为72.97%,林木绿化率为76.5%，活立木总蓄积量8247485立方米。阳山县省级生态公益林居全省之首，面积达1626.69平方千米。松树资源数据：阳山县现有松林面积76.5万亩，其中包括纯松林48.8万亩，针阔混交林17.6万亩，针叶混交林10.1万亩。此外，阳山县是松材线虫病疫区，这种疫病对松树资源构成了严重威胁。为了防治松材线虫病，阳山县采取了一系列措施，包括对山上病死松树进行伐除、焚烧和药剂除害处理，以及利用飞机喷洒药物杀死松褐天牛等媒介昆虫。'
-                    titleDescription='阳山县概况'
-                />
-            </Flex>
+                titleDescription='阳山县概况'
+            />
+        </Flex>
     )
 }
 
