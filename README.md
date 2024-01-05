@@ -1,4 +1,4 @@
-![ov1](https://github.com/LeonardoSya/Ecolens-System/assets/120240967/14ec778d-58b9-4b01-a5c3-0ffa2d81ad94)# Ecolens System -- 基于 React + Vite + TypeScript 的高精度生态监测地图平台
+# Ecolens System -- 基于 React + Vite + TypeScript 的高精度生态监测地图平台
 
 
 
