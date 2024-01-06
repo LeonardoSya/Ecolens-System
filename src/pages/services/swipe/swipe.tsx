@@ -152,7 +152,7 @@ const Swipe: React.FC = () => {
                 <Flex vertical gap="large" justify='space-around' align='center' style={{ width: '50%', marginTop: '2rem' }}>
                     <Overview />
                 </Flex>
-                
+
             </Flex>
         </Flex>
 

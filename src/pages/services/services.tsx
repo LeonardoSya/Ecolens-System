@@ -45,9 +45,9 @@ function getItem(label: string, key: string, icon: JSX.Element, path: string) {
 }
 
 const items = [
-    getItem('遥感影像', '1', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
-    getItem('虫害监测', '2', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
-    getItem('区域概况', '3', <PieChartOutlined style={{ fontSize: 20 }} />, "/services/swipe"),
+    getItem('区域概况', '1', <PieChartOutlined style={{ fontSize: 20 }} />, "/services/swipe"),
+    getItem('遥感影像', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
+    getItem('虫害监测', '3', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
     getItem('生态状况', '4', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
     getItem('产品文档', '5', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
     // getItem('Page 7', '7', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
@@ -56,7 +56,7 @@ const items = [
 const MySider = ({ collapsed }: { collapsed: boolean }) => {
     const renderMenuItems = (menuItems: any[]) => {
         return menuItems.map((item: { key: Key | null | undefined; icon: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; path: To; label: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <Menu.Item key={item.key} icon={item.icon} style={{ fontSize: "1.1rem" }}>
+            <Menu.Item key={item.key} icon={item.icon} style={{ borderRadius:'0.8rem',fontSize: "1.2rem",margin:"0.2rem 0.5rem 0.1rem 0.25rem",height:'4rem',lineHeight:'4rem' }}>
                 <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
         ));
@@ -117,7 +117,7 @@ const MySearchModule = ({ collapsed, toggleCollapsed }: { collapsed: boolean, to
             />
 
             <div className="search-input-container">
-                <input className="search-input" name="text" type="text" />
+                <input className="search-input" name="text" type="text" placeholder='虫害监测' />
                 <label className="search-label" htmlFor="input">Enter Your Query</label>
                 <div className="search-topline"></div>
                 <div className="search-underline"></div>
@@ -137,9 +137,9 @@ export const MyMap: React.FC<MyMapProps> = () => (
         {/* Route用于将应用的位置映射到不同的React组件 */}
         {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
         <Routes>
+            <Route path='/swipe' element={<Swipe />} />
             <Route path='/rsimagery' element={<RSImagery />} />
             <Route path='/xylophilus' element={<Xylophilus />} />
-            <Route path='/swipe' element={<Swipe />} />
             <Route path='/ndvitemp' element={<QuarterlyChart />} />
             <Route path='/introduction' element={<Introduction />} />
             <Route path='/' element={<Navigate replace to="/introduction" />} />

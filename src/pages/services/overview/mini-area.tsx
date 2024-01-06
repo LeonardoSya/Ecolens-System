@@ -18,44 +18,44 @@ const MiniArea: React.FC<MiniAreaProps> = ({ title, description }) => {
     const chartRef = useRef(null);
 
     useEffect(() => {
-
-        setTimeout(() => {
-            const fetchData = () => {
-                try {
-                    const chart = new Chart({
-                        container: chartRef.current!,
-                        autoFit: true,
-                    });
-
-                    chart
-                        .data(data);
-
-                    chart
-                        .area()
-                        .encode('x', (_: any, idx: any) => idx)
-                        .encode('y', (d: any) => d)
-                        .encode('shape', 'smooth')
-                        .scale('y', { zero: true, domain: [0.45, 0.65] })
-                        .style('fill', 'linear-gradient(-90deg, white 0%, #10239e 50%)')
-                        .style('fillOpacity', 0.7)
-                        .animate('enter', { type: 'fadeIn' })
-                        .axis(false)
-
-                    chart.interaction('tooltip', {
-                        // @ts-ignore
-                        render: (e: any, { title, items }: any) => items[0].value,
-                    })
-
-                    chart.render();
-
-                } catch (error) {
-                    console.error('Error fetching data "MiniArea" :', error);
-                }
-            };
-
-            fetchData();
-        }, 100);
         
+        setTimeout(() => {
+            fetchData();
+        }, 500);
+
+        const fetchData = () => {
+            try {
+                const chart = new Chart({
+                    container: chartRef.current!,
+                    autoFit: true,
+                });
+
+                chart
+                    .data(data);
+
+                chart
+                    .area()
+                    .encode('x', (_: any, idx: any) => idx)
+                    .encode('y', (d: any) => d)
+                    .encode('shape', 'smooth')
+                    .scale('y', { zero: true, domain: [0.45, 0.65] })
+                    .style('fill', 'linear-gradient(-90deg, white 0%, #10239e 50%)')
+                    .style('fillOpacity', 0.7)
+                    .animate('enter', { type: 'fadeIn' })
+                    .axis(false)
+
+                chart.interaction('tooltip', {
+                    // @ts-ignore
+                    render: (e: any, { title, items }: any) => items[0].value,
+                })
+
+                chart.render();
+
+            } catch (error) {
+                console.error('Error fetching data "MiniArea" :', error);
+            }
+        };
+
     }, []);
 
     return (

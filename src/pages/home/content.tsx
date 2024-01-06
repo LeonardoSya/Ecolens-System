@@ -49,7 +49,7 @@ const HomepageContent: React.FC = () => (
                         {/* 🚀 Kickstart Your Ecological Journey <br /> */}
                     </Title>
 
-                    <Link to="/services/rsimagery">
+                    <Link to="/services/swipe">
                         <button className="learn-more">
                             <span className="circle" aria-hidden="true">
                                 <span className="icon arrow"></span>
