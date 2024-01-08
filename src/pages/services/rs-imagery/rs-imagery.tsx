@@ -29,7 +29,7 @@ const RSImagery: React.FC = React.memo(() => {
     let timeoutId: number | null | undefined = null;
 
     const info = () => {
-        messageApi.info(`You have switched to remote sensing image of ${item === mapInfo[0] ? '2022' : '2023'}.`);
+        messageApi.info(`您已切换至${item === mapInfo[0] ? '2022' : '2023'}年的遥感影像`);
     };
 
     const toggleItem = useCallback(() => {
@@ -57,20 +57,7 @@ const RSImagery: React.FC = React.memo(() => {
             crossOrigin: 'anonymous',
         });
 
-        const wmsSource = new TileWMS({
-            url: 'https://electric-duly-peacock.ngrok-free.app/geoserver/vector/wms',
-            params: {
-                'LAYERS': 'vector:traffic',
-                'TILED': true,
-                'FORMAT': 'image/png',
-            },
-            projection: 'EPSG:4326',
-            serverType: 'geoserver',
-            attributions: '交通网',
-            crossOrigin: 'anonymous',
-        })
-
-        wmsSource.on('tileloadstart', () => {
+        xyzSource.on('tileloadstart', () => {
             setIsLoading(true);
             if (timeoutId !== null) {
                 clearTimeout(timeoutId);
@@ -89,9 +76,6 @@ const RSImagery: React.FC = React.memo(() => {
                     extent: extent,
                     source: xyzSource,
                 }),
-                new TileLayer({
-                    source: wmsSource,
-                })
             ],
             view: new View({
                 center: transformedCenter,

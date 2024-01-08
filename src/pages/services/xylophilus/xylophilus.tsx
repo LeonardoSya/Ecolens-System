@@ -62,7 +62,7 @@ const Xylophilus: React.FC = React.memo(() => {
     }
 
     const infoMessage = (selectedItem: seletedItemProps) => {
-        messageApi.info(`You have switched to the ${selectedItem.label} page.`);
+        messageApi.info(`您已切换至${selectedItem.label}界面.`);
     };
 
     const transformedCenter = useCreation(() => fromLonLat(item.center), [item.center])
@@ -97,7 +97,6 @@ const Xylophilus: React.FC = React.memo(() => {
                 }),
             ],
             view: new View({
-                // extent:
                 center: transformedCenter,
                 zoom: item.zoom,
                 minZoom: item.zoom - 1.5,
