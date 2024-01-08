@@ -14,10 +14,10 @@ import './index.css';
 import '../../../assets/styles/map.css'
 
 const mapInfo = [
-    { id: 'id', center: [112.61178989861932, 24.49146364092972], zoom: 18.5, label: "测区1", index: 0 },
-    { id: 'id', center: [112.654095, 24.462341], zoom: 17.5, label: "测区2", index: 1 },
-    { id: 'id', center: [112.661316, 24.474848], zoom: 17.9, label: "测区3", index: 2 },
-    { id: 'id', center: [112.619898, 24.432980], zoom: 16.9, label: "测区4", index: 3 },
+    { id: '02067963-3cde-46b5-ab9d-b64247a5fbbf', center: [112.61178989861932, 24.49146364092972], zoom: 18.5, label: "测区1", index: 0 },
+    { id: 'e8826544-2b17-478c-b7bc-9523a8489777', center: [112.654095, 24.462341], zoom: 17.5, label: "测区2", index: 1 },
+    { id: '66ba550a-a9f6-473e-af66-d22d8d1d1a9b', center: [112.661316, 24.474848], zoom: 17.9, label: "测区3", index: 2 },
+    { id: 'a91ffe76-5903-4911-9cc9-18b3fb4651a6', center: [112.619898, 24.432980], zoom: 16.9, label: "测区4", index: 3 },
 ];
 
 interface MapKitState {
@@ -62,7 +62,7 @@ const Xylophilus: React.FC = React.memo(() => {
     }
 
     const infoMessage = (selectedItem: seletedItemProps) => {
-        messageApi.info(`您已切换至${selectedItem.label}界面.`);
+        messageApi.info(`You have switched to the ${selectedItem.label} page.`);
     };
 
     const transformedCenter = useCreation(() => fromLonLat(item.center), [item.center])
@@ -71,7 +71,7 @@ const Xylophilus: React.FC = React.memo(() => {
         if (!mapRef.current || !item) return;
 
         const xyzSource = new XYZ({
-            url: `url`,
+            url: `http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/${item.id}/{z}/{x}/{y}/tile.png?tk=d26ca22d-a029-419e-9bdf-c2e7d3b52aa2`,
             projection: 'EPSG:4326',
             crossOrigin: 'anonymous',
         });
@@ -97,6 +97,7 @@ const Xylophilus: React.FC = React.memo(() => {
                 }),
             ],
             view: new View({
+                // extent:
                 center: transformedCenter,
                 zoom: item.zoom,
                 minZoom: item.zoom - 1.5,

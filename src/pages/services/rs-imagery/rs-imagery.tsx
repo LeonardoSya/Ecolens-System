@@ -15,8 +15,8 @@ import RoamingGuide from '../../../components/tour';
 import { GuideContext, GuideProvider } from '../../../models/tour-context';
 
 const mapInfo = [
-    { id: 'id', center: [112.678303857182, 24.38823323344173], zoom: 12.5 },
-    { id: 'id', center: [112.678303857182, 24.341823323344173], zoom: 12.5 },
+    { id: '61f9b270-a42c-4d9e-a9dc-ac3af586b313', center: [112.678303857182, 24.38823323344173], zoom: 12.5 },
+    { id: '2ce48a09-3160-46ef-9349-76b5bde1caae', center: [112.678303857182, 24.341823323344173], zoom: 12.5 },
 ];
 const extent = [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587];
 
@@ -29,7 +29,7 @@ const RSImagery: React.FC = React.memo(() => {
     let timeoutId: number | null | undefined = null;
 
     const info = () => {
-        messageApi.info(`您已切换至${item === mapInfo[0] ? '2022' : '2023'}年的遥感影像`);
+        messageApi.info(`You have switched to remote sensing image of ${item === mapInfo[0] ? '2022' : '2023'}.`);
     };
 
     const toggleItem = useCallback(() => {
@@ -48,7 +48,7 @@ const RSImagery: React.FC = React.memo(() => {
     const transformedCenter = useCreation(() => fromLonLat(item.center), []);
 
     useEffect(() => {
-        const url = `url`;
+        const url = `http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/${item.id}/{z}/{x}/{y}/tile.png?tk=d26ca22d-a029-419e-9bdf-c2e7d3b52aa2`;
 
         const xyzSource = new XYZ({
             url: url,
@@ -57,7 +57,20 @@ const RSImagery: React.FC = React.memo(() => {
             crossOrigin: 'anonymous',
         });
 
-        xyzSource.on('tileloadstart', () => {
+        const wmsSource = new TileWMS({
+            url: 'https://electric-duly-peacock.ngrok-free.app/geoserver/vector/wms',
+            params: {
+                'LAYERS': 'vector:traffic',
+                'TILED': true,
+                'FORMAT': 'image/png',
+            },
+            projection: 'EPSG:4326',
+            serverType: 'geoserver',
+            attributions: '交通网',
+            crossOrigin: 'anonymous',
+        })
+
+        wmsSource.on('tileloadstart', () => {
             setIsLoading(true);
             if (timeoutId !== null) {
                 clearTimeout(timeoutId);
@@ -76,6 +89,9 @@ const RSImagery: React.FC = React.memo(() => {
                     extent: extent,
                     source: xyzSource,
                 }),
+                new TileLayer({
+                    source: wmsSource,
+                })
             ],
             view: new View({
                 center: transformedCenter,

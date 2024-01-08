@@ -12,6 +12,7 @@ import Floatbutton from '../../../components/floatbutton';
 import '../../../assets/styles/map.css';
 import 'ol/ol.css';
 import './swipe.css';
+import QuarterlyChart from '../ndvi-temp';
 
 const { Title, Paragraph, Text, Link } = Typography;
 const center = [112.668303857182, 24.46182332334417];
@@ -59,7 +60,7 @@ const Swipe: React.FC = () => {
             target: mapRef.current,
             view: new View({
                 center: transformedCenter,
-                zoom: 6,
+                zoom: 12,
             }),
         });
 
