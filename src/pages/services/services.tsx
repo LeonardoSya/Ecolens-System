@@ -1,14 +1,15 @@
-import React, { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal } from 'react';
-import { Route, Link, Routes, Navigate, To } from 'react-router-dom';
+import React, { Key, ReactElement, JSXElementConstructor, ReactNode, ReactPortal, lazy, Suspense } from 'react';
+import { Link, To } from 'react-router-dom';
 import { Col, Row, ColorPicker, ConfigProvider, Flex, Button, Layout, Menu, Typography, Tooltip } from 'antd';
-import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, LineChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
-import { Introduction, Xylophilus, QuarterlyChart, Swipe, RSImagery } from './services-routers';
+import { AreaChartOutlined, BarChartOutlined, DotChartOutlined, SlidersOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined, GithubOutlined, WechatFilled, CodeFilled, FileFilled } from '@ant-design/icons';
 import { useSafeState } from '../../hooks/hooks';
 import { JSX } from 'react/jsx-runtime';
+import HomepageSkeleton from '../../components/homepage-skeleton';
 import './search-input.css';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Footer, Sider } = Layout;
 const { Title } = Typography;
+const MapRoutes = lazy(() => import('./Map'));
 
 const Services: React.FC = () => {
     const [primary, setPrimary] = useSafeState('#262626');
@@ -45,18 +46,17 @@ function getItem(label: string, key: string, icon: JSX.Element, path: string) {
 }
 
 const items = [
-    getItem('区域概况', '1', <PieChartOutlined style={{ fontSize: 20 }} />, "/services/swipe"),
-    getItem('遥感影像', '2', <AreaChartOutlined style={{ fontSize: 20 }} />, "/services/rsimagery"),
-    getItem('虫害监测', '3', <DotChartOutlined style={{ fontSize: 20 }} />, "/services/xylophilus"),
-    getItem('生态状况', '4', <BarChartOutlined style={{ fontSize: 20 }} />, "/services/ndvitemp"),
-    getItem('产品文档', '5', <SlidersOutlined style={{ fontSize: 20 }} />, "/services/introduction"),
-    // getItem('Page 7', '7', <RadarChartOutlined style={{ fontSize: 20 }} />, "/services/page5"),
+    getItem('区域概况', '1', <PieChartOutlined style={{ fontSize: '1.8rem' }} />, "/services/swipe"),
+    getItem('遥感影像', '2', <AreaChartOutlined style={{ fontSize: '1.8rem' }} />, "/services/rsimagery"),
+    getItem('虫害监测', '3', <DotChartOutlined style={{ fontSize: '1.8rem' }} />, "/services/xylophilus"),
+    getItem('生态状况', '4', <BarChartOutlined style={{ fontSize: '1.8rem' }} />, "/services/ndvitemp"),
+    getItem('产品文档', '5', <SlidersOutlined style={{ fontSize: '1.8rem' }} />, "/services/introduction"),
 ];
 
 const MySider = ({ collapsed }: { collapsed: boolean }) => {
     const renderMenuItems = (menuItems: any[]) => {
         return menuItems.map((item: { key: Key | null | undefined; icon: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; path: To; label: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | null | undefined; }) => (
-            <Menu.Item key={item.key} icon={item.icon} style={{ borderRadius:'0.8rem',fontSize: "1.2rem",margin:"0.2rem 0.5rem 0.1rem 0.25rem",height:'4rem',lineHeight:'4rem' }}>
+            <Menu.Item key={item.key} icon={item.icon} style={{ borderRadius: '0.8rem', fontSize: "1.2rem", margin: "0.2rem 0.5rem 0.1rem 0.25rem", height: '4rem', lineHeight: '4rem' }}>
                 <Link to={item.path}>{item.label}</Link>
             </Menu.Item>
         ));
@@ -122,29 +122,18 @@ const MySearchModule = ({ collapsed, toggleCollapsed }: { collapsed: boolean, to
                 <div className="search-topline"></div>
                 <div className="search-underline"></div>
             </div>
-
         </Flex>
     );
 };
-
 
 interface MyMapProps {
     style?: React.CSSProperties;
 }
 
 export const MyMap: React.FC<MyMapProps> = () => (
-    <Content>
-        {/* Route用于将应用的位置映射到不同的React组件 */}
-        {/* Route 接受 path(页面URL应导航到的路径，类似NavLink的to), element(页面导航到该路由时加载的元素) */}
-        <Routes>
-            <Route path='/swipe' element={<Swipe />} />
-            <Route path='/rsimagery' element={<RSImagery />} />
-            <Route path='/xylophilus' element={<Xylophilus />} />
-            <Route path='/ndvitemp' element={<QuarterlyChart />} />
-            <Route path='/introduction' element={<Introduction />} />
-            <Route path='/' element={<Navigate replace to="/introduction" />} />
-        </Routes>
-    </Content>
+    <Suspense fallback={<HomepageSkeleton />}>
+        <MapRoutes />
+    </Suspense>
 );
 
 export default Services;

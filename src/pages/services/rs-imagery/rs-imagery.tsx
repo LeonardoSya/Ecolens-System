@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef } from 'react';
 import Map from 'ol/Map';
 import View from 'ol/View';
 import TileLayer from 'ol/layer/Tile';
-import { XYZ, TileWMS } from 'ol/source';
+import { XYZ } from 'ol/source';
 import { fromLonLat, toLonLat } from 'ol/proj';
 import { useSafeState, useCreation } from '../../../hooks/hooks';
 import { Flex, Row, Col, message } from 'antd';
@@ -102,7 +102,7 @@ const RSImagery: React.FC = React.memo(() => {
 
                 <Row justify="center" align="top">
                     <Col span={7}>
-                        <span style={{fontSize: '1.3vw' }}>
+                        <span style={{ fontSize: '1.3vw' }}>
                             🚀 区域变化遥感影像
                         </span>
                     </Col>

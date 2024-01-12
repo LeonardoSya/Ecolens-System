@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, } from 'antd';
 import { GithubOutlined, InstagramFilled } from '@ant-design/icons';
@@ -16,7 +15,7 @@ const HomepageHeader = () => (
     >
         <Col span={2}></Col>
         <Col span={1}>
-            <InstagramFilled style={{ fontSize: "2.8vw" }} />
+            <InstagramFilled style={{ fontSize: "3rem" }} />
         </Col>
         <Col span={8}>
             <span style={{ fontSize: "2rem" }}><Link to="/" style={{ color: 'inherit' }}>Ecolens System <i style={{fontSize:'1.6rem'}}>生态监测系统</i></Link></span>
