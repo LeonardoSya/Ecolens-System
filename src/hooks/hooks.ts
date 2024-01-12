@@ -12,9 +12,11 @@ import useNetWork from './useNetWork';
 import useDebounce from './useDebounce';
 import useHover from './useHover';
 import useDebounceFn from './useDebounceFn';
+import useDetectPortrait from './useDetectPortrait';
 
 
 export {
+    useDetectPortrait,
     useDebounceFn,
     useHover,
     useDebounce,
