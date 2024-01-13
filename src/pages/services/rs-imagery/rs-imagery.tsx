@@ -15,8 +15,8 @@ import '../../../assets/styles/map.css'
 import 'ol/ol.css';
 
 const mapInfo = [
-    { id: '61f9b270-a42c-4d9e-a9dc-ac3af586b313', center: [112.678303857182, 24.38823323344173], zoom: 12.5 },
-    { id: '2ce48a09-3160-46ef-9349-76b5bde1caae', center: [112.678303857182, 24.341823323344173], zoom: 12.5 },
+    { id: 'id', center: [112.678303857182, 24.38823323344173], zoom: 12.5 },
+    { id: 'id', center: [112.678303857182, 24.341823323344173], zoom: 12.5 },
 ];
 const extent = [12405068.682639811, 2653037.9382806667, 12706225.178468876, 2872899.1673065587];
 
@@ -47,7 +47,7 @@ const RSImagery: React.FC = React.memo(() => {
     const transformedCenter = useCreation(() => fromLonLat(item.center), []);
 
     useEffect(() => {
-        const url = `http://zh01.stgz.org.cn/mapzonegis/yangshan-temp/${item.id}/{z}/{x}/{y}/tile.png?tk=d26ca22d-a029-419e-9bdf-c2e7d3b52aa2`;
+        const url = `url`;
 
         const xyzSource = new XYZ({
             url: url,
