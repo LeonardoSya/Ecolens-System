@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.body {
+    background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+    width: 100vw;
+    height: 100vh;
+}
+
+.text {
+    display: flex;
+    /* 水平居中 */
+    justify-content: center;
+    /* 垂直居中 */
+    align-items: center;
+    height: 100%;
+    /* 文字对齐方式居中 */
+    text-align: center;
+}
