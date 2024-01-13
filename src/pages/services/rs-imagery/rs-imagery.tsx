@@ -27,7 +27,6 @@ const RSImagery: React.FC = React.memo(() => {
     const [messageApi, contextHolder] = message.useMessage();
     const { refs } = useContext(GuideContext);
     let timeoutId: number | null | undefined = null;
-
     const info = () => {
         messageApi.info(`您已切换至${item === mapInfo[0] ? '2022' : '2023'}年的遥感影像`);
     };
