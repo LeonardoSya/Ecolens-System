@@ -1,6 +1,6 @@
 import React from 'react';
 // @ts-ignore
-import { Select,message } from 'antd';
+import { Select, message } from 'antd';
 import { useSafeState } from '../../../hooks/hooks';
 
 const { Option } = Select;
@@ -19,14 +19,14 @@ const MapSelector: React.FC<MapSelectorProps> = ({ onSelect, startDate, endDate 
     const handleDateChange = (value: string) => {
         setSelectedDate(value);
         onSelect(value);
-    }; 
-    
+    };
+
     // const info = () => {
     //     messageApi.info('You have switched to xxx page.');
     // };
 
     return (
-        <Select value={selectedDate} onChange={handleDateChange} style={{ width: 200 }}>
+        <Select value={selectedDate} onChange={handleDateChange} style={{ width: "14vw" }}>
             {dates.map(date => (
                 <Option key={date} value={date}>{date}</Option>
             ))}

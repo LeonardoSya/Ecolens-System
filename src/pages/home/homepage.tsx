@@ -13,15 +13,15 @@ const Homepage: React.FC = () => {
     return (
         <Layout>
             {isPortrait ? (
-                <div>请将手机横屏以获得最佳体验</div>
+            <div>请将手机横屏以获得最佳体验</div>
             ) :
-                <>
+            <>
                     <HomepageHeader />
                     <Suspense fallback={<HomepageSkeleton />}>
                         <HomepageContent />
                     </Suspense>
                     <HomepageFooter />
-                </>
+            </>
             }
 
         </Layout>

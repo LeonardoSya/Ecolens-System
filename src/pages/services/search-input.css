@@ -1,22 +1,22 @@
 .search-input-container {
   position: relative;
-  letter-spacing: 0.01rem;
+  letter-spacing: 0.01vw;
 }
 
 .search-input {
-  width: 12rem;
-  padding-left: 0.4rem;
+  width: 12vw;
+  padding-left: 0.4vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2rem;
-  border: 2px solid #0B2447;
+  height: 2vw;
+  border: 0.14vw solid #0B2447;
   border-top: none;
   border-bottom: none;
-  font-size: 0.8rem;
+  font-size: 0.8vw;
   background: transparent;
   outline: none;
-  box-shadow: 0.4rem 0.4rem 0px 0px #0B2447;
+  box-shadow: 0.4vw 0.4vw 0px 0px #0B2447;
   transition: all 0.5s;
   color: #0B2447;
 }
@@ -28,8 +28,8 @@
 
 .search-label {
   position: absolute;
-  top: 0.8rem;
-  left: 0.8rem;
+  top: 0.8vw;
+  left: 0.8vw;
   color: #0B2447;
   transition: all 0.5s;
   transform: scale(0);
@@ -41,7 +41,7 @@
   content: "";
   background-color: #0B2447;
   width: 0%;
-  height: 0.125rem;
+  height: 0.125vw;
   right: 0;
   top: 0;
   transition: all 0.5s;
@@ -57,7 +57,7 @@
   content: "";
   background-color: #0B2447;
   width: 0%;
-  height: 0.125rem;
+  height: 0.125vw;
   right: 0;
   bottom: 0;
   transition: all 0.5s;
@@ -69,7 +69,7 @@
 }
 
 .search-input-container input[type="text"]:focus~ .search-label {
-  top: -0.625rem;
+  top: -0.625vw;
   transform: scale(1);
   transition: all 0.5s;
 }

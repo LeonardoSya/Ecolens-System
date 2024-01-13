@@ -18,6 +18,8 @@ const CardComponent: React.FC<LittleCardProps> = ({ title, description, coverIma
             style={{
                 padding:0,
                 margin:0,
+                height:'17vw',
+                background: 'rgb(245,245,245)'
             }}
             cover={
                 <img
@@ -26,7 +28,7 @@ const CardComponent: React.FC<LittleCardProps> = ({ title, description, coverIma
                 />
             }
             actions={[
-                <SettingOutlined key="setting" />,
+                <SettingOutlined key="setting"/>,
                 <EditOutlined key="edit" />,
                 <EllipsisOutlined key="ellipsis" />,
             ]}

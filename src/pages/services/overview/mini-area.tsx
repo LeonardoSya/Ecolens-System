@@ -64,6 +64,8 @@ const MiniArea: React.FC<MiniAreaProps> = ({ title, description }) => {
             style={{
                 padding: 0,
                 margin: 0,
+                height: '17vw',
+                background: 'rgb(245,245,245)'
             }}
             cover={
                 <div id='miniarea-container' ref={chartRef} style={{ padding: 0, margin: 0, height: "149px" }}></div>

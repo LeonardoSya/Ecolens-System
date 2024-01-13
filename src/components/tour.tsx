@@ -24,12 +24,12 @@ const RoadmingGuide: React.FC = () => {
                     <img
                         alt='tour.png'
                         src={rsButtonImage}
-                        style={{ width: '6rem' }}
+                        style={{ width: '6vw' }}
                     />
                     <img
                         alt='tour.png'
                         src={rsTooltipImage}
-                        style={{ width: '18rem' }}
+                        style={{ width: '18vw' }}
                     />
                 </>
             ),
@@ -70,7 +70,7 @@ const RoadmingGuide: React.FC = () => {
                 open={clicked}
                 onOpenChange={handleClickChange}
             >
-                <button onClick={() => setOpen(true)} style={{ position: 'absolute', background: 'none', transform: 'scale(0.4)', right: "-1vw", top: "3vh" }}>
+                <button onClick={() => setOpen(true)} style={{ position: 'absolute', background: 'none', transformOrigin:'50% 50%',transform: 'scale(0.4)', right: "-1vw", top: "0.5vw" }}>
                     <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
                         <div className="wheel"></div>
                         <div className="hamster">

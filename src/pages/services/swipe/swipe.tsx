@@ -125,11 +125,11 @@ const Swipe: React.FC = () => {
                 </Typography>
             </Flex>
 
-            <Flex gap='large' justify='space-around' align='flex-start' style={{ padding: '0 2rem' }}>
+            <Flex gap='large' justify='space-around' align='flex-start' style={{ padding: '0 2vw' }}>
                 <Flex gap="small" vertical style={{ width: '50%', }}>
                     <Row justify="center" align="top">
                         <Col span={8}>
-                            <span style={{ fontSize: '1.2rem' }}>
+                            <span style={{ fontSize: '1.2vw' }}>
                                 🕹️ 拖动滑块查看
                             </span>
                         </Col>
@@ -148,7 +148,7 @@ const Swipe: React.FC = () => {
                     />
                 </Flex>
 
-                <Flex vertical gap="large" justify='space-around' align='center' style={{ width: '50%', marginTop: '2rem' }}>
+                <Flex vertical gap="large" justify='space-around' align='center' style={{ width: '50%', marginTop: '2vw' }}>
                     <Overview />
                 </Flex>
 

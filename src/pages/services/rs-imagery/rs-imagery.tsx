@@ -7,12 +7,12 @@ import { fromLonLat, toLonLat } from 'ol/proj';
 import { useSafeState, useCreation } from '../../../hooks/hooks';
 import { Flex, Row, Col, message } from 'antd';
 import Floatbutton from '../../../components/floatbutton';
-import '../services.css';
-import '../../../assets/styles/map.css'
-import 'ol/ol.css';
 import Loader from '../../../components/loader';
 import RoamingGuide from '../../../components/tour';
 import { GuideContext, GuideProvider } from '../../../models/tour-context';
+import '../services.css';
+import '../../../assets/styles/map.css'
+import 'ol/ol.css';
 
 const mapInfo = [
     { id: '61f9b270-a42c-4d9e-a9dc-ac3af586b313', center: [112.678303857182, 24.38823323344173], zoom: 12.5 },

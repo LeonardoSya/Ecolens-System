@@ -47,6 +47,8 @@ const Pathln: React.FC<PathlnProps> = ({ title, description }) => {
             style={{
                 padding: 0,
                 margin: 0,
+                height: '8vw',
+                background: 'rgb(245,245,245)'
             }}
             cover={
                 <div id='pathln-container' ref={chartRef} style={{ padding: 0, margin: 0, height: "149px" }}></div>

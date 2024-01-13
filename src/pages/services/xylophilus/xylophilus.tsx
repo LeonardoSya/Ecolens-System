@@ -62,7 +62,7 @@ const Xylophilus: React.FC = React.memo(() => {
     }
 
     const infoMessage = (selectedItem: seletedItemProps) => {
-        messageApi.info(`您已切换至${selectedItem.label}界面.`);
+        messageApi.info(`您已切换至${selectedItem.label}界面`);
     };
 
     const transformedCenter = useCreation(() => fromLonLat(item.center), [item.center])
@@ -124,7 +124,7 @@ const Xylophilus: React.FC = React.memo(() => {
                             🔍松材线虫害受灾区域监测图
                         </span>
                     </Col>
-                    <Col span={8}>
+                    <Col span={10}>
                         <div className='radio-buttons-container'>
                             {mapInfo.map((item, index) => (
                                 <div className="radio-button" key={index}>

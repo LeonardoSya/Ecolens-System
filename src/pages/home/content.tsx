@@ -25,7 +25,7 @@ const HomepageContent: React.FC = () => (
                     background: "inherit",
                     border: "none",
                     width: "500vw",
-                    marginBottom:'3rem'
+                    marginBottom:'2vw'
                 }}>
                 <Flex
                     vertical
@@ -81,10 +81,10 @@ const HomepageContent: React.FC = () => (
 
         <Divider
             style={{
-                margin: "3rem 0",
+                margin: "3vw 0",
                 color: "#fff",
-                fontSize: '1.6rem',
-                letterSpacing:'0.3rem'
+                fontSize: '1.6vw',
+                letterSpacing:'0.3vw'
             }}
         >
             产品技术栈

@@ -9,7 +9,8 @@
     background: transparent;
     padding: 0;
     margin-top: 3vh;
-    font-size: 1vw;
+    margin-left: 1.5vw;
+    font-size: 1.1vw;
     font-family: Poppins, Arial, sans-serif;
     width: 12vw;
     height: 3.2vh;
@@ -97,5 +98,5 @@ button.learn-more .button-text {
 }
 
 .button-text {
-    letter-spacing: 0.3rem;
+    letter-spacing: 0.3vw;
 }
