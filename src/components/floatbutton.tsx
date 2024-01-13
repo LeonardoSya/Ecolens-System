@@ -15,7 +15,7 @@ const Floatbutton: React.FC<floatbuttonProps> = React.memo(({ toggleFullScreen, 
     const { refs } = useContext(GuideContext);
 
     const info = () => {
-        messageApi.info('You have exited full-screen mode.');
+        messageApi.info('切换至全屏');
     };
 
     const openNotification = () => {
@@ -31,7 +31,7 @@ const Floatbutton: React.FC<floatbuttonProps> = React.memo(({ toggleFullScreen, 
         <>
             {contextHolder}
             {contextHolderApi}
-            <FloatButton.Group shape='circle' style={{ right: "2rem" }}>
+            <FloatButton.Group shape='circle' style={{ right: "2vw" }}>
                 <FloatButton ref={refs.ref2} icon={<FileSearchOutlined />} onClick={openNotification} tooltip={<div>地图说明</div>} />
                 <FloatButton ref={refs.ref3} icon={<ExpandOutlined />} onClick={() => { toggleFullScreen(); info(); }} tooltip={<div>全屏</div>} />
                 <FloatButton ref={refs.ref4} icon={<EditFilled />} tooltip={<div>在 Ecolens 中编辑</div>} />
